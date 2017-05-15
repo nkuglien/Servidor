@@ -3,15 +3,31 @@ package entities;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name="AreaProduccion")
 public class AreaProduccion {
-	private int codigo;
+	
+	
+	@Id
+	@Column
+	private Integer idAreaProduccion;
+	@Column
+	private Integer codigo;
 	private String nombre;
 	private Map<String,Boolean> lineas;
+	@OneToMany
+	@JoinColumn(name="idAreaProduccion")
 	private List<OrdenProduccionEspera> ordenesEspera;
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {
