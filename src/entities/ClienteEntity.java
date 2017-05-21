@@ -2,16 +2,32 @@ package entities;
 
 import java.util.List;
 
-public class Cliente {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name="Cliente")
+public class ClienteEntity {
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
 private long id;
 private int nroLegajo;
 private String nombre;
 private String direccion;
 private String telefono;
 private String cuit;
-private CuentaCorriente cc;
+@OneToMany
+@JoinColumn(name="idCliente")
+private CuentaCorrienteEntity cc;
 private long nroCliente;
+@Transient
 private List<ValorConsignacion> valores;
+@Transient
 private List<PedidoCliente> pedidos;
 
 
@@ -51,10 +67,10 @@ public String getCuit() {
 public void setCuit(String cuit) {
 	this.cuit = cuit;
 }
-public CuentaCorriente getCc() {
+public CuentaCorrienteEntity getCc() {
 	return cc;
 }
-public void setCc(CuentaCorriente cc) {
+public void setCc(CuentaCorrienteEntity cc) {
 	this.cc = cc;
 }
 public long getNroCliente() {

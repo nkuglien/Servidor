@@ -1,29 +1,16 @@
-package entities;
+package model;
 
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-@Entity
-@Table(name="AreaProduccion")
 public class AreaProduccion {
 	
 	
-	@Id
-	@Column
+	
 	private Integer idAreaProduccion;
-	@Column
+	
 	private Integer codigo;
 	private String nombre;
-	@Transient
 	private Map<String,Boolean> lineas;
-	@Transient
 	private List<OrdenProduccionEspera> ordenesEspera;
 	public Integer getCodigo() {
 		return codigo;
@@ -48,6 +35,12 @@ public class AreaProduccion {
 	}
 	public void setOrdenesEspera(List<OrdenProduccionEspera> ordenesEspera) {
 		this.ordenesEspera = ordenesEspera;
+	}
+	public Integer getIdAreaProduccion() {
+		return idAreaProduccion;
+	}
+	public void setIdAreaProduccion(Integer idAreaProduccion) {
+		this.idAreaProduccion = idAreaProduccion;
 	}
 
 }

@@ -1,6 +1,10 @@
 package util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
+
+import entities.AreaProduccion;
+import entities.ClienteEntity;
 public class HibernateUtil {
 	 private static final SessionFactory sessionFactory;
 	    static
@@ -8,7 +12,7 @@ public class HibernateUtil {
 	        try
 	        {
 	        	 AnnotationConfiguration config = new AnnotationConfiguration();
-	        	 config.addAnnotatedClass(Empleado.class);
+	        	 config.addAnnotatedClass(ClienteEntity.class);
 	             sessionFactory = config.buildSessionFactory();
 	        }
 	        catch (Throwable ex)
