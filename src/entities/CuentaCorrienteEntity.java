@@ -21,7 +21,7 @@ public class CuentaCorrienteEntity {
 	
 	@OneToMany
 	@JoinColumn(name="id")
-	private List<MovimientoCC> movimientos;
+	private List<MovimientoCCEntity> movimientos;
 	private Float saldo;
 	private Float limiteCredito;
 	@ManyToOne
@@ -35,10 +35,10 @@ public class CuentaCorrienteEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<MovimientoCC> getMovimientos() {
+	public List<MovimientoCCEntity> getMovimientos() {
 		return movimientos;
 	}
-	public void setMovimientos(List<MovimientoCC> movimientos) {
+	public void setMovimientos(List<MovimientoCCEntity> movimientos) {
 		this.movimientos = movimientos;
 	}
 	public Float getSaldo() {

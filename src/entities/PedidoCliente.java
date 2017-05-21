@@ -11,7 +11,7 @@ public class PedidoCliente {
 	private Date fechaDespacho;
 	private Date fechaProbableDespacho;
 	private List<ItemPedidoCliente> items;
-	private Cliente cliente; 
+	private ClienteEntity cliente; 
 	private Float subtotal;
 	private Float impuestos;
 	private Float total;
@@ -47,10 +47,10 @@ public class PedidoCliente {
 	public void setItems(List<ItemPedidoCliente> items) {
 		this.items = items;
 	}
-	public Cliente getCliente() {
+	public ClienteEntity getCliente() {
 		return cliente;
 	}
-	public void setCliente(Cliente cliente) {
+	public void setCliente(ClienteEntity cliente) {
 		this.cliente = cliente;
 	}
 	public Float getSubtotal() {

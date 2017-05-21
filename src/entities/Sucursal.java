@@ -9,7 +9,7 @@ public class Sucursal {
 	private Integer horarioApertura;
 	private Integer horarioCierre;
 	private String direccion;
-	private List<Cliente> clientes;
+	private List<ClienteEntity> clientes;
 	public Integer getNumero() {
 		return numero;
 	}
@@ -40,10 +40,10 @@ public class Sucursal {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public List<Cliente> getClientes() {
+	public List<ClienteEntity> getClientes() {
 		return clientes;
 	}
-	public void setClientes(List<Cliente> clientes) {
+	public void setClientes(List<ClienteEntity> clientes) {
 		this.clientes = clientes;
 	}
 	
