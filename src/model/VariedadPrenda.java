@@ -68,5 +68,8 @@ public class VariedadPrenda {
 		this.precioVentaActual = precioVentaActual;
 	}
 	
+	public boolean hayStock() {
+		return true;
+	}	
 	
 }
