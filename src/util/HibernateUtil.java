@@ -3,6 +3,7 @@ package util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+import entities.AreaProduccion;
 import entities.ClienteEntity;
 public class HibernateUtil {
 	 private static final SessionFactory sessionFactory;

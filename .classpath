@@ -9,6 +9,7 @@
 	<classpathentry kind="lib" path="libs/hibernate-core-5.0.11.Final.jar"/>
 	<classpathentry kind="lib" path="libs/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="libs/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="libs/jboss-annotations-api_1.2_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="libs/jboss-jms-api_2.0_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="libs/jboss-logging-3.3.0.Final.jar"/>
 	<classpathentry kind="lib" path="libs/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
@@ -32,6 +33,5 @@
 	<classpathentry kind="lib" path="libs/tika-core-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/tika-parsers-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/hibernate-annotations-3.5.0-final.jar"/>
-	<classpathentry kind="lib" path="libs/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

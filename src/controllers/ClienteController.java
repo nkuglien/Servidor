@@ -1,7 +1,6 @@
 package controllers;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,21 +10,8 @@ import DTO.ClienteDTO;
 import RemoteObject.ClienteRemote;
 import model.Cliente;
 
-public class ClienteController extends UnicastRemoteObject implements ClienteRemote {
+public class ClienteController implements ClienteRemote {
 
-	public ClienteController() throws RemoteException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-
-	private static final long serialVersionUID = 1L;
-	
-	
-	
-	
 	@Override
 	public List<ClienteDTO> GetClientes() throws RemoteException {
 		List<ClienteDTO> clientesRetorno = new ArrayList<ClienteDTO>();

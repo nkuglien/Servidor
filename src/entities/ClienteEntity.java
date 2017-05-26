@@ -21,7 +21,8 @@ private String nombre;
 private String direccion;
 private String telefono;
 private String cuit;
-@Transient
+@OneToMany
+@JoinColumn(name="idCliente")
 private CuentaCorrienteEntity cc;
 private long nroCliente;
 @Transient
