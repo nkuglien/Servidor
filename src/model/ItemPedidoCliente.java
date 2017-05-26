@@ -1,11 +1,17 @@
 package model;
 
+import DTO.ItemPedidoClienteDTO;
+
 public class ItemPedidoCliente {
 
 	private Long id;
 	private VariedadPrenda item;
 	private Integer cantidad;
 	private Float precioItem;
+	
+	public ItemPedidoCliente(ItemPedidoClienteDTO item2) {
+		// TODO Auto-generated constructor stub
+	}
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +35,10 @@ public class ItemPedidoCliente {
 	}
 	public void setPrecioItem(Float precioItem) {
 		this.precioItem = precioItem;
+	}
+	public ItemPedidoClienteDTO toDTO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
