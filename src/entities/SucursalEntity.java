@@ -2,14 +2,33 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "SUCURSAL")
 public class SucursalEntity {
 
+	@Id
+	@Column(name = "numero")
 	private Integer numero;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column(name = "horario_apertura")
 	private Integer horarioApertura;
+	
+	@Column(name = "horario_cierre")
 	private Integer horarioCierre;
+	
+	@Column(name = "direccion")
 	private String direccion;
 	
+	@OneToMany
 	private List<ClienteEntity> clientes;
 	
 	public Integer getNumero() {

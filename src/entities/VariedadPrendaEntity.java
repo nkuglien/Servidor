@@ -2,16 +2,47 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "VARIEDAD_PRENDA")
 public class VariedadPrendaEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "insumo_id")
 	private Long id;
+	
+	@ManyToOne
 	private PrendaEntity prenda;
+	
+	@Column(name = "talle")
 	private String talle;
+	
+	@Column(name = "color")
 	private String color;
+	
+	@Column(name = "en_produccion")
 	private Boolean enProduccion;
+	
+	@OneToMany
 	private List<ItemInsumoEntity> insumos;
+	
+	@Column(name = "cantidad_produccion_fija")
 	private Integer cantidadProduccionFija;
+	
+	@Column(name = "costo_produccion_actual")
 	private Float costoProduccionActual;
+	
+	@Column(name = "precio_venta_actual")
 	private Float precioVentaActual;
 	
 	public Long getId() {
