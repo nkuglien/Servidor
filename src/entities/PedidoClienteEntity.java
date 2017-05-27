@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import DTO.EstadoPedidoCliente;
 import model.Cliente;
 import model.CuentaCorriente;
 import model.PedidoCliente;
@@ -56,12 +57,11 @@ public class PedidoClienteEntity {
 
 	@Column(name = "total")
 	private Float total;
-
-	@Column(name = "aprobado_sucursal")
-	private Boolean aprobadoSucursal;
-
-	@Column(name = "aceptado_cliente")
-	private Boolean aceptadoCliente;
+	
+	private EstadoPedidoCliente estado;
+	
+	@Column(name = "nota")
+	private String nota;
 	
 	public PedidoClienteEntity() {
 	}
@@ -82,8 +82,8 @@ public class PedidoClienteEntity {
 		this.setSubtotal(pedido.getSubtotal());
 		this.setImpuestos(pedido.getImpuestos());
 		this.setTotal(pedido.getTotal());
-		this.setAprobadoSucursal(pedido.getAprobadoSucursal());
-		this.setAceptadoCliente(pedido.getAceptadoCliente());
+		this.setEstado(pedido.getEstado());
+		this.setNota(pedido.getNota());
 	}
 
 	public Long getNroPedido() {
@@ -159,28 +159,27 @@ public class PedidoClienteEntity {
 		this.total = total;
 	}
 
-	public Boolean getAprobadoSucursal() {
-		return aprobadoSucursal;
-	}
-
-	public void setAprobadoSucursal(Boolean aprobadoSucursal) {
-		this.aprobadoSucursal = aprobadoSucursal;
-	}
-
-	public Boolean getAceptadoCliente() {
-		return aceptadoCliente;
-	}
-
-	public void setAceptadoCliente(Boolean aceptadoCliente) {
-		this.aceptadoCliente = aceptadoCliente;
-	}
-
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public EstadoPedidoCliente getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoPedidoCliente estado) {
+		this.estado = estado;
+	}
+	
+	public String getNota() {
+		return nota;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
 	}
 
 }

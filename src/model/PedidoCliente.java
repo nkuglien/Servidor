@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import DTO.EstadosPedidoCliente;
+import DTO.EstadoPedidoCliente;
 import DTO.ItemPedidoClienteDTO;
 import DTO.PedidoClienteDTO;
 
@@ -20,7 +20,7 @@ public class PedidoCliente {
 	private Float subtotal;
 	private Float impuestos;
 	private Float total;
-	private EstadosPedidoCliente estado;
+	private EstadoPedidoCliente estado;
 	private String nota;
 	
 	public PedidoCliente(PedidoClienteDTO dto) {
@@ -121,10 +121,10 @@ public class PedidoCliente {
 		this.total = total;
 	}
 
-	public EstadosPedidoCliente getEstado() {
+	public EstadoPedidoCliente getEstado() {
 		return estado;
 	}
-	public void setEstado(EstadosPedidoCliente estado) {
+	public void setEstado(EstadoPedidoCliente estado) {
 		this.estado = estado;
 	}
 	

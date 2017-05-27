@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import DTO.EstadosPedidoCliente;
+import DTO.EstadoPedidoCliente;
 import DTO.PedidoClienteDTO;
 import dao.PedidoClienteDAO;
 import model.ItemPedidoCliente;
@@ -31,13 +31,13 @@ public class Controller {
 		PedidoCliente pedido = getPedidoCliente(nroPedido);
 
 		String nota = "";
-		EstadosPedidoCliente estado = EstadosPedidoCliente.VALIDADO;
+		EstadoPedidoCliente estado = EstadoPedidoCliente.VALIDADO;
 		List<VariedadPrenda> prendasSinStock = new ArrayList<VariedadPrenda>();
 		for (ItemPedidoCliente item : pedido.getItems()) {
 			VariedadPrenda prenda = item.getItem();
 			if (!prenda.hayStock()) {
 				if (!prenda.getEnProduccion()) {
-					estado = EstadosPedidoCliente.RECHAZADO;
+					estado = EstadoPedidoCliente.RECHAZADO;
 					nota = nota + "La prenda " + prenda.toString() + " esta discontinuada.\n";
 				} else {
 					prendasSinStock.add(prenda);
@@ -63,7 +63,7 @@ public class Controller {
 	public PedidoCliente aceptarPedidoCliente(Long nroPedido, boolean isAceptado) {
 		PedidoCliente pedido = getPedidoCliente(nroPedido);
 
-		EstadosPedidoCliente estado = isAceptado ? EstadosPedidoCliente.ACEPTADO : EstadosPedidoCliente.CANCELADO;
+		EstadoPedidoCliente estado = isAceptado ? EstadoPedidoCliente.ACEPTADO : EstadoPedidoCliente.CANCELADO;
 		pedido.setEstado(estado);
 
 		PedidoClienteDAO.update(pedido);
