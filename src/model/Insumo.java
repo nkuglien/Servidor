@@ -1,5 +1,6 @@
 package model;
 
+import DTO.InsumoDTO;
 import dao.InsumoDAO;
 
 public class Insumo {
@@ -72,6 +73,17 @@ public class Insumo {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public InsumoDTO toDTO() {
+		InsumoDTO dto = new InsumoDTO();
+		dto.setCantCompra(cantCompra);
+		dto.setCodigo(codigo);
+		dto.setDescripcion(descripcion);
+		dto.setNombre(nombre);
+		dto.setStockMinimo(stockMinimo);
+		dto.setId(id);
+		return dto;
 	}
 
 }

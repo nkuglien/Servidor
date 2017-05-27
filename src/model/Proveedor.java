@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.InsumoDTO;
+import DTO.InsumoProveedorDTO;
+import DTO.ProveedorDTO;
 import dao.ProveedorDAO;
 
 public class Proveedor {
@@ -45,6 +48,18 @@ public class Proveedor {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public ProveedorDTO toDTO() {
+		ProveedorDTO dto = new ProveedorDTO();
+		dto.setId(this.id);
+		dto.setNombre(this.nombre);
+
+		List<InsumoProveedorDTO> insumosDTO = new ArrayList<InsumoProveedorDTO>();
+		for(InsumoProveedor insumo : insumos){
+			insumosDTO.add(insumo.toDTO());			
+		}
+		return dto;
 	}
 
 }

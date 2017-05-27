@@ -1,4 +1,4 @@
-package controllers;
+package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -10,14 +10,14 @@ import RemoteObject.ClienteRemote;
 import dao.ClienteDAO;
 import model.Cliente;
 
-public class ClienteController extends UnicastRemoteObject implements ClienteRemote {
+public class ClienteRemoto extends UnicastRemoteObject implements ClienteRemote {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1395733353845311456L;
 
-	public ClienteController() throws RemoteException {
+	public ClienteRemoto() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}

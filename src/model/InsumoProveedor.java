@@ -1,5 +1,8 @@
 package model;
 
+import DTO.InsumoDTO;
+import DTO.InsumoProveedorDTO;
+
 public class InsumoProveedor {
 
 	private Long id;
@@ -36,6 +39,14 @@ public class InsumoProveedor {
 
 	public void setPrecio(Float precio) {
 		this.precio = precio;
+	}
+
+	public InsumoProveedorDTO toDTO() {
+		InsumoProveedorDTO dto = new InsumoProveedorDTO();
+		dto.setId(this.id);
+		dto.setInsumo(this.insumo.toDTO());
+		dto.setPrecio(this.precio);
+		return null;
 	}
 
 }
