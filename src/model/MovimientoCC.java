@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import DTO.MovimientoCCDTO;
+
 public class MovimientoCC {
 
 	private Long id;
@@ -14,6 +16,11 @@ public class MovimientoCC {
 	public MovimientoCC(Date fecha, Float importe) {
 		this.fecha = fecha;
 		this.importe = importe;
+	}
+	
+	public MovimientoCC(MovimientoCCDTO movCCDTO) {
+		this.fecha = movCCDTO.getFecha();
+		this.importe = movCCDTO.getImporte();
 	}
 
 	public Long getId() {

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import DTO.CuentaCorrienteDTO;
+import DTO.MovimientoCCDTO;
+
 public class CuentaCorriente {
 
 	private Long id;
@@ -16,6 +19,14 @@ public class CuentaCorriente {
 		this.movimientos = new ArrayList<MovimientoCC>();
 	}
 	
+	public CuentaCorriente(CuentaCorrienteDTO cc) {
+		this.saldo = cc.getSaldo();
+		this.limiteCredito = cc.getLimiteCredito();
+		List<MovimientoCC> movCC = new ArrayList<MovimientoCC>();
+		for(MovimientoCCDTO mov : cc.getMovimientos()) movCC.add(new MovimientoCC(mov));
+		this.movimientos = movCC;
+	}
+
 	public void agregarMovimiento(Date fecha, Float importe) {
 		getMovimientos().add(new MovimientoCC(fecha, importe));
 	}
