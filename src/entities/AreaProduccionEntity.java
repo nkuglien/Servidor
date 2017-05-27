@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import model.AreaProduccion;
+
 @Entity
 @Table(name = "AREA_PRODUCCION")
 public class AreaProduccionEntity {
@@ -21,11 +23,17 @@ public class AreaProduccionEntity {
 	private String nombre;
 	
 	@Transient
-	private Map<String,Boolean> lineas;
+	private Map<String, Boolean> lineas;
 	
 	@Transient
 	private List<OrdenProduccionEsperaEntity> ordenesEspera;
 	
+	public AreaProduccionEntity(AreaProduccion area) {
+		this.setCodigo(area.getCodigo());
+		this.setNombre(area.getNombre());
+		this.setLineas(area.getLineas());
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -56,6 +64,14 @@ public class AreaProduccionEntity {
 	
 	public void setOrdenesEspera(List<OrdenProduccionEsperaEntity> ordenesEspera) {
 		this.ordenesEspera = ordenesEspera;
+	}
+
+	public AreaProduccion toBusinessObject() {
+		AreaProduccion area = new AreaProduccion();
+		area.setCodigo(this.getCodigo());
+		area.setNombre(this.getNombre());
+		area.setLineas(this.getLineas());
+		return area;
 	}
 
 }

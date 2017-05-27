@@ -11,6 +11,18 @@ public class AreaProduccion {
 	private String nombre;
 	private Map<String, Boolean> lineas;
 	private List<OrdenProduccionEspera> ordenesEspera;
+	
+	public void agregarLinea(String codigoLinea, boolean isDisponible) {
+		lineas.put(codigoLinea, isDisponible);
+	}
+	
+	public void eliminarLinea(String codigoLinea) {
+		lineas.remove(codigoLinea);
+	}
+	
+	public void cambiarEstadoLinea(String codigoLinea, boolean isDisponible) {
+		lineas.put(codigoLinea, isDisponible);
+	}
 
 	public Integer getCodigo() {
 		return codigo;
