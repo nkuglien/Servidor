@@ -10,6 +10,7 @@ import DTO.PedidoClienteDTO;
 
 public class PedidoCliente {
 	
+	private long id;
 	private Long nroPedido;
 	private Date fechaGeneracion;
 	private Date fechaDespacho;
@@ -38,6 +39,14 @@ public class PedidoCliente {
 			items.add(new ItemPedidoCliente(item));
 		};
 		this.items = items;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Long getNroPedido() {

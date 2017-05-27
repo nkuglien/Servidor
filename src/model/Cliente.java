@@ -1,10 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import dao.ClienteDAO;
 import DTO.ClienteDTO;
 
 public class Cliente {
+	
 	private long id;
 	private int nroLegajo;
 	private String nombre;
@@ -15,9 +19,31 @@ public class Cliente {
 	private long nroCliente;
 	private List<ValorConsignacion> valores;
 	private List<PedidoCliente> pedidos;
+	
+	public Cliente() {
+		this.setCc(new CuentaCorriente());
+		this.setValores(new ArrayList<ValorConsignacion>());
+		this.setPedidos(new ArrayList<PedidoCliente>());
+	}
+	
+	public Cliente(int nroLegajo, String nombre, String direccion, String telefono, String cuit, long nroCliente) {
+		this.setNroLegajo(nroLegajo);
+		this.setNombre(nombre);
+		this.setDireccion(direccion);
+		this.setTelefono(telefono);
+		this.setCuit(cuit);
+		this.setCc(new CuentaCorriente());
+		this.setNroCliente(nroCliente);
+		this.setValores(new ArrayList<ValorConsignacion>());
+		this.setPedidos(new ArrayList<PedidoCliente>());
+	}
 
 	public Cliente(ClienteDTO cliente) {
 		// TODO Auto-generated constructor stub
+	}
+
+	public void save() {
+		ClienteDAO.getInstance().save(this);
 	}
 
 	public long getId() {
@@ -92,12 +118,24 @@ public class Cliente {
 		this.valores = valores;
 	}
 
+	public void addValor(float valor, String descripcion) {
+		this.getValores().add(new ValorConsignacion(valor, descripcion));
+	}
+	
 	public List<PedidoCliente> getPedidos() {
 		return pedidos;
 	}
 
 	public void setPedidos(List<PedidoCliente> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public void addPedido(PedidoCliente pedido) {
+		this.getPedidos().add(pedido);
+	}
+	
+	public void addMovimiento(Date fecha, float importe) {
+		this.getCc().agregarMovimiento(fecha, importe);
 	}
 
 	public ClienteDTO toDTO() {

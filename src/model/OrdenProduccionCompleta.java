@@ -1,6 +1,6 @@
 package model;
 
-public class OrdenProduccionCompleta extends OrdenProduccion{
+public class OrdenProduccionCompleta extends OrdenProduccion {
 
 	private Prenda prenda;
 
@@ -11,5 +11,5 @@ public class OrdenProduccionCompleta extends OrdenProduccion{
 	public void setPrenda(Prenda prenda) {
 		this.prenda = prenda;
 	}
-	
+
 }

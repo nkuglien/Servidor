@@ -13,6 +13,5 @@ public class OrdenProduccionParcial extends OrdenProduccion {
 	public void setVariedades(List<VariedadPrenda> variedades) {
 		this.variedades = variedades;
 	}
-	
-	
+
 }
