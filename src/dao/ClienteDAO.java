@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 import entities.ClienteEntity;
@@ -25,6 +28,10 @@ public class ClienteDAO extends HibernateDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	public List<Cliente> getAllClientes() {
+		return new ArrayList<Cliente>();
 	}
 	
 }

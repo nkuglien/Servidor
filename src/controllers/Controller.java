@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
@@ -16,13 +15,13 @@ public class Controller {
 	// ========================= MANEJO DE PEDIDOS =========================
 
 	public PedidoCliente getPedidoCliente(Long nroPedido) {
-		return PedidoClienteDAO.get(nroPedido);
+		return PedidoClienteDAO.getInstance().getByNroPedido(nroPedido);
 	}
 
 	// el cliente crea un pedido
 	public PedidoCliente crearPedido(PedidoClienteDTO dto) {
 		PedidoCliente pedido = new PedidoCliente(dto);
-		PedidoClienteDAO.save(pedido);
+		pedido.save();
 		return pedido;
 	}
 
@@ -49,7 +48,7 @@ public class Controller {
 		pedido.setNota(nota);
 		pedido.setEstado(estado);
 
-		PedidoClienteDAO.update(pedido);
+		pedido.save();
 		return pedido;
 	}
 
@@ -65,8 +64,7 @@ public class Controller {
 
 		EstadoPedidoCliente estado = isAceptado ? EstadoPedidoCliente.ACEPTADO : EstadoPedidoCliente.CANCELADO;
 		pedido.setEstado(estado);
-
-		PedidoClienteDAO.update(pedido);
+		pedido.save();
 		return pedido;
 	}
 

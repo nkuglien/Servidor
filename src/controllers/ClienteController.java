@@ -2,7 +2,6 @@ package controllers;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import DTO.ClienteDTO;
@@ -13,15 +12,46 @@ import model.Cliente;
 public class ClienteController implements ClienteRemote {
 
 	@Override
-	public List<ClienteDTO> GetClientes() throws RemoteException {
-		List<ClienteDTO> clientesRetorno = new ArrayList<ClienteDTO>();
-		List<Cliente> clientes = ClienteDAO.getInstancia().GetClientes();
+	public List<ClienteDTO> getAllClientes() throws RemoteException {
+		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
+		List<Cliente> clientes = ClienteDAO.getInstance().getAllClientes();
 		
-		for(Iterator<Cliente> cli =clientes.iterator(); cli.hasNext();){
-			Cliente sig = cli.next();
-			clientesRetorno.add(sig.toDTO());			
+		for(Cliente cliente : clientes){
+			clientesDTO.add(cliente.toDTO());			
 		}
-		return clientesRetorno;
+		
+		return clientesDTO;
+	}
+
+	@Override
+	public boolean verificarCliente(int parseInt) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void altaCliente(int parseInt, String text, String text2, int parseInt2, String text3)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bajaCliente(int parseInt) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ClienteDTO solicitarClienteView(int parseInt) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void modificarCliente(ClienteDTO cv, int parseInt) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

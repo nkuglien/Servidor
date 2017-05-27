@@ -7,6 +7,7 @@ import java.util.List;
 import DTO.EstadoPedidoCliente;
 import DTO.ItemPedidoClienteDTO;
 import DTO.PedidoClienteDTO;
+import dao.PedidoClienteDAO;
 
 public class PedidoCliente {
 	
@@ -154,6 +155,9 @@ public class PedidoCliente {
 		dto.setItems(items);
 		return dto;
 	}
-	
+
+	public void save() {
+		PedidoClienteDAO.getInstance().save(this);		
+	}
 	
 }
