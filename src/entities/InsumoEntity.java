@@ -45,10 +45,14 @@ public class InsumoEntity {
 		this.setCantCompra(insumo.getCantCompra());
 	}
 
-	public Insumo toBusinessObject() {
-		Insumo insumo = new Insumo(this.getCodigo(), this.getDescripcion(), this.getNombre(), this.getStockMinimo(),
-				this.getCantCompra());
+	public Insumo toBO() {
+		Insumo insumo = new Insumo();
 		insumo.setId(this.getId());
+		insumo.setCodigo(insumo.getCodigo());
+		insumo.setDescripcion(insumo.getDescripcion());
+		insumo.setNombre(insumo.getNombre());
+		insumo.setStockMinimo(insumo.getStockMinimo());
+		insumo.setCantCompra(insumo.getCantCompra());
 		return insumo;
 	}
 

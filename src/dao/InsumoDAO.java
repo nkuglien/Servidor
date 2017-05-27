@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -33,7 +36,18 @@ public class InsumoDAO extends HibernateDAO {
 		Query query = session.createQuery("from InsumoEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);
 		InsumoEntity insumo = (InsumoEntity) query.uniqueResult();
-		return insumo.toBusinessObject();
+		return insumo.toBO();
+	}
+	
+	public List<Insumo> getAllInsumos() {
+		List<Insumo> insumos = new ArrayList<Insumo>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from InsumoEntity");
+		List<InsumoEntity> insumosEntity = query.list();
+		for (InsumoEntity insumoEntity : insumosEntity) {
+			insumos.add(insumoEntity.toBO());
+		}
+		return insumos;
 	}
 
 }
