@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import DTO.ClienteDTO;
 import entities.ClienteEntity;
 import model.Cliente;
 
@@ -42,12 +43,20 @@ public class ClienteDAO extends HibernateDAO {
 		return clientes;
 	}
 	
-	public Cliente findClienteByNroCliente(String nroCliente) {
+	public Cliente findClienteByNroCliente(long nroCliente) {
 		Session session = this.openSession();
 		Query query = session.createQuery("from ClienteEntity where nroCliente = :nroCliente");
 		query.setParameter("nroCliente", nroCliente);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
 		return clienteEntity.toBO();
+	}
+
+	public ClienteDTO findClienteByCuit(String cuit) {
+		return null;
+	}
+
+	public ClienteDTO update(ClienteDTO cliente) {
+		return null;
 	}
 	
 }

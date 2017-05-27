@@ -41,28 +41,27 @@ public class ClienteController extends UnicastRemoteObject implements ClienteRem
 	}
 
 	@Override
-	public void altaCliente(ClienteDTO clienteDTO)
+	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
 			throws RemoteException {
 		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
+		return clienteDTO;
 		
 	}
 
 	@Override
-	public void bajaCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ClienteDTO solicitarClienteView(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
+	public ClienteDTO bajaCliente(long cuit) throws RemoteException {
 		return null;
 	}
 
+
 	@Override
-	public void modificarCliente(ClienteDTO cv, int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
+		return ClienteDAO.getInstance().update(cliente);
+	}
+
+	@Override
+	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
+		return ClienteDAO.getInstance().findClienteByNroCliente(1).toDTO();
 	}
 
 }
