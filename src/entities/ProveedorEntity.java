@@ -42,6 +42,14 @@ public class ProveedorEntity {
 		this.setNombre(proveedor.getNombre());
 		this.setInsumosInsumosEntity(proveedor.getInsumos());
 	}
+	
+	public Proveedor toBO() {
+		Proveedor proveedor = new Proveedor();
+		proveedor.setId(this.getId());
+		proveedor.setNombre(this.getNombre());
+		proveedor.setInsumos(toInsumosBO(this.getInsumos()));
+		return proveedor;
+	}
 
 	private void setInsumosInsumosEntity(List<InsumoProveedor> insumos) {
 		List<InsumoProveedorEntity> list = new ArrayList<InsumoProveedorEntity>();
@@ -49,6 +57,14 @@ public class ProveedorEntity {
 			list.add(new InsumoProveedorEntity(insumo));
 		}
 		this.setInsumos(list);
+	}
+	
+	private List<InsumoProveedor> toInsumosBO(List<InsumoProveedorEntity> insumosEntity) {
+		List<InsumoProveedor> insumos = new ArrayList<InsumoProveedor>();
+		for (InsumoProveedorEntity insumoEntity : insumosEntity) {
+			insumos.add(insumoEntity.toBO());
+		}
+		return insumos;
 	}
 
 	public List<InsumoProveedorEntity> getInsumos() {

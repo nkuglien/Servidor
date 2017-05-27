@@ -1,6 +1,7 @@
 package controllers;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,17 @@ import RemoteObject.ClienteRemote;
 import dao.ClienteDAO;
 import model.Cliente;
 
-public class ClienteController implements ClienteRemote {
+public class ClienteController extends UnicastRemoteObject implements ClienteRemote {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1395733353845311456L;
+
+	public ClienteController() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public List<ClienteDTO> getAllClientes() throws RemoteException {
@@ -30,28 +41,27 @@ public class ClienteController implements ClienteRemote {
 	}
 
 	@Override
-	public void altaCliente(int parseInt, String text, String text2, int parseInt2, String text3)
+	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
 			throws RemoteException {
-		// TODO Auto-generated method stub
+		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
+		return clienteDTO;
 		
 	}
 
 	@Override
-	public void bajaCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ClienteDTO solicitarClienteView(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
+	public ClienteDTO bajaCliente(long cuit) throws RemoteException {
 		return null;
 	}
 
+
 	@Override
-	public void modificarCliente(ClienteDTO cv, int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
+		return ClienteDAO.getInstance().update(cliente);
+	}
+
+	@Override
+	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
+		return ClienteDAO.getInstance().findClienteByNroCliente(1).toDTO();
 	}
 
 }

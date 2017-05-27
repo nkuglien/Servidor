@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /bin/
 /src/hibernate.properties
 src/hibernate.properties
+=======
+/bin/
+
+src/hibernate.properties
+>>>>>>> branch 'master' of https://github.com/nkuglien/Servidor.git

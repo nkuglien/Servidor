@@ -1,7 +1,12 @@
 package server;
 
+import java.rmi.Naming;
+import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+
+import RemoteObject.ClienteRemote;
+import controllers.ClienteController;
 
 public class Server {
 	
@@ -17,7 +22,8 @@ public class Server {
 		try {
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 			
-			//Naming.bind("AlumnoRemoto", alumnoRemoto);
+			ClienteRemote clienteRemote = new ClienteController();
+			Naming.bind("//localhost:1099/ClienteController", clienteRemote);
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {
 			e.printStackTrace();

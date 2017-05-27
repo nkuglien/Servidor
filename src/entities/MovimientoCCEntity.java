@@ -59,5 +59,13 @@ public class MovimientoCCEntity {
 	public void setImporte(Float importe) {
 		this.importe = importe;
 	}
+
+	public MovimientoCC toBO() {
+		MovimientoCC movimiento = new MovimientoCC();
+		movimiento.setId(this.getId());
+		movimiento.setFecha(this.getFecha());
+		movimiento.setImporte(this.getImporte());
+		return movimiento;
+	}
 	
 }

@@ -34,6 +34,14 @@ public class InsumoProveedorEntity {
 		this.setPrecio(insumo.getPrecio());
 	}
 
+	public InsumoProveedor toBO() {
+		InsumoProveedor insumoProveedor = new InsumoProveedor();
+		insumoProveedor.setId(this.getId());
+		insumoProveedor.setInsumo(this.getInsumo().toBO());
+		insumoProveedor.setPrecio(this.getPrecio());
+		return insumoProveedor;
+	}
+	
 	public Long getId() {
 		return id;
 	}

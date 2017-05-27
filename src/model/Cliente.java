@@ -6,6 +6,9 @@ import java.util.List;
 
 import dao.ClienteDAO;
 import DTO.ClienteDTO;
+import DTO.MovimientoCCDTO;
+import DTO.PedidoClienteDTO;
+import DTO.ValorConsignacionDTO;
 
 public class Cliente {
 	
@@ -39,7 +42,21 @@ public class Cliente {
 	}
 
 	public Cliente(ClienteDTO cliente) {
-		// TODO Auto-generated constructor stub
+		this.setNroLegajo(cliente.getNroLegajo());
+		this.setNombre(cliente.getNombre());
+		this.setDireccion(cliente.getDireccion());
+		this.setTelefono(cliente.getTelefono());
+		this.setCuit(cliente.getCuit());
+		this.setCc(new CuentaCorriente(cliente.getCc()));
+		this.setNroCliente(cliente.getNroCliente());
+		
+		List<ValorConsignacion> valores = new ArrayList<ValorConsignacion>();
+		for(ValorConsignacionDTO val : cliente.getValores()) valores.add(new ValorConsignacion(val));
+		this.valores = valores;
+		
+		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
+		for(PedidoClienteDTO ped : cliente.getPedidos()) pedidos.add(new PedidoCliente(ped));
+		this.pedidos = pedidos;
 	}
 
 	public void save() {

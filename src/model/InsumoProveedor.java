@@ -5,6 +5,9 @@ public class InsumoProveedor {
 	private Long id;
 	private Insumo insumo;
 	private Float precio;
+	
+	public InsumoProveedor() {
+	}
 
 	public InsumoProveedor(Insumo insumo, float precio) {
 		this.setInsumo(insumo);

@@ -43,6 +43,16 @@ public class ValorConsignacionEntity {
 		this.setDevuelto(valor.getDevuelto());
 	}
 	
+	public ValorConsignacion toBO() {
+		ValorConsignacion valor = new ValorConsignacion();
+		valor.setId(this.getId());
+		valor.setValor(this.getValor());
+		valor.setDescripcion(this.getDescripcion());
+		valor.setFecha(this.getFecha());
+		valor.setDevuelto(this.getDevuelto());
+		return valor;
+	}
+	
 	public Long getId() {
 		return id;
 	}

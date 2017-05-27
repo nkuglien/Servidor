@@ -88,7 +88,38 @@ public class ClienteEntity {
 		}
 		this.setPedidos(list);		
 	}
+	
+	public Cliente toBO() {
+		Cliente cliente = new Cliente();
+		cliente.setId(this.getId());
+		cliente.setNroLegajo(this.getNroLegajo());
+		cliente.setNombre(this.getNombre());
+		cliente.setDireccion(this.getDireccion());
+		cliente.setTelefono(this.getTelefono());
+		cliente.setCuit(this.getCuit());
+		cliente.setCc(this.getCc().toBO());
+		cliente.setNroCliente(this.getNroCliente());
+		cliente.setValores(toValoresBO(this.getValores()));
+		cliente.setPedidos(toPedidosBO(this.getPedidos()));
+		return cliente;
+	}
 
+	private List<ValorConsignacion> toValoresBO(List<ValorConsignacionEntity> valoresEntity) {
+		List<ValorConsignacion> valores = new ArrayList<ValorConsignacion>();
+		for (ValorConsignacionEntity valorEntity : valoresEntity) {
+			valores.add(valorEntity.toBO());
+		}
+		return valores;
+	}
+	
+	private List<PedidoCliente> toPedidosBO(List<PedidoClienteEntity> pedidosEntity) {
+		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
+		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
+			pedidos.add(pedidoEntity.toBO());
+		}
+		return pedidos;
+	}
+	
 	public long getId() {
 		return id;
 	}

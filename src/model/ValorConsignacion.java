@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import DTO.ValorConsignacionDTO;
+
 public class ValorConsignacion {
 
 	private Long id;
@@ -16,6 +18,13 @@ public class ValorConsignacion {
 	public ValorConsignacion (float valor, String descripcion) {
 		this.setValor(valor);
 		this.setDescripcion(descripcion);
+		this.setFecha(new Date());
+		this.setDevuelto(false);
+	}
+
+	public ValorConsignacion(ValorConsignacionDTO dto) {
+		this.setValor(dto.getValor());
+		this.setDescripcion(dto.getDescripcion());
 		this.setFecha(new Date());
 		this.setDevuelto(false);
 	}

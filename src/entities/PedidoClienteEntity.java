@@ -89,6 +89,11 @@ public class PedidoClienteEntity {
 		this.setEstado(pedido.getEstado());
 		this.setNota(pedido.getNota());
 	}
+	
+	public PedidoCliente toBO() {
+		//TODO
+		return null;
+	}
 
 	public Long getNroPedido() {
 		return nroPedido;
