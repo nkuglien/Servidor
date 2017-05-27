@@ -7,6 +7,9 @@ public class MovimientoCC {
 	private Long id;
 	private Date fecha;
 	private Float importe;
+	
+	public MovimientoCC() {
+	}
 
 	public MovimientoCC(Date fecha, Float importe) {
 		this.fecha = fecha;

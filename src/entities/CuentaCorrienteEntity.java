@@ -54,6 +54,23 @@ public class CuentaCorrienteEntity {
 		}
 		this.setMovimientos(list);
 	}
+	
+	public CuentaCorriente toBO() {
+		CuentaCorriente cc = new CuentaCorriente();
+		cc.setId(this.getId());
+		cc.setMovimientos(toMovimientosBO(this.getMovimientos()));
+		cc.setSaldo(this.getSaldo());
+		cc.setLimiteCredito(this.getLimiteCredito());
+		return cc;
+	}
+
+	private List<MovimientoCC> toMovimientosBO(List<MovimientoCCEntity> movimientosEntity) {
+		List<MovimientoCC> movimientos = new ArrayList<MovimientoCC>();
+		for (MovimientoCCEntity movimientoEntity : movimientosEntity) {
+			movimientos.add(movimientoEntity.toBO());
+		}
+		return movimientos;
+	}
 
 	public Long getId() {
 		return id;

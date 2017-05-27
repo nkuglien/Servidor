@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import entities.ClienteEntity;
@@ -31,7 +32,22 @@ public class ClienteDAO extends HibernateDAO {
 	}
 
 	public List<Cliente> getAllClientes() {
-		return new ArrayList<Cliente>();
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from ClienteEntity");
+		List<ClienteEntity> clientesEntity = query.list();
+		for (ClienteEntity clienteEntity : clientesEntity) {
+			clientes.add(clienteEntity.toBO());
+		}
+		return clientes;
+	}
+	
+	public Cliente findClienteByNroCliente(String nroCliente) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from ClienteEntity where nroCliente = :nroCliente");
+		query.setParameter("nroCliente", nroCliente);
+		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
+		return clienteEntity.toBO();
 	}
 	
 }

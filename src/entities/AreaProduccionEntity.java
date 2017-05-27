@@ -66,7 +66,7 @@ public class AreaProduccionEntity {
 		this.ordenesEspera = ordenesEspera;
 	}
 
-	public AreaProduccion toBusinessObject() {
+	public AreaProduccion toBO() {
 		AreaProduccion area = new AreaProduccion();
 		area.setCodigo(this.getCodigo());
 		area.setNombre(this.getNombre());
