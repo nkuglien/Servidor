@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import DAO.PedidoClienteDAO;
 import DTO.EstadosPedidoCliente;
 import DTO.PedidoClienteDTO;
+import dao.PedidoClienteDAO;
 import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;

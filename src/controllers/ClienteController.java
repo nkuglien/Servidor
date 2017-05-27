@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DAO.ClienteDAO;
 import DTO.ClienteDTO;
 import RemoteObject.ClienteRemote;
+import dao.ClienteDAO;
 import model.Cliente;
 
 public class ClienteController implements ClienteRemote {
