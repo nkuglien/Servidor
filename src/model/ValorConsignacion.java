@@ -69,4 +69,14 @@ public class ValorConsignacion {
 		this.devuelto = devuelto;
 	}
 
+	public ValorConsignacionDTO toDTO() {
+		ValorConsignacionDTO dto = new ValorConsignacionDTO();
+		dto.setId(id);
+		dto.setDescripcion(descripcion);
+		dto.setDevuelto(devuelto);
+		dto.setValor(valor);
+		dto.setFecha(fecha);
+		return dto;
+	}
+
 }

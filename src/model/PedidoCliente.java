@@ -159,5 +159,25 @@ public class PedidoCliente {
 	public void save() {
 		PedidoClienteDAO.getInstance().save(this);		
 	}
+
+	public PedidoClienteDTO toDTO() {
+		PedidoClienteDTO dto = new PedidoClienteDTO();
+		dto.setCliente(cliente.toDTO());
+		dto.setEstado(estado);
+		dto.setFechaDespacho(fechaDespacho);
+		dto.setFechaGeneracion(fechaGeneracion);
+		dto.setFechaProbableDespacho(fechaProbableDespacho);
+		dto.setImpuestos(impuestos);
+		dto.setNota(nota);
+		dto.setNroPedido(nroPedido);
+		dto.setSubtotal(subtotal);
+		dto.setTotal(subtotal);
+		
+		List<ItemPedidoClienteDTO> itemsDTO = new ArrayList<ItemPedidoClienteDTO>();
+		for (ItemPedidoCliente item : this.items) {
+			itemsDTO.add(item.toDTO());
+		}
+		return dto;
+	}
 	
 }

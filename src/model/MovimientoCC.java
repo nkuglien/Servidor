@@ -47,4 +47,12 @@ public class MovimientoCC {
 		this.importe = importe;
 	}
 
+	public MovimientoCCDTO toDTO() {
+		MovimientoCCDTO dto = new MovimientoCCDTO();
+		dto.setFecha(fecha);
+		dto.setId(id);
+		dto.setImporte(importe);
+		return null;
+	}
+
 }
