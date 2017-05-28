@@ -1,7 +1,7 @@
 package RemoteObjects;
 
-import RemoteObject.PedidoRemote;
+import RemoteObject.TDAPedido;
 
-public class PedidoRemoto implements PedidoRemote {
+public class PedidoRemoto implements TDAPedido {
 
 }

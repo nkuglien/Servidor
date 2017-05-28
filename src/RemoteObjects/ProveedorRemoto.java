@@ -7,14 +7,14 @@ import java.util.List;
 
 import DTO.ClienteDTO;
 import DTO.ProveedorDTO;
-import RemoteObject.ClienteRemote;
-import RemoteObject.ProveedorRemote;
+import RemoteObject.TDAProveedor;
+import controllers.ProveedorController;
 import dao.ClienteDAO;
 import dao.ProveedorDAO;
 import model.Cliente;
 import model.Proveedor;
 
-public class ProveedorRemoto extends UnicastRemoteObject implements ProveedorRemote {
+public class ProveedorRemoto extends UnicastRemoteObject implements TDAProveedor {
 
 	public ProveedorRemoto() throws RemoteException {
 		super();
@@ -23,44 +23,35 @@ public class ProveedorRemoto extends UnicastRemoteObject implements ProveedorRem
 
 	@Override
 	public boolean verificarProveedor(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		return ProveedorController.GetInstancia().verificarProveedor(parseInt);
 	}
 
 	@Override
 	public void altaProveedor(int parseInt, String text) throws RemoteException {
-		// TODO Auto-generated method stub
+		 ProveedorController.GetInstancia().altaProveedor(parseInt, text);
 
 	}
 
 	@Override
 	public void bajaProveedor(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
+		 ProveedorController.GetInstancia().bajaProveedor(parseInt);
 
 	}
 
 	@Override
 	public ProveedorDTO solicitarProveedorView(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return ProveedorController.GetInstancia().solicitarProveedorView(parseInt);
 	}
 
 	@Override
 	public void modificarProveedor(ProveedorDTO pv, int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
+		 ProveedorController.GetInstancia().modificarProveedor(pv, parseInt);
 
 	}
 
 	@Override
 	public List<ProveedorDTO> getAllProveedores() throws RemoteException {
-		List<ProveedorDTO> proveedoresDTO = new ArrayList<ProveedorDTO>();
-		List<Proveedor> proveedores = ProveedorDAO.getInstance().getAllProveedores();
-		
-		for(Proveedor proveedor : proveedores){
-			proveedoresDTO.add(proveedor.toDTO());			
-		}
-		
-		return proveedoresDTO;
+		return ProveedorController.GetInstancia().getAllProveedores();
 	}
 
 }

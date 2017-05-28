@@ -10,7 +10,7 @@ import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;
 
-public class Controller {
+public class PedidoController {
 
 	// ========================= MANEJO DE PEDIDOS =========================
 

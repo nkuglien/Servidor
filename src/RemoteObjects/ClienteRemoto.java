@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ClienteDTO;
-import RemoteObject.ClienteRemote;
+import RemoteObject.TDACliente;
+import controllers.ClienteController;
 import dao.ClienteDAO;
 import model.Cliente;
 
-public class ClienteRemoto extends UnicastRemoteObject implements ClienteRemote {
+public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 
 	/**
 	 * 
@@ -24,44 +25,39 @@ public class ClienteRemoto extends UnicastRemoteObject implements ClienteRemote 
 
 	@Override
 	public List<ClienteDTO> getAllClientes() throws RemoteException {
-		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
-		List<Cliente> clientes = ClienteDAO.getInstance().getAllClientes();
 		
-		for(Cliente cliente : clientes){
-			clientesDTO.add(cliente.toDTO());			
+		return ClienteController.GetInstancia().getAllClientes();
 		}
-		
-		return clientesDTO;
-	}
 
 	@Override
 	public boolean verificarCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		return ClienteController.GetInstancia().verificarCliente(parseInt);
 	}
 
 	@Override
 	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
 			throws RemoteException {
-		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
-		return clienteDTO;
+		return ClienteController.GetInstancia().altaCliente(clienteDTO);
 		
 	}
 
 	@Override
 	public ClienteDTO bajaCliente(long cuit) throws RemoteException {
-		return null;
+		return ClienteController.GetInstancia().bajaCliente(cuit);
 	}
 
 
 	@Override
 	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteDAO.getInstance().update(cliente);
+		return ClienteController.GetInstancia().modificarCliente(cliente);
 	}
 
 	@Override
 	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
-		return ClienteDAO.getInstance().findClienteByNroCliente(1).toDTO();
+		return ClienteController.GetInstancia().buscarCliente(cuit);
 	}
+
+	
+	
 
 }

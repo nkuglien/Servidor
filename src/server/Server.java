@@ -5,10 +5,16 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import RemoteObject.ClienteRemote;
-import RemoteObject.ProveedorRemote;
+import RemoteObject.TDACliente;
+import RemoteObject.TDAInsumo;
+import RemoteObject.TDAPrenda;
+import RemoteObject.TDAProveedor;
+import RemoteObject.TDASucursal;
 import RemoteObjects.ClienteRemoto;
+import RemoteObjects.InsumoRemoto;
+import RemoteObjects.PrendaRemoto;
 import RemoteObjects.ProveedorRemoto;
+import RemoteObjects.SucursalRemoto;
 
 public class Server {
 	
@@ -24,11 +30,20 @@ public class Server {
 		try {
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 			
-			ClienteRemote clienteRemote = new ClienteRemoto();
-			Naming.bind("//localhost:1099/ClienteController", clienteRemote);
+			TDACliente clienteRemote = new ClienteRemoto();
+			Naming.bind("//localhost:1099/ClienteRemote", clienteRemote);
 			
-			ProveedorRemote proveedorRemote = new ProveedorRemoto();
-			Naming.bind("//localhost:1099/ProveedorController", proveedorRemote);
+			TDAProveedor proveedorRemote = new ProveedorRemoto();
+			Naming.bind("//localhost:1099/ProveedorRemote", proveedorRemote);
+			
+			TDASucursal sucursalRemote = new SucursalRemoto();
+			Naming.bind("//localhost:1099/SucursalRemote", sucursalRemote);
+			
+			TDAInsumo insumoRemote = new InsumoRemoto();
+			Naming.bind("//localhost:1099/ProveedorRemote", insumoRemote);
+			
+			TDAPrenda prendaRemote = new PrendaRemoto();
+			Naming.bind("//localhost:1099/ProveedorRemote", prendaRemote);
 			
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {
