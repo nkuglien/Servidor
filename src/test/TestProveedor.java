@@ -1,11 +1,7 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dao.InsumoDAO;
 import model.Insumo;
-import model.InsumoProveedor;
 import model.Proveedor;
 
 public class TestProveedor {
@@ -13,21 +9,25 @@ public class TestProveedor {
 	public static void main(String[] args) {
 		TestInsumo.main(args);
 		
-		List<InsumoProveedor> insumos = new ArrayList<InsumoProveedor>();
+		Proveedor proveedor = crearProveedor("Proveedor Carlitos");
+		
 		Insumo insumo = InsumoDAO.getInstance().findByCodigo(new Long(1000));
-		insumos.add(new InsumoProveedor(insumo, 100));
+		proveedor.altaInsumo(insumo, 10);
+		
 		insumo = InsumoDAO.getInstance().findByCodigo(new Long(1001));
-		insumos.add(new InsumoProveedor(insumo, 4));
+		proveedor.altaInsumo(insumo, 20);
+		
 		insumo = InsumoDAO.getInstance().findByCodigo(new Long(1003));
-		insumos.add(new InsumoProveedor(insumo, 2));
-		crearProveedor("Proveedor Carlitos", insumos);
+		proveedor.altaInsumo(insumo, 30);
+		
+		proveedor.save();
 	}
 	
-	private static void crearProveedor(String nombre, List<InsumoProveedor> insumos) {
+	private static Proveedor crearProveedor(String nombre) {
 		Proveedor proveedor = new Proveedor();
 		proveedor.setNombre(nombre);
-		proveedor.setInsumos(insumos);
-		proveedor.save();
+		proveedor = proveedor.save();
+		return proveedor;
 	}
 
 }

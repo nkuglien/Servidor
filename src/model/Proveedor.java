@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import DTO.InsumoDTO;
 import DTO.InsumoProveedorDTO;
 import DTO.ProveedorDTO;
 import dao.ProveedorDAO;
@@ -18,14 +17,14 @@ public class Proveedor {
 		this.insumos = new ArrayList<InsumoProveedor>();
 	}
 	
-	public void save() {
-		ProveedorDAO.getInstance().save(this);
+	public Proveedor save() {
+		return ProveedorDAO.getInstance().save(this);
 	}
 	
-	public void agregarInsumo(Insumo insumo, float precio) {
+	public void altaInsumo(Insumo insumo, float precio) {
 		this.getInsumos().add(new InsumoProveedor(insumo, precio));
 	}
-
+	
 	public List<InsumoProveedor> getInsumos() {
 		return insumos;
 	}

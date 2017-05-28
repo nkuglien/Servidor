@@ -20,15 +20,18 @@ public class ProveedorDAO extends HibernateDAO {
 		return instancia;
 	}
 
-	public void save(Proveedor proveedor) {
+	public Proveedor save(Proveedor proveedor) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(new ProveedorEntity(proveedor));
+		ProveedorEntity entity = new ProveedorEntity(proveedor);
+		session.saveOrUpdate(entity);
 		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		
+		return entity.toBO();
 	}
 	
 	public List<Proveedor> getAllProveedores() {

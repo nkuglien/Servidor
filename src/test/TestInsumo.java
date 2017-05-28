@@ -11,8 +11,7 @@ public class TestInsumo {
 		crearInsumo(new Long(1003), "Cierre", "Cierre", 400, 400);
 	}
 
-	private static void crearInsumo(Long codigo, String descripcion, String nombre, Integer stockMinimo,
-			Integer cantCompra) {
+	private static void crearInsumo(Long codigo, String descripcion, String nombre, Integer stockMinimo, Integer cantCompra) {
 		Insumo insumo = new Insumo(codigo, descripcion, nombre, stockMinimo, cantCompra);
 		insumo.save();
 	}
