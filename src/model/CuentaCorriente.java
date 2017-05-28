@@ -6,6 +6,7 @@ import java.util.List;
 
 import DTO.CuentaCorrienteDTO;
 import DTO.MovimientoCCDTO;
+import dao.ClienteDAO;
 
 public class CuentaCorriente {
 
@@ -61,6 +62,10 @@ public class CuentaCorriente {
 
 	public void setLimiteCredito(float limiteCredito) {
 		this.limiteCredito = limiteCredito;
+	}
+
+	public void save() {
+		ClienteDAO.getInstance().save(this);	
 	}
 
 }

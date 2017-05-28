@@ -46,8 +46,8 @@ public class AreaProduccionDAO extends HibernateDAO {
 		Session session = this.openSession();
 		Query query = session.createQuery("from AreaProduccionEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);
-		AreaProduccionEntity area = (AreaProduccionEntity) query.uniqueResult();
-		return area.toBO();
+		AreaProduccionEntity areaEntity = (AreaProduccionEntity) query.uniqueResult();
+		return areaEntity != null? areaEntity.toBO() : null;
 	}
 	
 }

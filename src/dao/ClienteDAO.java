@@ -6,9 +6,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import DTO.ClienteDTO;
 import entities.ClienteEntity;
+import entities.CuentaCorrienteEntity;
 import model.Cliente;
+import model.CuentaCorriente;
 
 public class ClienteDAO extends HibernateDAO {
 	
@@ -25,12 +26,13 @@ public class ClienteDAO extends HibernateDAO {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(new ClienteEntity(cliente));
+		ClienteEntity entity = new ClienteEntity(cliente);
+		session.saveOrUpdate(entity);
 		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return cliente;
+		return entity.toBO();
 	}
 
 	public List<Cliente> getAllClientes() {
@@ -58,6 +60,19 @@ public class ClienteDAO extends HibernateDAO {
 		query.setParameter("cuit", cuit);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
 		return clienteEntity != null? clienteEntity.toBO() : null;
+	}
+
+	public CuentaCorriente save(CuentaCorriente cuentaCorriente) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		
+		CuentaCorrienteEntity entity = new CuentaCorrienteEntity(cuentaCorriente);
+		session.saveOrUpdate(entity);
+		
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+		return entity.toBO();		
 	}
 	
 }

@@ -47,7 +47,7 @@ public class ProveedorDAO extends HibernateDAO {
 		Query query = session.createQuery("from ProveedorEntity where id = :id");
 		query.setParameter("id", id);
 		ProveedorEntity proveedorEntity = (ProveedorEntity) query.uniqueResult();
-		return proveedorEntity.toBO();
+		return proveedorEntity != null? proveedorEntity.toBO() : null;
 	}
 
 }
