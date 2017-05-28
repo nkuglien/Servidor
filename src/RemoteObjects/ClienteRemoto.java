@@ -29,6 +29,7 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 		return ClienteController.GetInstancia().getAllClientes();
 		}
 
+
 	@Override
 	public boolean verificarCliente(int parseInt) throws RemoteException {
 		return ClienteController.GetInstancia().verificarCliente(parseInt);
@@ -50,11 +51,13 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 	@Override
 	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
 		return ClienteController.GetInstancia().modificarCliente(cliente);
+
 	}
 
 	@Override
 	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
 		return ClienteController.GetInstancia().buscarCliente(cuit);
+
 	}
 
 	

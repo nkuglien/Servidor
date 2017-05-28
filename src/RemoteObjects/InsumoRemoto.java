@@ -47,23 +47,5 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 		return insumo != null ? insumo.toDTO() : null;
 	}
 
-	@Override
-	public boolean verificarInsumo(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void altaInsumo(int parseInt, String text, String text2, int parseInt2, int parseInt3)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void bajaInsumo(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

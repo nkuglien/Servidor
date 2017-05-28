@@ -23,6 +23,14 @@ public class Insumo {
 		this.setCantCompra(cantCompra);
 	}
 	
+	public Insumo(InsumoDTO insumo) {
+		this.setCodigo(insumo.getCodigo());
+		this.setDescripcion(insumo.getDescripcion());
+		this.setNombre(insumo.getNombre());
+		this.setStockMinimo(insumo.getStockMinimo());
+		this.setCantCompra(insumo.getCantCompra());
+	}
+
 	public void save() {
 		InsumoDAO.getInstance().save(this);
 	}

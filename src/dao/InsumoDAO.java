@@ -36,7 +36,7 @@ public class InsumoDAO extends HibernateDAO {
 		Query query = session.createQuery("from InsumoEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);
 		InsumoEntity insumo = (InsumoEntity) query.uniqueResult();
-		return insumo.toBO();
+		return insumo != null? insumo.toBO() : null;
 	}
 	
 	public List<Insumo> getAllInsumos() {

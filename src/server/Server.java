@@ -1,7 +1,6 @@
 package server;
 
 import java.rmi.Naming;
-import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -10,6 +9,7 @@ import RemoteObject.TDAInsumo;
 import RemoteObject.TDAPrenda;
 import RemoteObject.TDAProveedor;
 import RemoteObject.TDASucursal;
+import RemoteObject.TDAProveedor;
 import RemoteObjects.ClienteRemoto;
 import RemoteObjects.InsumoRemoto;
 import RemoteObjects.PrendaRemoto;
@@ -40,10 +40,10 @@ public class Server {
 			Naming.bind("//localhost:1099/SucursalRemote", sucursalRemote);
 			
 			TDAInsumo insumoRemote = new InsumoRemoto();
-			Naming.bind("//localhost:1099/ProveedorRemote", insumoRemote);
+			Naming.bind("//localhost:1099/InsumoRemote", insumoRemote);
 			
 			TDAPrenda prendaRemote = new PrendaRemoto();
-			Naming.bind("//localhost:1099/ProveedorRemote", prendaRemote);
+			Naming.bind("//localhost:1099/PrendaRemote", prendaRemote);
 			
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {

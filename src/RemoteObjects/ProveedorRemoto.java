@@ -5,13 +5,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import DTO.ClienteDTO;
 import DTO.ProveedorDTO;
 import RemoteObject.TDAProveedor;
 import controllers.ProveedorController;
 import dao.ClienteDAO;
 import dao.ProveedorDAO;
-import model.Cliente;
 import model.Proveedor;
 
 public class ProveedorRemoto extends UnicastRemoteObject implements TDAProveedor {
