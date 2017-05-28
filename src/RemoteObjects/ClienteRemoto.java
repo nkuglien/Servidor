@@ -2,14 +2,11 @@ package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ClienteDTO;
 import RemoteObject.TDACliente;
 import controllers.ClienteController;
-import dao.ClienteDAO;
-import model.Cliente;
 
 public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 

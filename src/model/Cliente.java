@@ -8,11 +8,9 @@ import DTO.ClienteDTO;
 import DTO.PedidoClienteDTO;
 import DTO.ValorConsignacionDTO;
 import dao.ClienteDAO;
-import entities.PedidoClienteEntity;
-import entities.ValorConsignacionEntity;
 
 public class Cliente {
-	
+
 	private long id;
 	private int nroLegajo;
 	private String nombre;
@@ -23,13 +21,13 @@ public class Cliente {
 	private long nroCliente;
 	private List<ValorConsignacion> valores;
 	private List<PedidoCliente> pedidos;
-	
+
 	public Cliente() {
 		this.setCc(new CuentaCorriente());
 		this.setValores(new ArrayList<ValorConsignacion>());
 		this.setPedidos(new ArrayList<PedidoCliente>());
 	}
-	
+
 	public Cliente(int nroLegajo, String nombre, String direccion, String telefono, String cuit, long nroCliente) {
 		this.setNroLegajo(nroLegajo);
 		this.setNombre(nombre);
@@ -51,25 +49,29 @@ public class Cliente {
 		this.setCc(new CuentaCorriente(cliente.getCc()));
 		this.setNroCliente(cliente.getNroCliente());
 		this.setId(cliente.getId());
-				
+
 		List<ValorConsignacion> valores = new ArrayList<ValorConsignacion>();
-		for(ValorConsignacionDTO val : cliente.getValores()) valores.add(new ValorConsignacion(val));
+		for (ValorConsignacionDTO val : cliente.getValores()) {
+			valores.add(new ValorConsignacion(val));
+		}
 		this.valores = valores;
-		
+
 		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
-		for(PedidoClienteDTO ped : cliente.getPedidos()) pedidos.add(new PedidoCliente(ped));
+		for (PedidoClienteDTO ped : cliente.getPedidos()) {
+			pedidos.add(new PedidoCliente(ped));
+		}
 		this.pedidos = pedidos;
 	}
-	
+
 	public void agregarValorConsignacion(String descripcion, float valor) {
 		ValorConsignacion valorConsignacion = new ValorConsignacion(valor, descripcion);
 		this.getValores().add(valorConsignacion);
 		this.getCc().aumentarLimiteCredito(valor);
 	}
-	
+
 	public void habilitarCuentaCorriente(float saldo, float limiteCredito) {
 		this.getCc().setSaldo(saldo);
-		this.getCc().setLimiteCredito(limiteCredito);		
+		this.getCc().setLimiteCredito(limiteCredito);
 		this.getCc().save();
 	}
 
@@ -148,7 +150,7 @@ public class Cliente {
 	public void setValores(List<ValorConsignacion> valores) {
 		this.valores = valores;
 	}
-	
+
 	public List<PedidoCliente> getPedidos() {
 		return pedidos;
 	}
@@ -160,7 +162,7 @@ public class Cliente {
 	public void addPedido(PedidoCliente pedido) {
 		this.getPedidos().add(pedido);
 	}
-	
+
 	public void addMovimiento(Date fecha, float importe) {
 		this.getCc().agregarMovimiento(fecha, importe);
 	}
@@ -175,19 +177,19 @@ public class Cliente {
 		retorno.setNroLegajo(nroLegajo);
 		retorno.setTelefono(telefono);
 		retorno.setCc(cc.toDTO());
-		
+
 		List<PedidoClienteDTO> pedidosList = new ArrayList<PedidoClienteDTO>();
-		for(PedidoCliente pedido : pedidos) {
+		for (PedidoCliente pedido : pedidos) {
 			pedidosList.add(pedido.toDTO());
 		}
-		retorno.setPedidos(pedidosList);	
-		
+		retorno.setPedidos(pedidosList);
+
 		List<ValorConsignacionDTO> valoresList = new ArrayList<ValorConsignacionDTO>();
-		for(ValorConsignacion valor : valores) {
+		for (ValorConsignacion valor : valores) {
 			valoresList.add(valor.toDTO());
 		}
 		retorno.setValores(valoresList);
-		
+
 		return retorno;
 
 	}

@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import DTO.ClienteDTO;
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
 import model.Cliente;
