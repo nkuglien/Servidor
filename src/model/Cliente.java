@@ -58,6 +58,12 @@ public class Cliente {
 		this.pedidos = pedidos;
 	}
 	
+	public void agregarValorConsignacion(String descripcion, float valor) {
+		ValorConsignacion valorConsignacion = new ValorConsignacion(valor, descripcion);
+		this.getValores().add(valorConsignacion);
+		this.getCc().aumentarLimiteCredito(valor);
+	}
+	
 	public void habilitarCuentaCorriente(float saldo, float limiteCredito) {
 		this.getCc().setSaldo(saldo);
 		this.getCc().setLimiteCredito(limiteCredito);		
@@ -138,10 +144,6 @@ public class Cliente {
 
 	public void setValores(List<ValorConsignacion> valores) {
 		this.valores = valores;
-	}
-
-	public void addValor(float valor, String descripcion) {
-		this.getValores().add(new ValorConsignacion(valor, descripcion));
 	}
 	
 	public List<PedidoCliente> getPedidos() {

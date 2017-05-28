@@ -31,6 +31,10 @@ public class CuentaCorriente {
 	public void agregarMovimiento(Date fecha, Float importe) {
 		getMovimientos().add(new MovimientoCC(fecha, importe));
 	}
+	
+	public void aumentarLimiteCredito(float valor) {
+		this.setLimiteCredito(this.getLimiteCredito() - valor);		
+	}
 
 	public Long getId() {
 		return id;

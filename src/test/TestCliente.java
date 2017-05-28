@@ -1,14 +1,16 @@
 package test;
 
-import java.util.Date;
-
 import model.Cliente;
 
 public class TestCliente {
 
 	public static void main(String[] args) {
 		Cliente cliente = crearCliente(1, "Ezequiel", "French 2574", "1136214694", "20347444376", 1);
-		cliente.habilitarCuentaCorriente(0, 5000);
+		cliente.habilitarCuentaCorriente(0, -5000);
+		cliente.agregarValorConsignacion("libro", 20);
+		cliente.agregarValorConsignacion("bici", 500);
+		cliente.save();
+		
 //		crearCliente(2, "Coco", "Colombres 235", "1143579364", "20049807693", 2);
 //		crearCliente(3, "Eneas", "Castro Barros 108", "1193414721", "12345678910", 3);
 	}
@@ -23,13 +25,8 @@ public class TestCliente {
 		cliente.setCuit(cuit);
 		cliente.setNroCliente(nroCliente);
 
-		cliente.addValor(10, "libro");
-		cliente.addValor(500, "bici");
-
-		cliente.addMovimiento(new Date(), 200);
-		cliente.addMovimiento(new Date(), 1500);
-
 		cliente = cliente.save();
+		
 		return cliente;
 	}
 
