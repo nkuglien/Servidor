@@ -20,15 +20,18 @@ public class SucursalDAO extends HibernateDAO {
 		return instancia;
 	}
 	
-	public void save(Sucursal sucursal) {
+	public Sucursal save(Sucursal sucursal) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(new SucursalEntity(sucursal));
+		SucursalEntity entity = new SucursalEntity(sucursal);
+		session.saveOrUpdate(entity);
 		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		
+		return entity.toBO();
 	}
 
 	public List<Sucursal> getAllSucursales() {

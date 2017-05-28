@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import dao.SucursalDAO;
 
 public class Sucursal {
 
@@ -10,6 +13,18 @@ public class Sucursal {
 	private Integer horarioCierre;
 	private String direccion;
 	private List<Cliente> clientes;
+	
+	public Sucursal () {
+		this.clientes = new ArrayList<Cliente>();
+	}
+	
+	public Sucursal save() {
+		return SucursalDAO.getInstance().save(this);
+	}
+	
+	public void altaCliente(Cliente cliente) {
+		this.getClientes().add(cliente);
+	}
 
 	public Integer getNumero() {
 		return numero;
