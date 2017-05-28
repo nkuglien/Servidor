@@ -1,13 +1,12 @@
 package server;
 
 import java.rmi.Naming;
-import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import RemoteObject.ClienteRemote;
-import RemoteObject.InsumoRemote;
-import RemoteObject.ProveedorRemote;
+import RemoteObject.TDACliente;
+import RemoteObject.TDAInsumo;
+import RemoteObject.TDAProveedor;
 import RemoteObjects.ClienteRemoto;
 import RemoteObjects.InsumoRemoto;
 import RemoteObjects.ProveedorRemoto;
@@ -26,13 +25,13 @@ public class Server {
 		try {
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 			
-			ClienteRemote clienteRemote = new ClienteRemoto();
+			TDACliente clienteRemote = new ClienteRemoto();
 			Naming.bind("//localhost:1099/ClienteRemoto", clienteRemote);
 			
-			ProveedorRemote proveedorRemote = new ProveedorRemoto();
+			TDAProveedor proveedorRemote = new ProveedorRemoto();
 			Naming.bind("//localhost:1099/ProveedorRemoto", proveedorRemote);
 			
-			InsumoRemote insumoRemote = new InsumoRemoto();
+			TDAInsumo insumoRemote = new InsumoRemoto();
 			Naming.bind("//localhost:1099/InsumoRemoto", insumoRemote);
 			
 			System.out.println("Servicios registrados exitosamente");

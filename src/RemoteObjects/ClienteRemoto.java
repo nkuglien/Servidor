@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ClienteDTO;
-import RemoteObject.ClienteRemote;
+import RemoteObject.TDACliente;
 import dao.ClienteDAO;
 import model.Cliente;
 
-public class ClienteRemoto extends UnicastRemoteObject implements ClienteRemote {
+public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 
 	/**
 	 * 
