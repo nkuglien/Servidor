@@ -21,7 +21,7 @@ public class ClienteDAO extends HibernateDAO {
 		return instancia;
 	}
 	
-	public void save(Cliente cliente) {
+	public Cliente save(Cliente cliente) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
@@ -30,6 +30,7 @@ public class ClienteDAO extends HibernateDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		return cliente;
 	}
 
 	public List<Cliente> getAllClientes() {
@@ -48,15 +49,15 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ClienteEntity where nroCliente = :nroCliente");
 		query.setParameter("nroCliente", nroCliente);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
-		return clienteEntity.toBO();
+		return clienteEntity != null? clienteEntity.toBO() : null;
 	}
 
-	public ClienteDTO findClienteByCuit(String cuit) {
-		return null;
-	}
-
-	public ClienteDTO update(ClienteDTO cliente) {
-		return null;
+	public Cliente findClienteByCuit(String cuit) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from ClienteEntity where cuit = :cuit");
+		query.setParameter("cuit", cuit);
+		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
+		return clienteEntity != null? clienteEntity.toBO() : null;
 	}
 	
 }

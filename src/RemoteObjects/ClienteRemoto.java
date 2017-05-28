@@ -7,6 +7,7 @@ import java.util.List;
 
 import DTO.ClienteDTO;
 import RemoteObject.TDACliente;
+import controllers.ClienteController;
 import dao.ClienteDAO;
 import model.Cliente;
 
@@ -34,11 +35,6 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 		return clientesDTO;
 	}
 
-	@Override
-	public boolean verificarCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
@@ -56,12 +52,12 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 
 	@Override
 	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteDAO.getInstance().update(cliente);
+		return ClienteController.getInstance().update(cliente);
 	}
 
 	@Override
 	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
-		return ClienteDAO.getInstance().findClienteByNroCliente(1).toDTO();
+		return ClienteController.getInstance().buscarCliente(cuit);
 	}
 
 }
