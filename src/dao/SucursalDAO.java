@@ -47,7 +47,7 @@ public class SucursalDAO extends HibernateDAO {
 		Query query = session.createQuery("from SucursalEntity where numero = :numero");
 		query.setParameter("numero", numero);
 		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
-		return sucursalEntity.toBO();
+		return sucursalEntity != null? sucursalEntity.toBO() : null;
 	}
 
 }

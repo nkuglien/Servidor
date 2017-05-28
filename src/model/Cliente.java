@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import dao.ClienteDAO;
 import DTO.ClienteDTO;
-import DTO.MovimientoCCDTO;
 import DTO.PedidoClienteDTO;
 import DTO.ValorConsignacionDTO;
+import dao.ClienteDAO;
 
 public class Cliente {
 	
@@ -58,9 +57,15 @@ public class Cliente {
 		for(PedidoClienteDTO ped : cliente.getPedidos()) pedidos.add(new PedidoCliente(ped));
 		this.pedidos = pedidos;
 	}
+	
+	public void habilitarCuentaCorriente(float saldo, float limiteCredito) {
+		this.getCc().setSaldo(saldo);
+		this.getCc().setLimiteCredito(limiteCredito);		
+		this.getCc().save();
+	}
 
-	public void save() {
-		ClienteDAO.getInstance().save(this);
+	public Cliente save() {
+		return ClienteDAO.getInstance().save(this);
 	}
 
 	public long getId() {
