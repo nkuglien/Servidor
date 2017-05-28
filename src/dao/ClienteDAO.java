@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import DTO.ClienteDTO;
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
 import model.Cliente;
@@ -73,6 +74,10 @@ public class ClienteDAO extends HibernateDAO {
 		session.getTransaction().commit();
 		session.close();
 		return entity.toBO();		
+	}
+
+	public Cliente update(Cliente cliente) {
+		return save(cliente);
 	}
 	
 }

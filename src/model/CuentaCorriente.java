@@ -63,6 +63,16 @@ public class CuentaCorriente {
 	public void setLimiteCredito(float limiteCredito) {
 		this.limiteCredito = limiteCredito;
 	}
+	
+	public CuentaCorrienteDTO toDTO() {
+		List<MovimientoCCDTO> movsDTO = new ArrayList<MovimientoCCDTO>();
+		for(MovimientoCC mov : this.movimientos) {
+			movsDTO.add(mov.toDTO());
+		}
+		CuentaCorrienteDTO dto = new CuentaCorrienteDTO(this.saldo, this.limiteCredito, movsDTO);
+		dto.setId(id);
+		return dto;
+	}
 
 	public void save() {
 		ClienteDAO.getInstance().save(this);	
