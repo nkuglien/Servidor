@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.InsumoDTO;
+import DTO.InsumoProveedorDTO;
 import DTO.ProveedorDTO;
 import RemoteObject.TDAProveedor;
 import controllers.ProveedorController;
@@ -50,6 +52,12 @@ public class ProveedorRemoto extends UnicastRemoteObject implements TDAProveedor
 	@Override
 	public List<ProveedorDTO> getAllProveedores() throws RemoteException {
 		return ProveedorController.GetInstancia().getAllProveedores();
+	}
+
+	@Override
+	public InsumoProveedorDTO asociarInsumo(ProveedorDTO proveedor, InsumoDTO insumo, Float precio)
+			throws RemoteException {
+		return ProveedorController.GetInstancia().asociarInsumo(proveedor, insumo, precio);
 	}
 
 }

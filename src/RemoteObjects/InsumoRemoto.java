@@ -2,6 +2,7 @@ package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import DTO.InsumoDTO;
 import RemoteObject.TDAInsumo;
@@ -43,6 +44,11 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 	@Override
 	public InsumoDTO buscarInsumo(Long codigo) throws RemoteException {
 		return InsumoController.GetInstancia().buscarInsumo(codigo);
+	}
+
+	@Override
+	public List<InsumoDTO> getAllInsumos() throws RemoteException {
+		return InsumoController.GetInstancia().getAllInsumos();
 	}
 
 

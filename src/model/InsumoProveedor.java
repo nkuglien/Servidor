@@ -17,6 +17,12 @@ public class InsumoProveedor {
 		this.setPrecio(precio);
 	}
 
+	public InsumoProveedor(InsumoProveedorDTO insumoProv) {
+		this.id = insumoProv.getId();
+		this.insumo = new Insumo(insumoProv.getInsumo());
+		this.precio = insumoProv.getPrecio();
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -46,7 +52,7 @@ public class InsumoProveedor {
 		dto.setId(this.id);
 		dto.setInsumo(this.insumo.toDTO());
 		dto.setPrecio(this.precio);
-		return null;
+		return dto;
 	}
 
 }

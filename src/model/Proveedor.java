@@ -17,12 +17,24 @@ public class Proveedor {
 		this.insumos = new ArrayList<InsumoProveedor>();
 	}
 	
+	public Proveedor(ProveedorDTO proveedor) {
+		this.id = proveedor.getId();
+		this.nombre = proveedor.getNombre();
+		List<InsumoProveedor> insumosProveedor = new ArrayList<InsumoProveedor>();
+		for(InsumoProveedorDTO insumoProv : proveedor.getInsumos()) {
+			insumosProveedor.add(new InsumoProveedor(insumoProv));
+		}
+		this.insumos = insumosProveedor;
+	}
+
 	public Proveedor save() {
 		return ProveedorDAO.getInstance().save(this);
 	}
 	
-	public void altaInsumo(Insumo insumo, float precio) {
-		this.getInsumos().add(new InsumoProveedor(insumo, precio));
+	public InsumoProveedor altaInsumo(Insumo insumo, float precio) {
+		InsumoProveedor insumoProveedor = new InsumoProveedor(insumo, precio);
+		this.getInsumos().add(insumoProveedor);
+		return insumoProveedor;
 	}
 	
 	public List<InsumoProveedor> getInsumos() {
@@ -58,6 +70,7 @@ public class Proveedor {
 		for(InsumoProveedor insumo : insumos){
 			insumosDTO.add(insumo.toDTO());			
 		}
+		dto.setInsumos(insumosDTO);
 		return dto;
 	}
 
