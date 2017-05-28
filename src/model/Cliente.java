@@ -163,8 +163,8 @@ public class Cliente {
 		this.getPedidos().add(pedido);
 	}
 
-	public void addMovimiento(Date fecha, float importe) {
-		this.getCc().agregarMovimiento(fecha, importe);
+	public void addMovimiento(float importe) {
+		this.getCc().agregarMovimiento(new Date(), importe);
 	}
 
 	public ClienteDTO toDTO() {
