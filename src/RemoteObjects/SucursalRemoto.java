@@ -1,12 +1,18 @@
 package RemoteObjects;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import DTO.SucursalDTO;
 import RemoteObject.TDASucursal;
 import controllers.SucursalController;
 
-public class SucursalRemoto implements TDASucursal {
+public class SucursalRemoto extends UnicastRemoteObject implements TDASucursal {
+
+	public SucursalRemoto() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean verificarSucursal(int parseInt) throws RemoteException {

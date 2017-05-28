@@ -8,6 +8,8 @@ import DTO.ClienteDTO;
 import DTO.PedidoClienteDTO;
 import DTO.ValorConsignacionDTO;
 import dao.ClienteDAO;
+import entities.PedidoClienteEntity;
+import entities.ValorConsignacionEntity;
 
 public class Cliente {
 	
@@ -48,7 +50,8 @@ public class Cliente {
 		this.setCuit(cliente.getCuit());
 		this.setCc(new CuentaCorriente(cliente.getCc()));
 		this.setNroCliente(cliente.getNroCliente());
-		
+		this.setId(cliente.getId());
+				
 		List<ValorConsignacion> valores = new ArrayList<ValorConsignacion>();
 		for(ValorConsignacionDTO val : cliente.getValores()) valores.add(new ValorConsignacion(val));
 		this.valores = valores;
@@ -171,6 +174,20 @@ public class Cliente {
 		retorno.setNroCliente(nroCliente);
 		retorno.setNroLegajo(nroLegajo);
 		retorno.setTelefono(telefono);
+		retorno.setCc(cc.toDTO());
+		
+		List<PedidoClienteDTO> pedidosList = new ArrayList<PedidoClienteDTO>();
+		for(PedidoCliente pedido : pedidos) {
+			pedidosList.add(pedido.toDTO());
+		}
+		retorno.setPedidos(pedidosList);	
+		
+		List<ValorConsignacionDTO> valoresList = new ArrayList<ValorConsignacionDTO>();
+		for(ValorConsignacion valor : valores) {
+			valoresList.add(valor.toDTO());
+		}
+		retorno.setValores(valoresList);
+		
 		return retorno;
 
 	}

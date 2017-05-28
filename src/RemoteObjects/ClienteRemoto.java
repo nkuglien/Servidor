@@ -25,28 +25,20 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 
 	@Override
 	public List<ClienteDTO> getAllClientes() throws RemoteException {
-		
+
 		return ClienteController.GetInstancia().getAllClientes();
-		}
-
-
-	@Override
-	public boolean verificarCliente(int parseInt) throws RemoteException {
-		return ClienteController.GetInstancia().verificarCliente(parseInt);
 	}
 
 	@Override
-	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
-			throws RemoteException {
+	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
 		return ClienteController.GetInstancia().altaCliente(clienteDTO);
-		
+
 	}
 
 	@Override
-	public ClienteDTO bajaCliente(long cuit) throws RemoteException {
+	public ClienteDTO bajaCliente(String cuit) throws RemoteException {
 		return ClienteController.GetInstancia().bajaCliente(cuit);
 	}
-
 
 	@Override
 	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
@@ -55,12 +47,9 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 	}
 
 	@Override
-	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
+	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
 		return ClienteController.GetInstancia().buscarCliente(cuit);
 
 	}
-
-	
-	
 
 }

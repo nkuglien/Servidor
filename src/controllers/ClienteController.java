@@ -32,12 +32,6 @@ public class ClienteController{
 	}
 
 
-	public boolean verificarCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 	public ClienteDTO altaCliente(ClienteDTO clienteDTO)
 			throws RemoteException {
 		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
@@ -45,32 +39,20 @@ public class ClienteController{
 		
 	}
 
-	public ClienteDTO bajaCliente(long cuit) throws RemoteException {
+	public ClienteDTO bajaCliente(String cuit) throws RemoteException {
 		return null;
 	}
 
 
-	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteDAO.getInstance().update(cliente);
+	public ClienteDTO modificarCliente(ClienteDTO dto) throws RemoteException {
+		Cliente cliente = ClienteDAO.getInstance().update(new Cliente(dto));
+		return cliente != null? cliente.toDTO() : null;
 	}
 
 
-	public ClienteDTO buscarCliente(String cuit)throws RemoteException {
-		return ClienteDAO.getInstance().findClienteByNroCliente(1).toDTO();
-	}
-
-		
-	public void bajaCliente(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public ClienteDTO solicitarClienteView(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
+		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit(cuit);
+		return cliente != null? cliente.toDTO() : null;
+	}	
 
 }

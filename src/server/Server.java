@@ -31,19 +31,19 @@ public class Server {
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 			
 			TDACliente clienteRemote = new ClienteRemoto();
-			Naming.bind("//localhost:1099/ClienteRemote", clienteRemote);
+			Naming.bind("//localhost:1099/ClienteRemoto", clienteRemote);
 			
 			TDAProveedor proveedorRemote = new ProveedorRemoto();
-			Naming.bind("//localhost:1099/ProveedorRemote", proveedorRemote);
+			Naming.bind("//localhost:1099/ProveedorRemoto", proveedorRemote);
 			
 			TDASucursal sucursalRemote = new SucursalRemoto();
-			Naming.bind("//localhost:1099/SucursalRemote", sucursalRemote);
+			Naming.bind("//localhost:1099/SucursalRemoto", sucursalRemote);
 			
 			TDAInsumo insumoRemote = new InsumoRemoto();
-			Naming.bind("//localhost:1099/InsumoRemote", insumoRemote);
+			Naming.bind("//localhost:1099/InsumoRemoto", insumoRemote);
 			
 			TDAPrenda prendaRemote = new PrendaRemoto();
-			Naming.bind("//localhost:1099/PrendaRemote", prendaRemote);
+			Naming.bind("//localhost:1099/PrendaRemoto", prendaRemote);
 			
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {
