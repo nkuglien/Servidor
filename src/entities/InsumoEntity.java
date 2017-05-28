@@ -48,11 +48,11 @@ public class InsumoEntity {
 	public Insumo toBO() {
 		Insumo insumo = new Insumo();
 		insumo.setId(this.getId());
-		insumo.setCodigo(insumo.getCodigo());
-		insumo.setDescripcion(insumo.getDescripcion());
-		insumo.setNombre(insumo.getNombre());
-		insumo.setStockMinimo(insumo.getStockMinimo());
-		insumo.setCantCompra(insumo.getCantCompra());
+		insumo.setCodigo(this.getCodigo());
+		insumo.setDescripcion(this.getDescripcion());
+		insumo.setNombre(this.getNombre());
+		insumo.setStockMinimo(this.getStockMinimo());
+		insumo.setCantCompra(this.getCantCompra());
 		return insumo;
 	}
 

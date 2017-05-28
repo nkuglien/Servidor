@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import DTO.InsumoDTO;
 import RemoteObject.TDAInsumo;
+import controllers.InsumoController;
 import dao.InsumoDAO;
 import model.Insumo;
 
@@ -17,8 +18,7 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 
 	@Override
 	public InsumoDTO altaInsumo(InsumoDTO insumo) throws RemoteException {
-		InsumoDAO.getInstance().save(new Insumo(insumo));
-		return insumo;
+		return InsumoController.GetInstancia().altaInsumo(insumo);
 
 	}
 
@@ -36,15 +36,13 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 	}
 
 	@Override
-	public void modificarInsumo(InsumoDTO iv, int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-
+	public InsumoDTO modificarInsumo(InsumoDTO insumo) throws RemoteException {
+		return InsumoController.GetInstancia().modificarInsumo(insumo);
 	}
 
 	@Override
 	public InsumoDTO buscarInsumo(Long codigo) throws RemoteException {
-		Insumo insumo = InsumoDAO.getInstance().findByCodigo(codigo);
-		return insumo != null ? insumo.toDTO() : null;
+		return InsumoController.GetInstancia().buscarInsumo(codigo);
 	}
 
 

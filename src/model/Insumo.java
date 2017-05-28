@@ -29,6 +29,7 @@ public class Insumo {
 		this.setNombre(insumo.getNombre());
 		this.setStockMinimo(insumo.getStockMinimo());
 		this.setCantCompra(insumo.getCantCompra());
+		this.setId(insumo.getId());
 	}
 
 	public void save() {

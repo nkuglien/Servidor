@@ -20,7 +20,7 @@ public class InsumoDAO extends HibernateDAO {
 		return instancia;
 	}
 	
-	public void save(Insumo insumo) {
+	public Insumo save(Insumo insumo) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
@@ -29,6 +29,7 @@ public class InsumoDAO extends HibernateDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		return insumo;
 	}
 	
 	public Insumo findByCodigo(Long codigo) {
@@ -48,6 +49,10 @@ public class InsumoDAO extends HibernateDAO {
 			insumos.add(insumoEntity.toBO());
 		}
 		return insumos;
+	}
+
+	public Insumo update(Insumo insumo) {
+		return save(insumo);
 	}
 
 }
