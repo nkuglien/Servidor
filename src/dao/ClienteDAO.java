@@ -79,4 +79,15 @@ public class ClienteDAO extends HibernateDAO {
 		return save(cliente);
 	}
 	
+	public void baja(Cliente cliente) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update ClienteEntity set activo = false where id = :id");
+		query.setParameter("id", cliente.getId());
+		query.executeUpdate();	
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+	}
+	
 }

@@ -18,6 +18,8 @@ public class TestCliente {
 		
 		cliente.save();
 
+		cliente.baja();
+		
 //		crearCliente(2, "Coco", "Colombres 235", "1143579364", "20049807693", 2);
 //		crearCliente(3, "Eneas", "Castro Barros 108", "1193414721", "12345678910", 3);
 	}
@@ -31,7 +33,7 @@ public class TestCliente {
 		cliente.setTelefono(telefono);
 		cliente.setCuit(cuit);
 		cliente.setNroCliente(nroCliente);
-
+		cliente.setActivo(true);
 		cliente = cliente.save();
 		
 		return cliente;

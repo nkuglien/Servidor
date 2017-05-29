@@ -29,8 +29,9 @@ private static SucursalController instancia;
 	}
 
 	
-	public void bajaSucursal(int parseInt) throws RemoteException {
-		SucursalDAO.getInstance().baja(parseInt);
+	public void bajaSucursal(int numero) throws RemoteException {
+		Sucursal sucursal = SucursalDAO.getInstance().findSucursalByNumero(numero);
+		sucursal.baja();
 	}
 
 	

@@ -38,7 +38,7 @@ public class Sucursal {
 	}
 	
 	public void baja() {
-		SucursalDAO.getInstance().baja(this.getNumero());
+		SucursalDAO.getInstance().baja(this);
 	}
 
 	public Integer getNumero() {

@@ -76,10 +76,12 @@ public class Cliente {
 		this.getCc().save();
 	}
 	
-	
-
 	public Cliente save() {
 		return ClienteDAO.getInstance().save(this);
+	}
+	
+	public void baja() {
+		ClienteDAO.getInstance().baja(this);
 	}
 
 	public long getId() {
