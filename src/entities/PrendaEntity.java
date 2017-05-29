@@ -3,15 +3,17 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.Prenda;
 import model.PrendaAreaProduccion;
-import model.ValorConsignacion;
 import model.VariedadPrenda;
 
 @Entity
@@ -31,7 +33,9 @@ public class PrendaEntity {
 	@OneToMany
 	private List<VariedadPrendaEntity> variedades;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PRENDA_PRENDA_AREA_PRODUCCION", joinColumns = { @JoinColumn(name = "codigo") }, inverseJoinColumns = {
+			@JoinColumn(name = "prenda_area_produccion_id") })
 	private List<PrendaAreaProduccionEntity> areas;
 	
 	public PrendaEntity() {

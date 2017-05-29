@@ -29,6 +29,15 @@ public class Prenda {
 	public Prenda save() {
 		return PrendaDAO.getInstance().save(this);
 	}
+	
+	public void agregarVariedad(VariedadPrenda variedad) {
+		this.getVariedades().add(variedad);
+	}
+	
+	public void agregarArea(AreaProduccion area, Integer tiempo) {
+		PrendaAreaProduccion prendaArea = new PrendaAreaProduccion(area, tiempo);
+		this.getAreas().add(prendaArea);
+	}
 
 	public Long getCodigo() {
 		return codigo;

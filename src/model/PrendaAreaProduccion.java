@@ -5,6 +5,14 @@ public class PrendaAreaProduccion {
 	private Long id;
 	private AreaProduccion area;
 	private Integer tiempo;
+	
+	public PrendaAreaProduccion() {
+	}
+	
+	public PrendaAreaProduccion(AreaProduccion area, Integer tiempo) {
+		this.setArea(area);
+		this.setTiempo(tiempo);
+	}
 
 	public Long getId() {
 		return id;

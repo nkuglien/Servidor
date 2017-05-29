@@ -35,6 +35,9 @@ public class AreaProduccionEntity {
 	@Transient
 	private List<OrdenProduccionEsperaEntity> ordenesEspera;
 	
+	public AreaProduccionEntity() {
+	}
+	
 	public AreaProduccionEntity(AreaProduccion area) {
 		this.setCodigo(area.getCodigo());
 		this.setNombre(area.getNombre());
