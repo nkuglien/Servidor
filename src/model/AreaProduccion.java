@@ -1,16 +1,27 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AreaProduccion {
+import dao.AreaProduccionDAO;
 
-	private Integer idAreaProduccion;
+public class AreaProduccion {
 
 	private Integer codigo;
 	private String nombre;
 	private Map<String, Boolean> lineas;
 	private List<OrdenProduccionEspera> ordenesEspera;
+	
+	public AreaProduccion() {
+		this.setLineas(new HashMap<String, Boolean>());
+	}
+	
+	public AreaProduccion(Integer codigo, String nombre) {
+		this.setCodigo(codigo);
+		this.setNombre(nombre);
+		this.setLineas(new HashMap<String, Boolean>());
+	}
 	
 	public void agregarLinea(String codigoLinea, boolean isDisponible) {
 		lineas.put(codigoLinea, isDisponible);
@@ -22,6 +33,10 @@ public class AreaProduccion {
 	
 	public void cambiarEstadoLinea(String codigoLinea, boolean isDisponible) {
 		lineas.put(codigoLinea, isDisponible);
+	}
+	
+	public AreaProduccion save() {
+		return AreaProduccionDAO.getInstance().save(this);
 	}
 
 	public Integer getCodigo() {
@@ -54,14 +69,6 @@ public class AreaProduccion {
 
 	public void setOrdenesEspera(List<OrdenProduccionEspera> ordenesEspera) {
 		this.ordenesEspera = ordenesEspera;
-	}
-
-	public Integer getIdAreaProduccion() {
-		return idAreaProduccion;
-	}
-
-	public void setIdAreaProduccion(Integer idAreaProduccion) {
-		this.idAreaProduccion = idAreaProduccion;
 	}
 
 }
