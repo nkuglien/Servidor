@@ -89,16 +89,16 @@ public class Sucursal {
 		this.clientes = clientes;
 	}
 
-	public SucursalDTO toDTO() {
-		return new SucursalDTO(this.numero,this.nombre,this.horarioApertura,this.horarioCierre,this.direccion);
-	}
-
 	public boolean isActivo() {
 		return activo;
 	}
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	
+	public SucursalDTO toDTO() {
+		return new SucursalDTO(this.numero,this.nombre,this.horarioApertura,this.horarioCierre,this.direccion);
 	}
 
 }
