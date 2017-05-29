@@ -1,6 +1,8 @@
 package controllers;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import DTO.InsumoDTO;
 import dao.InsumoDAO;
@@ -35,6 +37,14 @@ public class InsumoController {
 	public boolean verificarInsumo(int parseInt) {
 		// TODO Auto-generated method stub
 		return false;
+		}
+	public List<InsumoDTO> getAllInsumos() {
+		List<Insumo> insumos = InsumoDAO.getInstance().getAllInsumos();
+		List<InsumoDTO> insumosDTO = new ArrayList<InsumoDTO>();
+		for(Insumo insumo : insumos) {
+			insumosDTO.add(insumo.toDTO());
+		}
+		return insumosDTO;
 	}
 
 }

@@ -2,12 +2,11 @@ package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import DTO.InsumoDTO;
 import RemoteObject.TDAInsumo;
 import controllers.InsumoController;
-import dao.InsumoDAO;
-import model.Insumo;
 
 public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 
@@ -48,6 +47,11 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 	@Override
 	public boolean verificarInsumo(int parseInt) {
 		return InsumoController.GetInstancia().verificarInsumo(parseInt);
+		
+	}
+	@Override
+	public List<InsumoDTO> getAllInsumos() throws RemoteException {
+		return InsumoController.GetInstancia().getAllInsumos();
 	}
 
 

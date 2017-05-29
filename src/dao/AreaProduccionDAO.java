@@ -20,15 +20,18 @@ public class AreaProduccionDAO extends HibernateDAO {
 		return instancia;
 	}
 
-	public void save(AreaProduccion area) {
+	public AreaProduccion save(AreaProduccion area) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(new AreaProduccionEntity(area));
+		AreaProduccionEntity entity = new AreaProduccionEntity(area);
+		session.saveOrUpdate(entity);
 		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		
+		return entity.toBO();
 	}
 
 	public List<AreaProduccion> getAllAreasProduccion() {

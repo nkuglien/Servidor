@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import DTO.PrendaDTO;
-import RemoteObject.TDAInsumo;
 import RemoteObject.TDAPrenda;
 
 public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {

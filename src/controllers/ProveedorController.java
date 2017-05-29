@@ -1,11 +1,13 @@
 package controllers;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.InsumoDTO;
+import DTO.InsumoProveedorDTO;
 import DTO.ProveedorDTO;
 import dao.ProveedorDAO;
+import model.Insumo;
 import model.Proveedor;
 
 public class ProveedorController {
@@ -60,5 +62,15 @@ private static ProveedorController instancia;
 		}
 		
 		return proveedoresDTO;
+	}
+
+
+
+
+	public InsumoProveedorDTO asociarInsumo(ProveedorDTO proveedorDTO, InsumoDTO insumoDTO, Float precio) {
+		Proveedor proveedor =  new Proveedor(proveedorDTO);
+		InsumoProveedorDTO insumoPorveedor = proveedor.altaInsumo(new Insumo(insumoDTO), precio).toDTO();
+		proveedor.save();
+		return insumoPorveedor;
 	}
 }

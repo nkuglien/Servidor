@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import model.ItemInsumo;
+
 @Entity
 @Table(name = "ITEM_INSUMO")
 public class ItemInsumoEntity {
@@ -25,6 +27,25 @@ public class ItemInsumoEntity {
 	
 	@Column(name = "cantidad")
 	private Integer cantidad;
+	
+	public ItemInsumoEntity() {
+	}
+	
+	public ItemInsumoEntity(ItemInsumo itemInsumo) {
+		this.setId(itemInsumo.getId());
+		this.setInsumo(new InsumoEntity(itemInsumo.getInsumo()));
+		this.setDesperdicio(itemInsumo.getDesperdicio());
+		this.setCantidad(itemInsumo.getCantidad());		
+	}
+	
+	public ItemInsumo toBO() {
+		ItemInsumo itemInsumo = new ItemInsumo();
+		itemInsumo.setId(this.getId());
+		itemInsumo.setInsumo(this.getInsumo().toBO());
+		itemInsumo.setDesperdicio(this.getDesperdicio());
+		itemInsumo.setCantidad(this.getCantidad());
+		return itemInsumo;
+	}
 	
 	public Long getId() {
 		return id;
