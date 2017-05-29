@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import model.ItemInsumo;
+import model.VariedadPrenda;
 
 
 @Entity
@@ -45,6 +49,51 @@ public class VariedadPrendaEntity {
 	@Column(name = "precio_venta_actual")
 	private Float precioVentaActual;
 	
+	public VariedadPrendaEntity() {
+	}
+	
+	public VariedadPrendaEntity(VariedadPrenda variedad) {
+		this.setId(variedad.getId());
+		this.setPrenda(new PrendaEntity(variedad.getPrenda()));
+		this.setTalle(variedad.getTalle());
+		this.setColor(variedad.getColor());
+		this.setEnProduccion(variedad.getEnProduccion());
+		this.setItemsInsumoEntity(variedad.getInsumos());
+		this.setCantidadProduccionFija(variedad.getCantidadProduccionFija());
+		this.setCostoProduccionActual(variedad.getCostoProduccionActual());
+		this.setPrecioVentaActual(variedad.getPrecioVentaActual());
+	}
+	
+	private void setItemsInsumoEntity(List<ItemInsumo> itemsInsumo) {
+		List<ItemInsumoEntity> list = new ArrayList<ItemInsumoEntity>();
+		for(ItemInsumo itemInsumo : itemsInsumo) {
+			list.add(new ItemInsumoEntity(itemInsumo));
+		}
+		this.setInsumos(list);		
+	}
+	
+	public VariedadPrenda toBO() {
+		VariedadPrenda variedad = new VariedadPrenda();
+		variedad.setId(this.getId());
+		variedad.setPrenda(this.getPrenda().toBO());
+		variedad.setTalle(this.getTalle());
+		variedad.setColor(this.getColor());
+		variedad.setEnProduccion(this.getEnProduccion());
+		variedad.setInsumos(toInsumosBO(this.getInsumos()));
+		variedad.setCantidadProduccionFija(this.getCantidadProduccionFija());
+		variedad.setCostoProduccionActual(this.getCostoProduccionActual());
+		variedad.setPrecioVentaActual(this.getPrecioVentaActual());
+		return variedad;
+	}
+
+	private List<ItemInsumo> toInsumosBO(List<ItemInsumoEntity> itemsInsumo) {
+		List<ItemInsumo> insumos = new ArrayList<ItemInsumo>();
+		for (ItemInsumoEntity insumoEntity : itemsInsumo) {
+			insumos.add(insumoEntity.toBO());
+		}
+		return insumos;
+	}
+
 	public Long getId() {
 		return id;
 	}

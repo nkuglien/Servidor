@@ -16,6 +16,9 @@ public class TestAreaProduccion {
 		areaPlanchado.agregarLinea("Linea2", true);
 		areaPlanchado.agregarLinea("Linea3", true);
 		areaPlanchado.save();
+		
+		areaCorte.cambiarEstadoLinea("Linea1", false);
+		areaCorte.save();
 	}
 	
 	private static AreaProduccion crearAreaProduccion(Integer codigo, String nombre) {

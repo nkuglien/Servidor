@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import dao.PrendaDAO;
 
 public class Prenda {
 
@@ -9,6 +12,23 @@ public class Prenda {
 	private Boolean enProduccion;
 	private List<VariedadPrenda> variedades;
 	private List<PrendaAreaProduccion> areas;
+	
+	public Prenda() {
+		this.setVariedades(new ArrayList<VariedadPrenda>());
+		this.setAreas(new ArrayList<PrendaAreaProduccion>());
+	}
+	
+	public Prenda(Long codigo, String descripcion, Boolean enProduccion) {
+		this.setCodigo(codigo);
+		this.setDescripcion(descripcion);
+		this.setEnProduccion(enProduccion);
+		this.setVariedades(new ArrayList<VariedadPrenda>());
+		this.setAreas(new ArrayList<PrendaAreaProduccion>());
+	}
+	
+	public Prenda save() {
+		return PrendaDAO.getInstance().save(this);
+	}
 
 	public Long getCodigo() {
 		return codigo;

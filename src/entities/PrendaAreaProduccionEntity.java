@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import model.PrendaAreaProduccion;
+
 @Entity
 @Table(name = "PRENDA_AREA_PRODUCCION")
 public class PrendaAreaProduccionEntity {
@@ -23,6 +25,23 @@ public class PrendaAreaProduccionEntity {
 	@Column(name = "tiempo")
 	private Integer tiempo;
 	
+	public PrendaAreaProduccionEntity() {
+	}
+	
+	public PrendaAreaProduccionEntity(PrendaAreaProduccion area) {
+		this.setId(area.getId());
+		this.setArea(new AreaProduccionEntity(area.getArea()));
+		this.setTiempo(area.getTiempo());
+	}
+	
+	public PrendaAreaProduccion toBO() {
+		PrendaAreaProduccion prendaArea = new PrendaAreaProduccion();
+		prendaArea.setId(this.getId());
+		prendaArea.setArea(this.getArea().toBO());
+		prendaArea.setTiempo(this.getTiempo());		
+		return prendaArea;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -46,5 +65,5 @@ public class PrendaAreaProduccionEntity {
 	public void setTiempo(Integer tiempo) {
 		this.tiempo = tiempo;
 	}
-	
+
 }

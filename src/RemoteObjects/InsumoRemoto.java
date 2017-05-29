@@ -7,8 +7,6 @@ import java.util.List;
 import DTO.InsumoDTO;
 import RemoteObject.TDAInsumo;
 import controllers.InsumoController;
-import dao.InsumoDAO;
-import model.Insumo;
 
 public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 

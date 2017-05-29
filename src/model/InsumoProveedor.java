@@ -1,6 +1,5 @@
 package model;
 
-import DTO.InsumoDTO;
 import DTO.InsumoProveedorDTO;
 
 public class InsumoProveedor {
