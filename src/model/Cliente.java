@@ -21,6 +21,7 @@ public class Cliente {
 	private long nroCliente;
 	private List<ValorConsignacion> valores;
 	private List<PedidoCliente> pedidos;
+	private boolean activo;
 
 	public Cliente() {
 		this.setCc(new CuentaCorriente());
@@ -74,6 +75,8 @@ public class Cliente {
 		this.getCc().setLimiteCredito(limiteCredito);
 		this.getCc().save();
 	}
+	
+	
 
 	public Cliente save() {
 		return ClienteDAO.getInstance().save(this);
@@ -192,6 +195,14 @@ public class Cliente {
 
 		return retorno;
 
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 }

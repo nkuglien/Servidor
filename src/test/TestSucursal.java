@@ -13,6 +13,9 @@ public class TestSucursal {
 		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit("20347444376");
 		sucursal.altaCliente(cliente);
 		sucursal.save();
+		
+		sucursal.baja();
+		
 	}
 
 	public static Sucursal createSucursal(int numero, String nombre, int horAp, int horCier, String dir) {
@@ -23,6 +26,7 @@ public class TestSucursal {
 		sucursal.setHorarioCierre(horCier);
 		sucursal.setDireccion(dir);
 		sucursal = sucursal.save();
+		sucursal.setActivo(true);
 		return sucursal;
 	}
 	

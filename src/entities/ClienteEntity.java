@@ -57,6 +57,9 @@ public class ClienteEntity {
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<PedidoClienteEntity> pedidos;
 	
+	@Column(name = "activo")
+	private boolean activo;
+	
 	public ClienteEntity() {
 	}
 	
@@ -71,6 +74,7 @@ public class ClienteEntity {
 		this.setNroCliente(cliente.getNroCliente());
 		this.setValoresEntity(cliente.getValores());
 		this.setPedidosEntity(cliente.getPedidos());
+		this.setActivo(cliente.isActivo());
 	}
 	
 	private void setValoresEntity(List<ValorConsignacion> valores) {
@@ -101,6 +105,7 @@ public class ClienteEntity {
 		cliente.setNroCliente(this.getNroCliente());
 		cliente.setValores(toValoresBO(this.getValores()));
 		cliente.setPedidos(toPedidosBO(this.getPedidos()));
+		cliente.setActivo(this.isActivo());
 		return cliente;
 	}
 
@@ -198,6 +203,14 @@ public class ClienteEntity {
 
 	public void setPedidos(List<PedidoClienteEntity> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 }

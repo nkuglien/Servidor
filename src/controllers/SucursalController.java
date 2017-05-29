@@ -30,7 +30,7 @@ private static SucursalController instancia;
 
 	
 	public void bajaSucursal(int parseInt) throws RemoteException {
-		SucursalDAO.getInstance().BajaSucursal(parseInt);
+		SucursalDAO.getInstance().baja(parseInt);
 	}
 
 	
