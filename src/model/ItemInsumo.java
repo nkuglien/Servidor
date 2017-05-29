@@ -25,10 +25,6 @@ public class ItemInsumo {
 		this.cantidad = dto.getCantidad();
 	}
 
-	public ItemInsumo() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getId() {
 		return id;
 	}
