@@ -18,7 +18,7 @@ public class TestPrenda {
 		TestAreaProduccion.main(args);
 		TestInsumo.main(args);
 		
-		Prenda remera = crearPrenda(new Long(1000), "Remera", true);
+		Prenda remera = crearPrenda(1000, "Remera", true);
 
 		AreaProduccion areaCorte = AreaProduccionDAO.getInstance().findAreaByCodigo(1000);
 		AreaProduccion areaPlanchado = AreaProduccionDAO.getInstance().findAreaByCodigo(1001);
@@ -27,7 +27,7 @@ public class TestPrenda {
 		remera.agregarArea(areaPlanchado, 3);
 		remera = remera.save();
 
-		Prenda jean = crearPrenda(new Long(1001), "Jean", true);
+		Prenda jean = crearPrenda(1001, "Jean", true);
 
 		jean.agregarArea(areaCorte, 2);
 		jean.agregarArea(areaPlanchado, 4);
@@ -49,7 +49,7 @@ public class TestPrenda {
 		System.out.println(remeraReload);
 	}
 
-	private static Prenda crearPrenda(Long codigo, String descripcion, boolean enProduccion) {
+	private static Prenda crearPrenda(long codigo, String descripcion, boolean enProduccion) {
 		Prenda prenda = new Prenda(codigo, descripcion, enProduccion);
 		prenda = prenda.save();
 		return prenda;
@@ -66,9 +66,9 @@ public class TestPrenda {
 		variedad.setPrecioVentaActual(precioVentaActual);
 		variedad.setCantidadProduccionFija(cantidadProduccionFija);
 		List<ItemInsumo> insumos = new ArrayList<ItemInsumo>();
-		Insumo insumoTela = InsumoDAO.getInstance().findByCodigo(new Long(1000));
+		Insumo insumoTela = InsumoDAO.getInstance().findByCodigo(1000);
 		insumos.add(new ItemInsumo(insumoTela, 1, 4));
-		Insumo insumoBoton = InsumoDAO.getInstance().findByCodigo(new Long(1001));
+		Insumo insumoBoton = InsumoDAO.getInstance().findByCodigo(1001);
 		insumos.add(new ItemInsumo(insumoBoton, 2, 7));
 		variedad.setInsumos(insumos);
 		return variedad;

@@ -22,7 +22,7 @@ public class Prenda {
 		this.setAreas(new ArrayList<PrendaAreaProduccion>());
 	}
 	
-	public Prenda(Long codigo, String descripcion, Boolean enProduccion) {
+	public Prenda(long codigo, String descripcion, Boolean enProduccion) {
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);
 		this.setEnProduccion(enProduccion);

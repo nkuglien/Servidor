@@ -15,7 +15,7 @@ public class Insumo {
 	public Insumo() {
 	}
 	
-	public Insumo(Long codigo, String descripcion, String nombre, Integer stockMinimo, Integer cantCompra) {
+	public Insumo(long codigo, String descripcion, String nombre, int stockMinimo, int cantCompra) {
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);
 		this.setNombre(nombre);
