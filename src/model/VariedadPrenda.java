@@ -7,6 +7,7 @@ import dao.PrendaDAO;
 
 import DTO.InsumoDTO;
 import DTO.ItemInsumoDTO;
+import DTO.PrendaDTO;
 import DTO.VariedadPrendaDTO;
 import entities.ItemInsumoEntity;
 
@@ -122,6 +123,11 @@ public class VariedadPrenda {
 	
 	public boolean hayStock() {
 		return true;
+	}
+
+	public VariedadPrendaDTO toDTO() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }

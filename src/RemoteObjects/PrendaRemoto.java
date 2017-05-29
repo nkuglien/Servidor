@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import DTO.PrendaDTO;
 import RemoteObject.TDAPrenda;
+import controllers.PrendaController;
 import dao.PrendaDAO;
 import model.Prenda;
 
@@ -25,7 +26,6 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	public void altaPrenda(PrendaDTO prenda) throws RemoteException {
 		Prenda p = new Prenda(prenda);
 		p.save();
-
 	}
 
 	@Override
@@ -35,9 +35,8 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	}
 
 	@Override
-	public PrendaDTO solicitarPrendaView(int parseInt) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public PrendaDTO solicitarPrendaView(Long codigo) throws RemoteException {
+		return PrendaController.getInstance().buscarPrenda(codigo);
 	}
 
 	@Override

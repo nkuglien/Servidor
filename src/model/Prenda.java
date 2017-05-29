@@ -101,4 +101,24 @@ public class Prenda {
 		this.areas = areas;
 	}
 
+	public PrendaDTO toDTO() {
+		PrendaDTO dto = new PrendaDTO();
+		dto.setCodigo(this.getCodigo());
+		dto.setDescripcion(this.getDescripcion());
+		dto.setEnProduccion(this.getEnProduccion());
+		
+		List<VariedadPrendaDTO> vaiedadesDTO = new ArrayList<VariedadPrendaDTO>();
+		for(VariedadPrenda variedad : this.getVariedades()) {
+			vaiedadesDTO.add(variedad.toDTO());
+		}
+		dto.setVariedades(vaiedadesDTO);
+		
+		List<PrendaAreaProduccionDTO> areasDTO = new ArrayList<PrendaAreaProduccionDTO>();
+		for(PrendaAreaProduccion area : this.getAreas()) {
+			areas.add(area.toDTO());
+		}
+		dto.setAreas(areasDTO);
+		return dto;
+	}
+
 }

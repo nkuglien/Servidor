@@ -46,4 +46,9 @@ public class PrendaAreaProduccion {
 		this.tiempo = tiempo;
 	}
 
+	public PrendaAreaProduccion toDTO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
