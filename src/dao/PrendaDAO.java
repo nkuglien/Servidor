@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import entities.ClienteEntity;
 import entities.PrendaEntity;
+import entities.ValorConsignacionEntity;
 import entities.VariedadPrendaEntity;
 import model.Cliente;
 import model.Prenda;
@@ -61,6 +62,14 @@ public class PrendaDAO extends HibernateDAO {
 		session.close();
 		
 		return entity.toBO(true);
+	}
+	
+	public Prenda getPrendaByCodigo(long codigo) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from PrendaEntity where codigo = :codigo");
+		query.setParameter("codigo", codigo);
+		PrendaEntity prendaEntity = (PrendaEntity) query.uniqueResult();
+		return prendaEntity != null? prendaEntity.toBO() : null;
 	}
 
 }
