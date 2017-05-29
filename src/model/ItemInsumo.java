@@ -1,5 +1,7 @@
 package model;
 
+import DTO.ItemInsumoDTO;
+
 public class ItemInsumo {
 
 	private Long id;
@@ -14,6 +16,17 @@ public class ItemInsumo {
 		this.setInsumo(insumo);
 		this.setDesperdicio(desperdicio);
 		this.setCantidad(cantidad);
+	}
+
+	public ItemInsumo(ItemInsumoDTO dto) {
+		this.id = dto.getId();
+		this.insumo = new Insumo(dto.getInsumo());
+		this.desperdicio = dto.getDesperdicio();
+		this.cantidad = dto.getCantidad();
+	}
+
+	public ItemInsumo() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

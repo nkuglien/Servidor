@@ -1,5 +1,7 @@
 package model;
 
+import DTO.PrendaAreaProduccionDTO;
+
 public class PrendaAreaProduccion {
 
 	private Long id;
@@ -10,6 +12,12 @@ public class PrendaAreaProduccion {
 	}
 	
 	public PrendaAreaProduccion(AreaProduccion area, Integer tiempo) {
+		this.setArea(area);
+		this.setTiempo(tiempo);
+	}
+
+	public PrendaAreaProduccion(PrendaAreaProduccionDTO areaDTO) {
+		this.setId(areaDTO.getId());
 		this.setArea(area);
 		this.setTiempo(tiempo);
 	}

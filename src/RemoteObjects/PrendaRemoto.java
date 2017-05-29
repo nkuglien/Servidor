@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 
 import DTO.PrendaDTO;
 import RemoteObject.TDAPrenda;
+import dao.PrendaDAO;
+import model.Prenda;
 
 public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 
@@ -20,14 +22,14 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 		return false;
 	}
 
-	@Override
-	public void altaPrenda(int parseInt, String text) throws RemoteException {
-		// TODO Auto-generated method stub
+	public void altaPrenda(PrendaDTO prenda) throws RemoteException {
+		Prenda p = new Prenda(prenda);
+		p.save();
 
 	}
 
 	@Override
-	public void bajaprenda(int parseInt) throws RemoteException {
+	public void bajaprenda(PrendaDTO prenda) throws RemoteException {
 		// TODO Auto-generated method stub
 
 	}
@@ -39,7 +41,7 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	}
 
 	@Override
-	public void modificarPrenda(PrendaDTO pv, int parseInt) throws RemoteException {
+	public void modificarPrenda(PrendaDTO prenda) throws RemoteException {
 		// TODO Auto-generated method stub
 
 	}

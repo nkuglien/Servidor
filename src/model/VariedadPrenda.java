@@ -1,8 +1,14 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.PrendaDAO;
+
+import DTO.InsumoDTO;
+import DTO.ItemInsumoDTO;
+import DTO.VariedadPrendaDTO;
+import entities.ItemInsumoEntity;
 
 public class VariedadPrenda {
 
@@ -22,6 +28,25 @@ public class VariedadPrenda {
 	public VariedadPrenda save() {
 		return PrendaDAO.getInstance().saveVarieadad(this);
 	}
+
+	public VariedadPrenda(VariedadPrendaDTO variedadDTO) {
+		this.id = variedadDTO.getId();
+		this.prenda = new Prenda(variedadDTO.getPrenda());
+		this.talle = variedadDTO.getTalle();
+		this.color = variedadDTO.getColor();
+		this.enProduccion = variedadDTO.getEnProduccion();
+		this.cantidadProduccionFija = variedadDTO.getCantidadProduccionFija();
+		this.costoProduccionActual = variedadDTO.getCostoProduccionActual();
+		this.precioVentaActual = variedadDTO.getPrecioVentaActual();
+		
+		
+		List<ItemInsumo> insumosList = new ArrayList<ItemInsumo>();
+		for (ItemInsumoDTO insumoDTO : variedadDTO.getInsumos()) {
+			insumosList.add(new ItemInsumo(insumoDTO));
+		}
+		this.insumos = insumosList ;
+	}
+
 
 	public Long getId() {
 		return id;

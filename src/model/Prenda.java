@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.PrendaAreaProduccionDTO;
+import DTO.PrendaDTO;
+import DTO.VariedadPrendaDTO;
 import dao.PrendaDAO;
 
 public class Prenda {
@@ -26,6 +29,25 @@ public class Prenda {
 		this.setAreas(new ArrayList<PrendaAreaProduccion>());
 	}
 	
+	public Prenda(PrendaDTO prenda) {
+		this.setCodigo(prenda.getCodigo());
+		this.setDescripcion(prenda.getDescripcion());
+		this.setEnProduccion(prenda.getEnProduccion());
+		
+		List<VariedadPrenda> vaiedades = new ArrayList<VariedadPrenda>();
+		for(VariedadPrendaDTO variedadDTO : prenda.getVariedades()) {
+			vaiedades.add(new VariedadPrenda(variedadDTO));
+		}
+		this.setVariedades(vaiedades);
+		
+		List<PrendaAreaProduccion> areas = new ArrayList<PrendaAreaProduccion>();
+		for(PrendaAreaProduccionDTO areaDTO : prenda.getAreas()) {
+			areas.add(new PrendaAreaProduccion(areaDTO));
+		}
+		this.setAreas(areas);
+		
+	}
+
 	public Prenda save() {
 		return PrendaDAO.getInstance().save(this);
 	}
