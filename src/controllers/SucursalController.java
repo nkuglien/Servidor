@@ -36,7 +36,8 @@ private static SucursalController instancia;
 
 	
 	public SucursalDTO solicitarSucursalView(int parseInt) throws RemoteException {
-		return SucursalDAO.getInstance().findSucursalByNumero(parseInt).toDTO();
+		Sucursal suc = SucursalDAO.getInstance().findSucursalByNumero(parseInt);
+		return suc != null? suc.toDTO() : null;
 	}
 
 	

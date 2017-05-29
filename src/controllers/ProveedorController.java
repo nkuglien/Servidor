@@ -29,9 +29,8 @@ private static ProveedorController instancia;
 	}
 
 	
-	public void altaProveedor(int parseInt, String text)  {
-		// TODO Auto-generated method stub
-
+	public void altaProveedor(ProveedorDTO proveedor)  {
+		ProveedorDAO.getInstance().save(new Proveedor(proveedor));
 	}
 
 	
@@ -42,14 +41,14 @@ private static ProveedorController instancia;
 
 	
 	public ProveedorDTO solicitarProveedorView(int parseInt)  {
-		// TODO Auto-generated method stub
-		return null;
+		Proveedor prov = ProveedorDAO.getInstance().findProveedorById(parseInt);
+		return prov != null? prov.toDTO() : null;
 	}
 
 	
-	public void modificarProveedor(ProveedorDTO pv, int parseInt)  {
-		// TODO Auto-generated method stub
-
+	public void modificarProveedor(ProveedorDTO pv)  {
+		Proveedor p = new Proveedor(pv);
+		p.save();
 	}
 
 	
