@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.SucursalDTO;
 import dao.SucursalDAO;
 
 public class Sucursal {
@@ -18,6 +19,15 @@ public class Sucursal {
 		this.clientes = new ArrayList<Cliente>();
 	}
 	
+	public Sucursal(SucursalDTO sucursal) {
+		this.setNumero(sucursal.getNumero());
+		this.setNombre(sucursal.getNombre());
+		this.setHorarioApertura(sucursal.getHorarioApertura());
+		this.setHorarioCierre(sucursal.getHorarioCierre());
+		this.setDireccion(sucursal.getDireccion());
+		this.setClientes(new ArrayList<Cliente>());
+	}
+
 	public Sucursal save() {
 		return SucursalDAO.getInstance().save(this);
 	}
@@ -72,6 +82,10 @@ public class Sucursal {
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+
+	public SucursalDTO toDTO() {
+		return new SucursalDTO(this.numero,this.nombre,this.horarioApertura,this.horarioCierre,this.direccion);
 	}
 
 }

@@ -34,6 +34,10 @@ public class InsumoController {
 		return insumo != null ? insumo.toDTO() : null;
 	}
 
+	public boolean verificarInsumo(int parseInt) {
+		// TODO Auto-generated method stub
+		return false;
+		}
 	public List<InsumoDTO> getAllInsumos() {
 		List<Insumo> insumos = InsumoDAO.getInstance().getAllInsumos();
 		List<InsumoDTO> insumosDTO = new ArrayList<InsumoDTO>();

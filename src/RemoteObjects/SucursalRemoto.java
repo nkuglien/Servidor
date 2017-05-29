@@ -20,14 +20,15 @@ public class SucursalRemoto extends UnicastRemoteObject implements TDASucursal {
 	}
 
 	@Override
-	public void altaSucursal(int parseInt, String text, int parseInt2, int parseInt3) throws RemoteException {
-		 SucursalController.GetInstancia().altaSucursal(parseInt, text, parseInt2, parseInt3);
+	public void altaSucursal(SucursalDTO sucursal) throws RemoteException {
+		System.out.println("Sucursal recibida en el servidor");
+		 SucursalController.GetInstancia().altaSucursal(sucursal);
 		
 	}
 
 	@Override
 	public void bajaSucursal(int parseInt) throws RemoteException {
-		 SucursalController.GetInstancia().solicitarSucursalView(parseInt);	
+		 SucursalController.GetInstancia().bajaSucursal(parseInt);	
 	}
 
 	@Override
@@ -36,8 +37,8 @@ public class SucursalRemoto extends UnicastRemoteObject implements TDASucursal {
 	}
 
 	@Override
-	public void modificarSucursal(SucursalDTO sv, int parseInt) throws RemoteException {
-		 SucursalController.GetInstancia().modificarSucursal(sv, parseInt);
+	public void modificarSucursal(SucursalDTO sv) throws RemoteException {
+		 SucursalController.GetInstancia().modificarSucursal(sv);
 		
 	}
 

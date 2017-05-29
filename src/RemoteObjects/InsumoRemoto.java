@@ -45,6 +45,11 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 	}
 
 	@Override
+	public boolean verificarInsumo(int parseInt) {
+		return InsumoController.GetInstancia().verificarInsumo(parseInt);
+		
+	}
+	@Override
 	public List<InsumoDTO> getAllInsumos() throws RemoteException {
 		return InsumoController.GetInstancia().getAllInsumos();
 	}

@@ -32,6 +32,17 @@ public class SucursalEntity {
 	@Column(name = "direccion")
 	private String direccion;
 	
+	@Column(name = "activo")
+	private boolean activo;
+	
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
 	@OneToMany
 	private List<ClienteEntity> clientes;
 	
@@ -45,6 +56,7 @@ public class SucursalEntity {
 		this.setHorarioCierre(sucursal.getHorarioCierre());
 		this.setDireccion(sucursal.getDireccion());
 		this.setClientesEntity(sucursal.getClientes());
+		this.setActivo(true);
 	}
 	
 	public Sucursal toBO() {
@@ -54,7 +66,10 @@ public class SucursalEntity {
 		sucursal.setHorarioApertura(this.getHorarioApertura());
 		sucursal.setHorarioCierre(this.getHorarioCierre());
 		sucursal.setDireccion(this.getDireccion());
+		if(this.clientes!=null)
 		sucursal.setClientes(toClientesBO(this.getClientes()));
+		else
+			sucursal.setClientes(new ArrayList<Cliente>());
 		return sucursal;
 	}
 	
