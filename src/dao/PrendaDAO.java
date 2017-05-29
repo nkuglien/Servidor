@@ -8,8 +8,10 @@ import org.hibernate.Session;
 
 import entities.ClienteEntity;
 import entities.PrendaEntity;
+import entities.VariedadPrendaEntity;
 import model.Cliente;
 import model.Prenda;
+import model.VariedadPrenda;
 
 public class PrendaDAO extends HibernateDAO {
 	
@@ -36,15 +38,29 @@ public class PrendaDAO extends HibernateDAO {
 		return entity.toBO();
 	}
 
-	public List<Cliente> getAllClientes() {
-		List<Cliente> clientes = new ArrayList<Cliente>();
+	public List<Prenda> getAllPrendas() {
+		List<Prenda> prendas = new ArrayList<Prenda>();
 		Session session = this.openSession();
-		Query query = session.createQuery("from ClienteEntity");
-		List<ClienteEntity> clientesEntity = query.list();
-		for (ClienteEntity clienteEntity : clientesEntity) {
-			clientes.add(clienteEntity.toBO());
+		Query query = session.createQuery("from PrendaEntity");
+		List<PrendaEntity> prendasEntity = query.list();
+		for (PrendaEntity prendaEntity : prendasEntity) {
+			prendas.add(prendaEntity.toBO());
 		}
-		return clientes;
+		return prendas;
+	}
+
+	public VariedadPrenda saveVarieadad(VariedadPrenda variedadPrenda) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		
+		VariedadPrendaEntity entity = new VariedadPrendaEntity(variedadPrenda);
+		session.saveOrUpdate(entity);
+		
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+		
+		return entity.toBO(true);
 	}
 
 }

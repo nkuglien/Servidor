@@ -30,7 +30,7 @@ public class PrendaEntity {
 	@Column(name = "enProduccion")
 	private Boolean enProduccion;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "prenda")
 	private List<VariedadPrendaEntity> variedades;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -120,7 +120,7 @@ public class PrendaEntity {
 	private List<VariedadPrenda> toVariedadesBO(List<VariedadPrendaEntity> variedadesEntity) {
 		List<VariedadPrenda> variedades = new ArrayList<VariedadPrenda>();
 		for (VariedadPrendaEntity variedadEntity : variedadesEntity) {
-			variedades.add(variedadEntity.toBO());
+			variedades.add(variedadEntity.toBO(false));
 		}
 		return variedades;
 	}

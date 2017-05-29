@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import dao.PrendaDAO;
+
 public class VariedadPrenda {
 
 	private Long id;
@@ -13,6 +15,13 @@ public class VariedadPrenda {
 	private Integer cantidadProduccionFija;
 	private Float costoProduccionActual;
 	private Float precioVentaActual;
+	
+	public VariedadPrenda() {
+	}
+	
+	public VariedadPrenda save() {
+		return PrendaDAO.getInstance().saveVarieadad(this);
+	}
 
 	public Long getId() {
 		return id;

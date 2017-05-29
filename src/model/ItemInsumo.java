@@ -6,6 +6,15 @@ public class ItemInsumo {
 	private Insumo insumo;
 	private Float desperdicio;
 	private Integer cantidad;
+	
+	public ItemInsumo() {
+	}
+	
+	public ItemInsumo(Insumo insumo, float desperdicio, int cantidad) {
+		this.setInsumo(insumo);
+		this.setDesperdicio(desperdicio);
+		this.setCantidad(cantidad);
+	}
 
 	public Long getId() {
 		return id;

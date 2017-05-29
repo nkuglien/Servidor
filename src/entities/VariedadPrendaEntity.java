@@ -3,11 +3,14 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,10 +25,12 @@ public class VariedadPrendaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "insumo_id")
+	@Column(name = "variedad_id")
 	private Long id;
 	
 	@ManyToOne
+	@JoinTable(name = "PRENDA_VARIEDAD_PRENDA", joinColumns = { @JoinColumn(name = "variedad_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "codigo") })
 	private PrendaEntity prenda;
 	
 	@Column(name = "talle")
@@ -37,7 +42,7 @@ public class VariedadPrendaEntity {
 	@Column(name = "en_produccion")
 	private Boolean enProduccion;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ItemInsumoEntity> insumos;
 	
 	@Column(name = "cantidad_produccion_fija")
@@ -72,10 +77,12 @@ public class VariedadPrendaEntity {
 		this.setInsumos(list);		
 	}
 	
-	public VariedadPrenda toBO() {
+	public VariedadPrenda toBO(boolean copyInverseReferences) {
 		VariedadPrenda variedad = new VariedadPrenda();
 		variedad.setId(this.getId());
-		variedad.setPrenda(this.getPrenda().toBO());
+		if(copyInverseReferences) {
+			variedad.setPrenda(this.getPrenda().toBO());
+		}
 		variedad.setTalle(this.getTalle());
 		variedad.setColor(this.getColor());
 		variedad.setEnProduccion(this.getEnProduccion());
@@ -85,7 +92,7 @@ public class VariedadPrendaEntity {
 		variedad.setPrecioVentaActual(this.getPrecioVentaActual());
 		return variedad;
 	}
-
+	
 	private List<ItemInsumo> toInsumosBO(List<ItemInsumoEntity> itemsInsumo) {
 		List<ItemInsumo> insumos = new ArrayList<ItemInsumo>();
 		for (ItemInsumoEntity insumoEntity : itemsInsumo) {
