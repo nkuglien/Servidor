@@ -2,6 +2,7 @@ package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.InsumoDTO;
@@ -23,9 +24,8 @@ public class ProveedorRemoto extends UnicastRemoteObject implements TDAProveedor
 	}
 
 	@Override
-	public void altaProveedor(int parseInt, String text) throws RemoteException {
-		 ProveedorController.GetInstancia().altaProveedor(parseInt, text);
-
+	public void altaProveedor(ProveedorDTO proveedor) throws RemoteException {
+		ProveedorController.GetInstancia().altaProveedor(proveedor);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class ProveedorRemoto extends UnicastRemoteObject implements TDAProveedor
 	}
 
 	@Override
-	public void modificarProveedor(ProveedorDTO pv, int parseInt) throws RemoteException {
-		 ProveedorController.GetInstancia().modificarProveedor(pv, parseInt);
+	public void modificarProveedor(ProveedorDTO pv) throws RemoteException {
+		 ProveedorController.GetInstancia().modificarProveedor(pv);
 
 	}
 

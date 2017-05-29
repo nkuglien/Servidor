@@ -33,8 +33,8 @@ public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
 	}
 
 	@Override
-	public ClienteDTO bajaCliente(String cuit) throws RemoteException {
-		return ClienteController.GetInstancia().bajaCliente(cuit);
+	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
+		return ClienteController.GetInstancia().bajaCliente(cliente);
 	}
 
 	@Override

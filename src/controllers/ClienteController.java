@@ -39,8 +39,9 @@ public class ClienteController{
 		
 	}
 
-	public ClienteDTO bajaCliente(String cuit) throws RemoteException {
-		return null;
+	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
+		ClienteDAO.getInstance().baja(new Cliente(cliente));
+		return cliente;
 	}
 
 

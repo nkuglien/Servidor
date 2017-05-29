@@ -23,8 +23,7 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 
 	@Override
 	public InsumoDTO bajaInsumo(Long codigo) throws RemoteException {
-		return null;
-		// TODO Auto-generated method stub
+		return InsumoController.GetInstancia().bajaInsumo(codigo);
 
 	}
 

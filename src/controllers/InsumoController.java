@@ -47,4 +47,8 @@ public class InsumoController {
 		return insumosDTO;
 	}
 
+	public InsumoDTO bajaInsumo(Long codigo) {
+		return null;
+	}
+
 }
