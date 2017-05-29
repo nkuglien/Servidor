@@ -2,6 +2,7 @@ package RemoteObjects;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import DTO.PrendaDTO;
 import RemoteObject.TDAPrenda;
@@ -43,6 +44,11 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	public void modificarPrenda(PrendaDTO prenda) throws RemoteException {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<PrendaDTO> getAllPrendas() throws RemoteException {
+		return PrendaController.getInstance().getAllPrendas();
 	}
 
 }
