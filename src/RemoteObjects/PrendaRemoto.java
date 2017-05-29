@@ -42,8 +42,8 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 
 	@Override
 	public void modificarPrenda(PrendaDTO prenda) throws RemoteException {
-		// TODO Auto-generated method stub
-
+		Prenda p = new Prenda(prenda);
+		p.save();
 	}
 
 	@Override

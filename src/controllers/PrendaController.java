@@ -30,7 +30,7 @@ public class PrendaController {
 	}
 	
 	public PrendaDTO buscarPrenda(Long codigo) {
-		Prenda prenda = null;
+		Prenda prenda = PrendaDAO.getInstance().getPrendaByCodigo(codigo);
 		return prenda != null? prenda.toDTO() : null;
 	}
 
