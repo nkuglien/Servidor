@@ -8,8 +8,10 @@ import org.hibernate.Session;
 
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
+import entities.ValorConsignacionEntity;
 import model.Cliente;
 import model.CuentaCorriente;
+import model.ValorConsignacion;
 
 public class ClienteDAO extends HibernateDAO {
 	
@@ -88,6 +90,14 @@ public class ClienteDAO extends HibernateDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	public ValorConsignacion findValorConsignacion(long idValorConsignado) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from ValorConsignacionEntity where id = :idValorConsignado");
+		query.setParameter("id", idValorConsignado);
+		ValorConsignacionEntity valorConsignacionEntity = (ValorConsignacionEntity) query.uniqueResult();
+		return valorConsignacionEntity != null? valorConsignacionEntity.toBO() : null;
 	}
 	
 }

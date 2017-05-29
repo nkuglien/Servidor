@@ -32,8 +32,8 @@ public class Insumo {
 		this.setId(insumo.getId());
 	}
 
-	public void save() {
-		InsumoDAO.getInstance().save(this);
+	public Insumo save() {
+		return InsumoDAO.getInstance().save(this);
 	}
 
 	public Long getCodigo() {
