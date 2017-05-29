@@ -32,4 +32,9 @@ public class InsumoController {
 		return insumo != null ? insumo.toDTO() : null;
 	}
 
+	public boolean verificarInsumo(int parseInt) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

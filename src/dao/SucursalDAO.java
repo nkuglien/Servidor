@@ -53,4 +53,24 @@ public class SucursalDAO extends HibernateDAO {
 		return sucursalEntity != null? sucursalEntity.toBO() : null;
 	}
 
+	
+	public void BajaSucursal(int numero) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from SucursalEntity where numero = :numero");
+		query.setParameter("numero", numero);
+		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
+		sucursalEntity.setActivo(false);
+		session.saveOrUpdate(sucursalEntity);		
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public boolean ExisteSucursal(int numero) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from SucursalEntity where numero = :numero");
+		query.setParameter("numero", numero);
+		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
+		return sucursalEntity !=null;
+	}
 }

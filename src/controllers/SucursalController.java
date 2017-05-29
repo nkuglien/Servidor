@@ -3,6 +3,8 @@ package controllers;
 import java.rmi.RemoteException;
 
 import DTO.SucursalDTO;
+import dao.SucursalDAO;
+import model.Sucursal;
 
 public class SucursalController {
 
@@ -17,28 +19,28 @@ private static SucursalController instancia;
 	
 	
 	public boolean verificarSucursal(int parseInt) throws RemoteException {
-		return false;
+		return SucursalDAO.getInstance().ExisteSucursal(parseInt);
 	}
 
 	
-	public void altaSucursal(int parseInt, String text, int parseInt2, int parseInt3) throws RemoteException {
-		
+	public void altaSucursal(SucursalDTO sucursal) throws RemoteException {
+		SucursalDAO.getInstance().save(new Sucursal(sucursal));
 		
 	}
 
 	
 	public void bajaSucursal(int parseInt) throws RemoteException {
-			
+		SucursalDAO.getInstance().BajaSucursal(parseInt);
 	}
 
 	
 	public SucursalDTO solicitarSucursalView(int parseInt) throws RemoteException {
-		return null;
+		return SucursalDAO.getInstance().findSucursalByNumero(parseInt).toDTO();
 	}
 
 	
-	public void modificarSucursal(SucursalDTO sv, int parseInt) throws RemoteException {
-		
+	public void modificarSucursal(SucursalDTO sv) throws RemoteException {
+		SucursalDAO.getInstance().save(new Sucursal(sv) );
 		
 	}
 	
