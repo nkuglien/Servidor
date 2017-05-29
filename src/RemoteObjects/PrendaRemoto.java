@@ -8,9 +8,10 @@ import RemoteObject.TDAPrenda;
 
 public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 
+	private static final long serialVersionUID = -6532975774132254572L;
+
 	public PrendaRemoto() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -22,13 +23,13 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	@Override
 	public void altaPrenda(int parseInt, String text) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void bajaprenda(int parseInt) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 	@Override
 	public void modificarPrenda(PrendaDTO pv, int parseInt) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

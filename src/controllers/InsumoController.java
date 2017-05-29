@@ -10,12 +10,13 @@ import model.Insumo;
 
 public class InsumoController {
 
-	private static InsumoController instancia;
+	private static InsumoController instance;
 
-	public static InsumoController GetInstancia() {
-		if (instancia == null)
-			instancia = new InsumoController();
-		return instancia;
+	public static InsumoController getInstance() {
+		if (instance == null) {
+			instance = new InsumoController();
+		}
+		return instance;
 	}
 
 	public InsumoDTO altaInsumo(InsumoDTO insumo) throws RemoteException {
@@ -37,7 +38,8 @@ public class InsumoController {
 	public boolean verificarInsumo(int parseInt) {
 		// TODO Auto-generated method stub
 		return false;
-		}
+	}
+	
 	public List<InsumoDTO> getAllInsumos() {
 		List<Insumo> insumos = InsumoDAO.getInstance().getAllInsumos();
 		List<InsumoDTO> insumosDTO = new ArrayList<InsumoDTO>();

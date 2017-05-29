@@ -9,43 +9,39 @@ import RemoteObject.TDACliente;
 import controllers.ClienteController;
 
 public class ClienteRemoto extends UnicastRemoteObject implements TDACliente {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -1395733353845311456L;
 
 	public ClienteRemoto() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<ClienteDTO> getAllClientes() throws RemoteException {
 
-		return ClienteController.GetInstancia().getAllClientes();
+		return ClienteController.getInstance().getAllClientes();
 	}
 
 	@Override
 	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
-		return ClienteController.GetInstancia().altaCliente(clienteDTO);
+		return ClienteController.getInstance().altaCliente(clienteDTO);
 
 	}
 
 	@Override
 	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteController.GetInstancia().bajaCliente(cliente);
+		return ClienteController.getInstance().bajaCliente(cliente);
 	}
 
 	@Override
 	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteController.GetInstancia().modificarCliente(cliente);
+		return ClienteController.getInstance().modificarCliente(cliente);
 
 	}
 
 	@Override
 	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
-		return ClienteController.GetInstancia().buscarCliente(cuit);
+		return ClienteController.getInstance().buscarCliente(cuit);
 
 	}
 

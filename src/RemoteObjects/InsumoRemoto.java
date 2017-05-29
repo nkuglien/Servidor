@@ -10,20 +10,21 @@ import controllers.InsumoController;
 
 public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 
+	private static final long serialVersionUID = -7875362815975562019L;
+
 	public InsumoRemoto() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public InsumoDTO altaInsumo(InsumoDTO insumo) throws RemoteException {
-		return InsumoController.GetInstancia().altaInsumo(insumo);
+		return InsumoController.getInstance().altaInsumo(insumo);
 
 	}
 
 	@Override
 	public InsumoDTO bajaInsumo(Long codigo) throws RemoteException {
-		return InsumoController.GetInstancia().bajaInsumo(codigo);
+		return InsumoController.getInstance().bajaInsumo(codigo);
 
 	}
 
@@ -35,23 +36,23 @@ public class InsumoRemoto extends UnicastRemoteObject implements TDAInsumo {
 
 	@Override
 	public InsumoDTO modificarInsumo(InsumoDTO insumo) throws RemoteException {
-		return InsumoController.GetInstancia().modificarInsumo(insumo);
+		return InsumoController.getInstance().modificarInsumo(insumo);
 	}
 
 	@Override
 	public InsumoDTO buscarInsumo(Long codigo) throws RemoteException {
-		return InsumoController.GetInstancia().buscarInsumo(codigo);
+		return InsumoController.getInstance().buscarInsumo(codigo);
 	}
 
 	@Override
 	public boolean verificarInsumo(int parseInt) {
-		return InsumoController.GetInstancia().verificarInsumo(parseInt);
-		
-	}
-	@Override
-	public List<InsumoDTO> getAllInsumos() throws RemoteException {
-		return InsumoController.GetInstancia().getAllInsumos();
+		return InsumoController.getInstance().verificarInsumo(parseInt);
+
 	}
 
+	@Override
+	public List<InsumoDTO> getAllInsumos() throws RemoteException {
+		return InsumoController.getInstance().getAllInsumos();
+	}
 
 }
