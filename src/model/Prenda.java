@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import DTO.PrendaAreaProduccionDTO;
@@ -59,6 +60,17 @@ public class Prenda {
 	public void agregarArea(AreaProduccion area, Integer tiempo) {
 		PrendaAreaProduccion prendaArea = new PrendaAreaProduccion(area, tiempo);
 		this.getAreas().add(prendaArea);
+	}
+	
+	public void removerArea(long prendaAreaProduccionId) {
+		Iterator<PrendaAreaProduccion> it = this.getAreas().iterator();
+		while (it.hasNext()) {
+			PrendaAreaProduccion prendaArea = it.next();
+			if (prendaArea.getId() == prendaAreaProduccionId) {
+				it.remove();
+				return;
+			}
+		}
 	}
 
 	public Long getCodigo() {

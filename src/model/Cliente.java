@@ -69,6 +69,12 @@ public class Cliente {
 		this.getValores().add(valorConsignacion);
 		this.getCc().aumentarLimiteCredito(valor);
 	}
+	
+	public void retirarValorConsignacion(long idValorConsignado) {
+		ValorConsignacion valor = ClienteDAO.getInstance().findValorConsignacion(idValorConsignado);
+		this.getValores().remove(valor);
+		this.getCc().disminuirLimiteCredito(valor.getValor());
+	}
 
 	public void habilitarCuentaCorriente(float saldo, float limiteCredito) {
 		this.getCc().setSaldo(saldo);

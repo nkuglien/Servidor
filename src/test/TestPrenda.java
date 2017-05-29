@@ -39,6 +39,10 @@ public class TestPrenda {
 		
 		Prenda remeraRecuperada = PrendaDAO.getInstance().getAllPrendas().get(0);
 		System.out.println(remeraRecuperada);		
+		
+		long prendaAreaProduccionId = 0;
+		remera.removerArea(prendaAreaProduccionId);
+		remera.save();
 	}
 
 	private static Prenda crearPrenda(Long codigo, String descripcion, boolean enProduccion) {

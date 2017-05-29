@@ -11,7 +11,6 @@ import dao.ClienteDAO;
 public class CuentaCorriente {
 
 	private Long id;
-
 	private List<MovimientoCC> movimientos;
 	private float saldo;
 	private float limiteCredito;
@@ -35,6 +34,10 @@ public class CuentaCorriente {
 	
 	public void aumentarLimiteCredito(float valor) {
 		this.setLimiteCredito(this.getLimiteCredito() - valor);		
+	}
+	
+	public void disminuirLimiteCredito(float valor) {
+		this.setLimiteCredito(this.getLimiteCredito() + valor);		
 	}
 
 	public Long getId() {
