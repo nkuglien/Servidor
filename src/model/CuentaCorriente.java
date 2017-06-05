@@ -20,6 +20,7 @@ public class CuentaCorriente {
 	}
 	
 	public CuentaCorriente(CuentaCorrienteDTO cc) {
+		this.id = cc.getId();
 		this.saldo = cc.getSaldo();
 		this.limiteCredito = cc.getLimiteCredito();
 		List<MovimientoCC> movCC = new ArrayList<MovimientoCC>();
