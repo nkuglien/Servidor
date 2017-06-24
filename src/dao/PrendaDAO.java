@@ -6,11 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.ClienteEntity;
 import entities.PrendaEntity;
-import entities.ValorConsignacionEntity;
 import entities.VariedadPrendaEntity;
-import model.Cliente;
 import model.Prenda;
 import model.VariedadPrenda;
 
@@ -70,6 +67,17 @@ public class PrendaDAO extends HibernateDAO {
 		query.setParameter("codigo", codigo);
 		PrendaEntity prendaEntity = (PrendaEntity) query.uniqueResult();
 		return prendaEntity != null? prendaEntity.toBO() : null;
+	}
+
+	public void baja(Prenda prenda) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update PrendaEntity enProduccion = false where codigo = :codigo");
+		query.setParameter("codigo", prenda.getCodigo());
+		query.executeUpdate();
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }
