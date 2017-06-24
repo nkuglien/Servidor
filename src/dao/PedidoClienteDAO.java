@@ -1,5 +1,8 @@
 package dao;
 
+import org.hibernate.Session;
+
+import entities.PedidoClienteEntity;
 import model.PedidoCliente;
 
 public class PedidoClienteDAO extends HibernateDAO {
@@ -18,8 +21,25 @@ public class PedidoClienteDAO extends HibernateDAO {
 		return null;
 	}
 
-	public void save(PedidoCliente pedidoCliente) {
-		//TODO
+	public PedidoCliente save(PedidoCliente pedidoCliente) {
+		PedidoClienteEntity entity = null;
+		Session session = null;
+		try {
+			session = this.openSession();
+			session.beginTransaction();
+		
+			entity = new PedidoClienteEntity(pedidoCliente);
+			session.saveOrUpdate(entity);
+		
+			session.flush();
+			session.getTransaction().commit();
+		} catch (RuntimeException re) {
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+		
+		return entity.toBO(true);
 	}
 
 

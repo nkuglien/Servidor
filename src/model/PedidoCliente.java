@@ -24,6 +24,9 @@ public class PedidoCliente {
 	private EstadoPedidoCliente estado;
 	private String nota;
 	
+	public PedidoCliente() {
+	}
+	
 	public PedidoCliente(PedidoClienteDTO dto) {
 		this.nroPedido = dto.getNroPedido();
 		this.fechaGeneracion = dto.getFechaGeneracion();

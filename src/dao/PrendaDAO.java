@@ -26,7 +26,7 @@ public class PrendaDAO extends HibernateDAO {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		PrendaEntity entity = new PrendaEntity(cliente);
+		PrendaEntity entity = new PrendaEntity(cliente, true);
 		session.saveOrUpdate(entity);
 		
 		session.flush();
@@ -78,6 +78,14 @@ public class PrendaDAO extends HibernateDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	public VariedadPrenda getVariedadPrendaById(Long id) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from VariedadPrendaEntity where id = :id");
+		query.setParameter("id", id);
+		VariedadPrendaEntity variedadPrendaEntity = (VariedadPrendaEntity) query.uniqueResult();
+		return variedadPrendaEntity != null? variedadPrendaEntity.toBO(true) : null;
 	}
 
 }

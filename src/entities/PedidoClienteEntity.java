@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,12 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import DTO.EstadoPedidoCliente;
 import model.Cliente;
 import model.CuentaCorriente;
+import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.ValorConsignacion;
 
@@ -44,7 +46,7 @@ public class PedidoClienteEntity {
 	@Column(name = "fecha_probable_despacho")
 	private Date fechaProbableDespacho;
 
-	@Transient
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ItemPedidoClienteEntity> items;
 
 	@ManyToOne
@@ -83,6 +85,7 @@ public class PedidoClienteEntity {
 		cliente.setPedidos(new ArrayList<PedidoCliente>());
 		this.setCliente(new ClienteEntity(cliente));
 		
+		this.setItemsEntity(pedido.getItems());
 		this.setSubtotal(pedido.getSubtotal());
 		this.setImpuestos(pedido.getImpuestos());
 		this.setTotal(pedido.getTotal());
@@ -90,9 +93,39 @@ public class PedidoClienteEntity {
 		this.setNota(pedido.getNota());
 	}
 	
-	public PedidoCliente toBO() {
-		//TODO
-		return null;
+	public PedidoCliente toBO(boolean copyInverseReferences) {
+		PedidoCliente pedidoCliente = new PedidoCliente();
+		pedidoCliente.setId(this.getId());
+		pedidoCliente.setNroPedido(this.getNroPedido());
+		pedidoCliente.setFechaGeneracion(this.getFechaGeneracion());
+		pedidoCliente.setFechaDespacho(this.getFechaDespacho());
+		pedidoCliente.setFechaProbableDespacho(this.getFechaProbableDespacho());
+		pedidoCliente.setItems(toItemsBO(this.getItems()));
+		if(copyInverseReferences) {
+			pedidoCliente.setCliente(this.getCliente().toBO());
+		}
+		pedidoCliente.setSubtotal(this.getSubtotal());
+		pedidoCliente.setImpuestos(this.getImpuestos());
+		pedidoCliente.setTotal(this.getTotal());
+		pedidoCliente.setEstado(this.getEstado());
+		pedidoCliente.setNota(this.getNota());
+		return pedidoCliente;
+	}
+	
+	private void setItemsEntity(List<ItemPedidoCliente> items) {
+		List<ItemPedidoClienteEntity> list = new ArrayList<>();
+		for(ItemPedidoCliente item : items) {
+			list.add(new ItemPedidoClienteEntity(item));
+		}
+		this.setItems(list);		
+	}
+	
+	private List<ItemPedidoCliente> toItemsBO(List<ItemPedidoClienteEntity> items) {
+		List<ItemPedidoCliente> itemsPedido = new ArrayList<>();
+		for (ItemPedidoClienteEntity item : items) {
+			itemsPedido.add(item.toBO());
+		}
+		return itemsPedido;
 	}
 
 	public Long getNroPedido() {

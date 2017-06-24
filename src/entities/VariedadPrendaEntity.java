@@ -59,7 +59,7 @@ public class VariedadPrendaEntity {
 	
 	public VariedadPrendaEntity(VariedadPrenda variedad) {
 		this.setId(variedad.getId());
-		this.setPrenda(new PrendaEntity(variedad.getPrenda()));
+		this.setPrenda(new PrendaEntity(variedad.getPrenda(), false));
 		this.setTalle(variedad.getTalle());
 		this.setColor(variedad.getColor());
 		this.setEnProduccion(variedad.getEnProduccion());

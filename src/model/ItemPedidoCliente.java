@@ -9,9 +9,13 @@ public class ItemPedidoCliente {
 	private Integer cantidad;
 	private Float precioItem;
 	
+	public ItemPedidoCliente() {
+	}
+	
 	public ItemPedidoCliente(ItemPedidoClienteDTO item2) {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -120,7 +120,7 @@ public class ClienteEntity {
 	private List<PedidoCliente> toPedidosBO(List<PedidoClienteEntity> pedidosEntity) {
 		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
 		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
-			pedidos.add(pedidoEntity.toBO());
+			pedidos.add(pedidoEntity.toBO(false));
 		}
 		return pedidos;
 	}
