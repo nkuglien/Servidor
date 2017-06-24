@@ -18,8 +18,8 @@ public class PrendaAreaProduccion {
 
 	public PrendaAreaProduccion(PrendaAreaProduccionDTO areaDTO) {
 		this.setId(areaDTO.getId());
-		this.setArea(area);
-		this.setTiempo(tiempo);
+		this.setArea(new AreaProduccion(areaDTO.getArea()));
+		this.setTiempo(areaDTO.getTiempo());
 	}
 
 	public Long getId() {
@@ -46,9 +46,12 @@ public class PrendaAreaProduccion {
 		this.tiempo = tiempo;
 	}
 
-	public PrendaAreaProduccion toDTO() {
-		// TODO Auto-generated method stub
-		return null;
+	public PrendaAreaProduccionDTO toDTO() {
+		PrendaAreaProduccionDTO dto = new PrendaAreaProduccionDTO();
+		dto.setArea(area.toDTO());
+		dto.setId(id);
+		dto.setTiempo(tiempo);
+		return dto;
 	}
 
 }

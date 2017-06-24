@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import DTO.AreaProduccionDTO;
 import dao.AreaProduccionDAO;
 
 public class AreaProduccion {
@@ -23,6 +24,12 @@ public class AreaProduccion {
 		this.setLineas(new HashMap<String, Boolean>());
 	}
 	
+	public AreaProduccion(AreaProduccionDTO area) {
+		this.setCodigo(area.getCodigo());
+		this.setNombre(area.getNombre());
+		this.setLineas(new HashMap<String, Boolean>());
+	}
+
 	public void agregarLinea(String codigoLinea, boolean isDisponible) {
 		lineas.put(codigoLinea, isDisponible);
 	}
@@ -69,6 +76,13 @@ public class AreaProduccion {
 
 	public void setOrdenesEspera(List<OrdenProduccionEspera> ordenesEspera) {
 		this.ordenesEspera = ordenesEspera;
+	}
+
+	public AreaProduccionDTO toDTO() {
+		AreaProduccionDTO dto = new AreaProduccionDTO();
+		dto.setCodigo(getCodigo());
+		dto.setNombre(getNombre());
+		return dto;
 	}
 
 }
