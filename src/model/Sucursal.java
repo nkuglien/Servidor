@@ -14,6 +14,7 @@ public class Sucursal {
 	private Integer horarioCierre;
 	private String direccion;
 	private List<Cliente> clientes;
+	private boolean activo;
 	
 	public Sucursal () {
 		this.clientes = new ArrayList<Cliente>();
@@ -34,6 +35,10 @@ public class Sucursal {
 	
 	public void altaCliente(Cliente cliente) {
 		this.getClientes().add(cliente);
+	}
+	
+	public void baja() {
+		SucursalDAO.getInstance().baja(this);
 	}
 
 	public Integer getNumero() {
@@ -84,6 +89,14 @@ public class Sucursal {
 		this.clientes = clientes;
 	}
 
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	public SucursalDTO toDTO() {
 		return new SucursalDTO(this.numero,this.nombre,this.horarioApertura,this.horarioCierre,this.direccion);
 	}

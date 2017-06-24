@@ -1,6 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import DTO.ItemInsumoDTO;
+import DTO.PrendaDTO;
+import DTO.VariedadPrendaDTO;
+import dao.PrendaDAO;
 
 public class VariedadPrenda {
 
@@ -13,6 +19,48 @@ public class VariedadPrenda {
 	private Integer cantidadProduccionFija;
 	private Float costoProduccionActual;
 	private Float precioVentaActual;
+
+	public VariedadPrenda() {
+		this.setInsumos(new ArrayList<ItemInsumo>());
+	}
+
+	public VariedadPrenda(Prenda prenda, String talle, String color, boolean enProduccion, int cantidadProduccionFija,
+			float costoProduccionActual, float precioVentaActual) {
+		this.setPrenda(prenda);
+		this.setTalle(talle);
+		this.setColor(color);
+		this.setEnProduccion(enProduccion);
+		this.setInsumos(new ArrayList<ItemInsumo>());
+		this.setCantidadProduccionFija(cantidadProduccionFija);
+		this.setCostoProduccionActual(costoProduccionActual);
+		this.setPrecioVentaActual(precioVentaActual);
+	}
+
+	public VariedadPrenda save() {
+		return PrendaDAO.getInstance().saveVarieadad(this);
+	}
+
+	public void agregarInusmo(Insumo insumo, float desperdicio, int cantidad) {
+		ItemInsumo itemInsumo = new ItemInsumo(insumo, desperdicio, cantidad);
+		this.getInsumos().add(itemInsumo);
+	}
+
+	public VariedadPrenda(VariedadPrendaDTO variedadDTO) {
+		this.id = variedadDTO.getId();
+		this.prenda = new Prenda(variedadDTO.getPrenda());
+		this.talle = variedadDTO.getTalle();
+		this.color = variedadDTO.getColor();
+		this.enProduccion = variedadDTO.getEnProduccion();
+		this.cantidadProduccionFija = variedadDTO.getCantidadProduccionFija();
+		this.costoProduccionActual = variedadDTO.getCostoProduccionActual();
+		this.precioVentaActual = variedadDTO.getPrecioVentaActual();
+
+		List<ItemInsumo> insumosList = new ArrayList<ItemInsumo>();
+		for (ItemInsumoDTO insumoDTO : variedadDTO.getInsumos()) {
+			insumosList.add(new ItemInsumo(insumoDTO));
+		}
+		this.insumos = insumosList;
+	}
 
 	public Long getId() {
 		return id;
@@ -85,9 +133,15 @@ public class VariedadPrenda {
 	public void setPrecioVentaActual(Float precioVentaActual) {
 		this.precioVentaActual = precioVentaActual;
 	}
-	
+
 	public boolean hayStock() {
 		return true;
+	}
+
+
+	public VariedadPrendaDTO toDTO() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
-	
+
 }

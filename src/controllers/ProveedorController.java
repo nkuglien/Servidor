@@ -12,63 +12,52 @@ import model.Proveedor;
 
 public class ProveedorController {
 
-private static ProveedorController instancia;
-	
-	public static ProveedorController GetInstancia(){
-		if(instancia==null)
-			instancia= new ProveedorController();
-		return instancia;
+	private static ProveedorController instance;
+
+	public static ProveedorController getInstance() {
+		if (instance == null) {
+			instance = new ProveedorController();
+		}
+		return instance;
 	}
-	
-	
-	
-	
-	public boolean verificarProveedor(int parseInt)  {
+
+	public boolean verificarProveedor(int parseInt) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
-	public void altaProveedor(int parseInt, String text)  {
+	public void altaProveedor(ProveedorDTO proveedor) {
+		ProveedorDAO.getInstance().save(new Proveedor(proveedor));
+	}
+
+	public void bajaProveedor(int parseInt) {
 		// TODO Auto-generated method stub
 
 	}
 
-	
-	public void bajaProveedor(int parseInt)  {
-		// TODO Auto-generated method stub
-
+	public ProveedorDTO solicitarProveedorView(int parseInt) {
+		Proveedor prov = ProveedorDAO.getInstance().findProveedorById(parseInt);
+		return prov != null ? prov.toDTO() : null;
 	}
 
-	
-	public ProveedorDTO solicitarProveedorView(int parseInt)  {
-		// TODO Auto-generated method stub
-		return null;
+	public void modificarProveedor(ProveedorDTO pv) {
+		Proveedor p = new Proveedor(pv);
+		p.save();
 	}
 
-	
-	public void modificarProveedor(ProveedorDTO pv, int parseInt)  {
-		// TODO Auto-generated method stub
-
-	}
-
-	
-	public List<ProveedorDTO> getAllProveedores()  {
+	public List<ProveedorDTO> getAllProveedores() {
 		List<ProveedorDTO> proveedoresDTO = new ArrayList<ProveedorDTO>();
 		List<Proveedor> proveedores = ProveedorDAO.getInstance().getAllProveedores();
-		
-		for(Proveedor proveedor : proveedores){
-			proveedoresDTO.add(proveedor.toDTO());			
+
+		for (Proveedor proveedor : proveedores) {
+			proveedoresDTO.add(proveedor.toDTO());
 		}
-		
+
 		return proveedoresDTO;
 	}
 
-
-
-
 	public InsumoProveedorDTO asociarInsumo(ProveedorDTO proveedorDTO, InsumoDTO insumoDTO, Float precio) {
-		Proveedor proveedor =  new Proveedor(proveedorDTO);
+		Proveedor proveedor = new Proveedor(proveedorDTO);
 		InsumoProveedorDTO insumoPorveedor = proveedor.altaInsumo(new Insumo(insumoDTO), precio).toDTO();
 		proveedor.save();
 		return insumoPorveedor;

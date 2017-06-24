@@ -54,13 +54,12 @@ public class SucursalDAO extends HibernateDAO {
 	}
 
 	
-	public void BajaSucursal(int numero) {
+	public void baja(Sucursal sucursal) {
 		Session session = this.openSession();
-		Query query = session.createQuery("from SucursalEntity where numero = :numero");
-		query.setParameter("numero", numero);
-		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
-		sucursalEntity.setActivo(false);
-		session.saveOrUpdate(sucursalEntity);		
+		session.beginTransaction();
+		Query query = session.createQuery("update SucursalEntity set activo = false where numero = :numero");
+		query.setParameter("numero", sucursal.getNumero());
+		query.executeUpdate();	
 		session.flush();
 		session.getTransaction().commit();
 		session.close();

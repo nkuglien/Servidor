@@ -32,7 +32,7 @@ public class InsumoDAO extends HibernateDAO {
 		return insumo;
 	}
 	
-	public Insumo findByCodigo(Long codigo) {
+	public Insumo findByCodigo(long codigo) {
 		Session session = this.openSession();
 		Query query = session.createQuery("from InsumoEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);

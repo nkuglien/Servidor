@@ -8,8 +8,10 @@ import org.hibernate.Session;
 
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
+import entities.ValorConsignacionEntity;
 import model.Cliente;
 import model.CuentaCorriente;
+import model.ValorConsignacion;
 
 public class ClienteDAO extends HibernateDAO {
 	
@@ -77,6 +79,25 @@ public class ClienteDAO extends HibernateDAO {
 
 	public Cliente update(Cliente cliente) {
 		return save(cliente);
+	}
+	
+	public void baja(Cliente cliente) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update ClienteEntity set activo = false where id = :id");
+		query.setParameter("id", cliente.getId());
+		query.executeUpdate();	
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public ValorConsignacion findValorConsignacion(long idValorConsignado) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from ValorConsignacionEntity where id = :idValorConsignado");
+		query.setParameter("id", idValorConsignado);
+		ValorConsignacionEntity valorConsignacionEntity = (ValorConsignacionEntity) query.uniqueResult();
+		return valorConsignacionEntity != null? valorConsignacionEntity.toBO() : null;
 	}
 	
 }

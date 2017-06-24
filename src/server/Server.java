@@ -9,7 +9,6 @@ import RemoteObject.TDAInsumo;
 import RemoteObject.TDAPrenda;
 import RemoteObject.TDAProveedor;
 import RemoteObject.TDASucursal;
-import RemoteObject.TDAProveedor;
 import RemoteObjects.ClienteRemoto;
 import RemoteObjects.InsumoRemoto;
 import RemoteObjects.PrendaRemoto;

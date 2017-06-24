@@ -5,7 +5,7 @@ import dao.InsumoDAO;
 
 public class Insumo {
 
-	private long id;
+	private Long id;
 	private Long codigo;
 	private String descripcion;
 	private String nombre;
@@ -15,7 +15,7 @@ public class Insumo {
 	public Insumo() {
 	}
 	
-	public Insumo(Long codigo, String descripcion, String nombre, Integer stockMinimo, Integer cantCompra) {
+	public Insumo(long codigo, String descripcion, String nombre, int stockMinimo, int cantCompra) {
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);
 		this.setNombre(nombre);
@@ -32,8 +32,8 @@ public class Insumo {
 		this.setId(insumo.getId());
 	}
 
-	public void save() {
-		InsumoDAO.getInstance().save(this);
+	public Insumo save() {
+		return InsumoDAO.getInstance().save(this);
 	}
 
 	public Long getCodigo() {
@@ -76,11 +76,11 @@ public class Insumo {
 		this.cantCompra = cantCompra;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

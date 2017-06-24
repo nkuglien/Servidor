@@ -16,7 +16,7 @@ public class InsumoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "insumo_id")
-	private long id;
+	private Long id;
 
 	@Column(name = "codigo")
 	private Long codigo;
@@ -56,11 +56,11 @@ public class InsumoEntity {
 		return insumo;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

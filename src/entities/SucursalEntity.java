@@ -35,18 +35,11 @@ public class SucursalEntity {
 	@Column(name = "activo")
 	private boolean activo;
 	
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
 	@OneToMany
 	private List<ClienteEntity> clientes;
 	
 	public SucursalEntity() {
+		this.setClientes(new ArrayList<ClienteEntity>());
 	}
 	
 	public SucursalEntity(Sucursal sucursal) {
@@ -56,7 +49,7 @@ public class SucursalEntity {
 		this.setHorarioCierre(sucursal.getHorarioCierre());
 		this.setDireccion(sucursal.getDireccion());
 		this.setClientesEntity(sucursal.getClientes());
-		this.setActivo(true);
+		this.setActivo(sucursal.isActivo());
 	}
 	
 	public Sucursal toBO() {
@@ -66,10 +59,8 @@ public class SucursalEntity {
 		sucursal.setHorarioApertura(this.getHorarioApertura());
 		sucursal.setHorarioCierre(this.getHorarioCierre());
 		sucursal.setDireccion(this.getDireccion());
-		if(this.clientes!=null)
 		sucursal.setClientes(toClientesBO(this.getClientes()));
-		else
-			sucursal.setClientes(new ArrayList<Cliente>());
+		sucursal.setActivo(this.isActivo());
 		return sucursal;
 	}
 	
@@ -135,6 +126,14 @@ public class SucursalEntity {
 	
 	public void setClientes(List<ClienteEntity> clientes) {
 		this.clientes = clientes;
+	}
+	
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 }
