@@ -48,6 +48,10 @@ public class Prenda {
 		this.setAreas(areas);
 		
 	}
+	
+	public void baja() {
+		PrendaDAO.getInstance().baja(this);
+	}
 
 	public Prenda save() {
 		return PrendaDAO.getInstance().save(this);

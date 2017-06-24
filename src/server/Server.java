@@ -30,7 +30,7 @@ public class Server {
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 			
 			TDACliente clienteRemote = new ClienteRemoto();
-			Naming.bind("ClienteRemoto", clienteRemote);
+			Naming.bind("//localhost:1099/ClienteRemoto", clienteRemote);
 			
 			TDAProveedor proveedorRemote = new ProveedorRemoto();
 			Naming.bind("//localhost:1099/ProveedorRemoto", proveedorRemote);
