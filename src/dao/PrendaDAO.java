@@ -72,7 +72,7 @@ public class PrendaDAO extends HibernateDAO {
 	public void baja(Prenda prenda) {
 		Session session = this.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("update PrendaEntity enProduccion = false where codigo = :codigo");
+		Query query = session.createQuery("update PrendaEntity set enProduccion = false where codigo = :codigo");
 		query.setParameter("codigo", prenda.getCodigo());
 		query.executeUpdate();
 		session.flush();
