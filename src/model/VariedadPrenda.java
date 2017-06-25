@@ -47,7 +47,7 @@ public class VariedadPrenda {
 
 	public VariedadPrenda(VariedadPrendaDTO variedadDTO) {
 		this.id = variedadDTO.getId();
-		this.prenda = new Prenda(variedadDTO.getPrenda());
+		if(variedadDTO.getPrenda()!=null) this.prenda = new Prenda(variedadDTO.getPrenda());
 		this.talle = variedadDTO.getTalle();
 		this.color = variedadDTO.getColor();
 		this.enProduccion = variedadDTO.getEnProduccion();
@@ -140,8 +140,22 @@ public class VariedadPrenda {
 
 
 	public VariedadPrendaDTO toDTO() {
-		// TODO Auto-generated method stub
-		return null;
+		VariedadPrendaDTO dto = new VariedadPrendaDTO();
+		dto.setId(id);
+		if(prenda!=null) dto.setPrenda(prenda.toDTO());
+		dto.setTalle(talle);
+		dto.setColor(color);
+		dto.setEnProduccion(enProduccion);
+		dto.setCantidadProduccionFija(cantidadProduccionFija);
+		dto.setPrecioVentaActual(precioVentaActual);
+		dto.setCostoProduccionActual(costoProduccionActual);
+		
+		List<ItemInsumoDTO> insumosList = new ArrayList<ItemInsumoDTO>();
+		for (ItemInsumo insumo : insumos) {
+			insumosList.add(insumo.toDTO());
+		}
+		dto.setInsumos(insumosList);
+		return dto;
 	}	
 
 }
