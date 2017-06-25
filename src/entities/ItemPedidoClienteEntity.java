@@ -35,7 +35,7 @@ public class ItemPedidoClienteEntity {
 	
 	public ItemPedidoClienteEntity(ItemPedidoCliente item) {
 		this.setId(item.getId());
-		this.setItem(new VariedadPrendaEntity(item.getItem()));
+		this.setItem(new VariedadPrendaEntity(item.getItem(), true));
 		this.setCantidad(item.getCantidad());
 		this.setPrecioItem(item.getPrecioItem());
 	}

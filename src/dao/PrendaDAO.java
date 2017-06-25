@@ -22,11 +22,11 @@ public class PrendaDAO extends HibernateDAO {
 		return instancia;
 	}
 	
-	public Prenda save(Prenda cliente) {
+	public Prenda save(Prenda prenda) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		PrendaEntity entity = new PrendaEntity(cliente, true);
+		PrendaEntity entity = new PrendaEntity(prenda, true);
 		session.saveOrUpdate(entity);
 		
 		session.flush();
@@ -51,7 +51,7 @@ public class PrendaDAO extends HibernateDAO {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		VariedadPrendaEntity entity = new VariedadPrendaEntity(variedadPrenda);
+		VariedadPrendaEntity entity = new VariedadPrendaEntity(variedadPrenda, true);
 		session.saveOrUpdate(entity);
 		
 		session.flush();

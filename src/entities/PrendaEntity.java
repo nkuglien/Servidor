@@ -58,7 +58,7 @@ public class PrendaEntity {
 	private void setVariedadesEntity(List<VariedadPrenda> variedades) {
 		List<VariedadPrendaEntity> list = new ArrayList<VariedadPrendaEntity>();
 		for(VariedadPrenda variedad : variedades) {
-			list.add(new VariedadPrendaEntity(variedad));
+			list.add(new VariedadPrendaEntity(variedad, false));
 		}
 		this.setVariedades(list);		
 	}
