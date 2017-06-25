@@ -39,6 +39,10 @@ public class VariedadPrenda {
 	public VariedadPrenda save() {
 		return PrendaDAO.getInstance().saveVarieadad(this);
 	}
+	
+	public void baja() {
+		// completalo amigacho 
+	}
 
 	public void agregarInusmo(Insumo insumo, float desperdicio, int cantidad) {
 		ItemInsumo itemInsumo = new ItemInsumo(insumo, desperdicio, cantidad);
