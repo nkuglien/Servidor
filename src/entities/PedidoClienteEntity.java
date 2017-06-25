@@ -80,12 +80,14 @@ public class PedidoClienteEntity {
 		this.setFechaProbableDespacho(pedido.getFechaProbableDespacho());
 		
 		Cliente cliente = pedido.getCliente();
-		cliente.setCc(new CuentaCorriente());
-		cliente.setValores(new ArrayList<ValorConsignacion>());
-		cliente.setPedidos(new ArrayList<PedidoCliente>());
-		this.setCliente(new ClienteEntity(cliente));
+		if(cliente!=null){
+			cliente.setCc(new CuentaCorriente());
+			cliente.setValores(new ArrayList<ValorConsignacion>());
+			cliente.setPedidos(new ArrayList<PedidoCliente>());
+			this.setCliente(new ClienteEntity(cliente));
+		}
 		
-		this.setItemsEntity(pedido.getItems());
+		if(pedido.getItems()!=null) this.setItemsEntity(pedido.getItems());
 		this.setSubtotal(pedido.getSubtotal());
 		this.setImpuestos(pedido.getImpuestos());
 		this.setTotal(pedido.getTotal());
@@ -100,7 +102,7 @@ public class PedidoClienteEntity {
 		pedidoCliente.setFechaGeneracion(this.getFechaGeneracion());
 		pedidoCliente.setFechaDespacho(this.getFechaDespacho());
 		pedidoCliente.setFechaProbableDespacho(this.getFechaProbableDespacho());
-		pedidoCliente.setItems(toItemsBO(this.getItems()));
+		if(this.getItems()!=null)pedidoCliente.setItems(toItemsBO(this.getItems()));
 		if(copyInverseReferences) {
 			pedidoCliente.setCliente(this.getCliente().toBO());
 		}

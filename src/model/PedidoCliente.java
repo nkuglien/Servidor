@@ -32,17 +32,20 @@ public class PedidoCliente {
 		this.fechaGeneracion = dto.getFechaGeneracion();
 		this.fechaDespacho = dto.getFechaDespacho();
 		this.fechaProbableDespacho = dto.getFechaProbableDespacho();
-		this.cliente = new Cliente(dto.getCliente());
+		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente());
 		this.subtotal = dto.getSubtotal();
 		this.impuestos = dto.getImpuestos();
 		this.total = dto.getTotal();
 		this.estado = dto.getEstado();
 		this.setNota(dto.getNota());
-		List<ItemPedidoCliente> items = new ArrayList<ItemPedidoCliente>();
-		for(ItemPedidoClienteDTO item : dto.getItems()) {
-			items.add(new ItemPedidoCliente(item));
-		};
-		this.items = items;
+		if(dto.getItems()!=null) {
+			List<ItemPedidoCliente> items = new ArrayList<ItemPedidoCliente>();
+			for(ItemPedidoClienteDTO item : dto.getItems()) {
+				items.add(new ItemPedidoCliente(item));
+			};
+			this.items = items;	
+		}
+
 	}
 
 	public long getId() {
@@ -175,10 +178,11 @@ public class PedidoCliente {
 		dto.setNroPedido(nroPedido);
 		dto.setSubtotal(subtotal);
 		dto.setTotal(subtotal);
-		
-		List<ItemPedidoClienteDTO> itemsDTO = new ArrayList<ItemPedidoClienteDTO>();
-		for (ItemPedidoCliente item : this.items) {
-			itemsDTO.add(item.toDTO());
+		if(this.getItems()!=null) {
+			List<ItemPedidoClienteDTO> itemsDTO = new ArrayList<ItemPedidoClienteDTO>();
+			for (ItemPedidoCliente item : this.items) {
+				itemsDTO.add(item.toDTO());
+			}
 		}
 		return dto;
 	}
