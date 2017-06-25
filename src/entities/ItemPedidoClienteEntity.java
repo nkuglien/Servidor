@@ -40,10 +40,10 @@ public class ItemPedidoClienteEntity {
 		this.setPrecioItem(item.getPrecioItem());
 	}
 
-	public ItemPedidoCliente toBO() {
+	public ItemPedidoCliente toBO(boolean copyInverseReferences) {
 		ItemPedidoCliente itemPedido = new ItemPedidoCliente();
 		itemPedido.setId(this.getId());
-		itemPedido.setItem(this.getItem().toBO(false));
+		itemPedido.setItem(this.getItem().toBO(copyInverseReferences));
 		itemPedido.setCantidad(this.getCantidad());
 		itemPedido.setPrecioItem(this.getPrecioItem());
 		return itemPedido;

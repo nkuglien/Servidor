@@ -102,7 +102,7 @@ public class PedidoClienteEntity {
 		pedidoCliente.setFechaGeneracion(this.getFechaGeneracion());
 		pedidoCliente.setFechaDespacho(this.getFechaDespacho());
 		pedidoCliente.setFechaProbableDespacho(this.getFechaProbableDespacho());
-		if(this.getItems()!=null)pedidoCliente.setItems(toItemsBO(this.getItems()));
+		if(this.getItems()!=null)pedidoCliente.setItems(toItemsBO(this.getItems(), copyInverseReferences));
 		if(copyInverseReferences && this.getCliente()!=null) {
 			pedidoCliente.setCliente(this.getCliente().toBO());
 		}
@@ -122,10 +122,10 @@ public class PedidoClienteEntity {
 		this.setItems(list);		
 	}
 	
-	private List<ItemPedidoCliente> toItemsBO(List<ItemPedidoClienteEntity> items) {
+	private List<ItemPedidoCliente> toItemsBO(List<ItemPedidoClienteEntity> items, boolean copyInverseReferences) {
 		List<ItemPedidoCliente> itemsPedido = new ArrayList<>();
 		for (ItemPedidoClienteEntity item : items) {
-			itemsPedido.add(item.toBO());
+			itemsPedido.add(item.toBO(copyInverseReferences));
 		}
 		return itemsPedido;
 	}
