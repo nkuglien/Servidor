@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ItemInsumoDTO;
-import DTO.PrendaDTO;
 import DTO.VariedadPrendaDTO;
 import dao.PrendaDAO;
 
@@ -41,7 +40,7 @@ public class VariedadPrenda {
 	}
 	
 	public void baja() {
-		// completalo amigacho 
+		PrendaDAO.getInstance().baja(this);
 	}
 
 	public void agregarInusmo(Insumo insumo, float desperdicio, int cantidad) {

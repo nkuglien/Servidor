@@ -88,4 +88,15 @@ public class PrendaDAO extends HibernateDAO {
 		return variedadPrendaEntity != null? variedadPrendaEntity.toBO(true) : null;
 	}
 
+	public void baja(VariedadPrenda variedadPrenda) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update VariedadPrendaEntity set enProduccion = false where id = :id");
+		query.setParameter("id", variedadPrenda.getId());
+		query.executeUpdate();
+		session.flush();
+		session.getTransaction().commit();
+		session.close();	
+	}
+
 }
