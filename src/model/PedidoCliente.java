@@ -165,7 +165,7 @@ public class PedidoCliente {
 
 	public PedidoClienteDTO toDTO() {
 		PedidoClienteDTO dto = new PedidoClienteDTO();
-		dto.setCliente(cliente.toDTO());
+		if(cliente!=null)dto.setCliente(cliente.toDTO());
 		dto.setEstado(estado);
 		dto.setFechaDespacho(fechaDespacho);
 		dto.setFechaGeneracion(fechaGeneracion);
