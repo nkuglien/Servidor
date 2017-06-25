@@ -103,7 +103,7 @@ public class PedidoClienteEntity {
 		pedidoCliente.setFechaDespacho(this.getFechaDespacho());
 		pedidoCliente.setFechaProbableDespacho(this.getFechaProbableDespacho());
 		if(this.getItems()!=null)pedidoCliente.setItems(toItemsBO(this.getItems()));
-		if(copyInverseReferences) {
+		if(copyInverseReferences && this.getCliente()!=null) {
 			pedidoCliente.setCliente(this.getCliente().toBO());
 		}
 		pedidoCliente.setSubtotal(this.getSubtotal());
