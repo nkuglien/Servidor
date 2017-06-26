@@ -52,7 +52,7 @@ public class ItemPedidoCliente {
 		dto.setId(id);
 		dto.setCantidad(cantidad);
 		dto.setPrecioItem(precioItem);		
-		dto.setItem(item.toDTO());
+		if(item!=null)dto.setItem(item.toDTO());
 		return dto;
 	}
 	

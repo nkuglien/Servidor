@@ -35,7 +35,7 @@ public class ItemPedidoClienteEntity {
 	
 	public ItemPedidoClienteEntity(ItemPedidoCliente item) {
 		this.setId(item.getId());
-		this.setItem(new VariedadPrendaEntity(item.getItem(), true));
+		if(item.getItem()!=null)this.setItem(new VariedadPrendaEntity(item.getItem(), true));
 		this.setCantidad(item.getCantidad());
 		this.setPrecioItem(item.getPrecioItem());
 	}
@@ -43,7 +43,7 @@ public class ItemPedidoClienteEntity {
 	public ItemPedidoCliente toBO(boolean copyInverseReferences) {
 		ItemPedidoCliente itemPedido = new ItemPedidoCliente();
 		itemPedido.setId(this.getId());
-		itemPedido.setItem(this.getItem().toBO(copyInverseReferences));
+		if(this.getItem()!=null)itemPedido.setItem(this.getItem().toBO(copyInverseReferences));
 		itemPedido.setCantidad(this.getCantidad());
 		itemPedido.setPrecioItem(this.getPrecioItem());
 		return itemPedido;
