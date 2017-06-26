@@ -183,6 +183,7 @@ public class PedidoCliente {
 			for (ItemPedidoCliente item : this.items) {
 				itemsDTO.add(item.toDTO());
 			}
+			dto.setItems(itemsDTO);
 		}
 		return dto;
 	}
