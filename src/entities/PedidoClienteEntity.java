@@ -30,11 +30,7 @@ public class PedidoClienteEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "pedido_id")
-	private long id;
-
 	@Column(name = "numero_pedido")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long nroPedido;
 
 	@Column(name = "fecha_generacion")
@@ -73,7 +69,6 @@ public class PedidoClienteEntity {
 	}
 	
 	public PedidoClienteEntity(PedidoCliente pedido) {
-		this.setId(pedido.getId());
 		this.setNroPedido(pedido.getNroPedido());
 		this.setFechaGeneracion(pedido.getFechaGeneracion());
 		this.setFechaDespacho(pedido.getFechaDespacho());
@@ -97,7 +92,6 @@ public class PedidoClienteEntity {
 	
 	public PedidoCliente toBO(boolean copyInverseReferences) {
 		PedidoCliente pedidoCliente = new PedidoCliente();
-		pedidoCliente.setId(this.getId());
 		pedidoCliente.setNroPedido(this.getNroPedido());
 		pedidoCliente.setFechaGeneracion(this.getFechaGeneracion());
 		pedidoCliente.setFechaDespacho(this.getFechaDespacho());
@@ -201,14 +195,6 @@ public class PedidoClienteEntity {
 
 	public void setTotal(Float total) {
 		this.total = total;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 	public EstadoPedidoCliente getEstado() {

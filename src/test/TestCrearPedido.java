@@ -32,7 +32,7 @@ public class TestCrearPedido {
 		
 		List<ItemPedidoCliente> items = new ArrayList<>();
 	
-		VariedadPrenda variedad = PrendaDAO.getInstance().getVariedadPrendaById(Long.valueOf(17));
+		VariedadPrenda variedad = PrendaDAO.getInstance().getVariedadPrendaById(Long.valueOf(9));
 		ItemPedidoCliente item1 = new ItemPedidoCliente();
 		item1.setCantidad(5);
 		item1.setItem(variedad);
