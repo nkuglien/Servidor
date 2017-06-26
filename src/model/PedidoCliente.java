@@ -11,7 +11,6 @@ import dao.PedidoClienteDAO;
 
 public class PedidoCliente {
 	
-	private long id;
 	private Long nroPedido;
 	private Date fechaGeneracion;
 	private Date fechaDespacho;
@@ -46,14 +45,6 @@ public class PedidoCliente {
 			this.items = items;	
 		}
 
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public Long getNroPedido() {
