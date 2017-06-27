@@ -29,7 +29,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	
 	public LoteVariedadPrendaEntity(LoteVariedadPrenda lote) {
 		if(lote.getVariedadPrenda()!=null)
-			setVariedadPrenda(new VariedadPrendaEntity(lote.getVariedadPrenda()));
+			setVariedadPrenda(new VariedadPrendaEntity(lote.getVariedadPrenda(),true));
 		if(lote.getOrdenProduccion()!=null)
 			setOrdenProduccion(new OrdenProduccionEntity(lote.getOrdenProduccion()));
 		setFechaProduccion(lote.getFechaProduccion());

@@ -120,7 +120,7 @@ public class OrdenProduccionEntity {
 		 List<ReservaInsumo> insumos2=new ArrayList<ReservaInsumo>();
 		 if(pedidoCliente!=null){
 			 for(PedidoClienteEntity p : pedidoCliente){
-				 pedidosC.add(p.toBO());
+				 pedidosC.add(p.toBO(true));
 			 }
 		 } 
 		 if(variedades!=null){
