@@ -55,4 +55,9 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		return save(pedido);
 	}
 
+	public List<PedidoInsumo> GetPedidosPendientesInsumo(Insumo insumo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

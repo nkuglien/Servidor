@@ -1,9 +1,11 @@
 package model;
 
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import dao.PedidoInsumoDAO;
 
 public class PedidoInsumo {
 
@@ -15,22 +17,43 @@ public class PedidoInsumo {
 	private String estado;
 	private Insumo insumo;
 	private int cantidad;
-	private Float precioUnidad;
-	
+	private Float precioUnidad;	
 	private List<OrdenProduccion> ordenesProduccion;
 
 	
 	
 	
 	public static void generarPedidoInsumo(Insumo insumo,OrdenProduccion orden ){
-		
-		
+		PedidoInsumoDAO DAO = PedidoInsumoDAO.getInstance();
+		List<PedidoInsumo> pedidosPendientes= DAO.GetPedidosPendientesInsumo(insumo);
+		Boolean flag =false;
+		for(PedidoInsumo p : pedidosPendientes){
+			if(p.ordenesProduccion.size()<=1){
+				p.ordenesProduccion.add(orden);
+				flag=true;
+				p.save();
+				break;
+			}
+		}
+		if(!flag){
+			PedidoInsumo pedi = new PedidoInsumo(insumo,orden);
+			pedi.save();
+		}
 		
 	}
 	
 	
 	
 	
+	private void save() {
+		PedidoInsumoDAO DAO = PedidoInsumoDAO.getInstance();
+		DAO.save(this);
+		
+	}
+
+
+
+
 	public PedidoInsumo(Insumo insumo){
 		setInsumo(insumo);
 		setFechaGeneracion(new Date());
