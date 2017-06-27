@@ -57,4 +57,13 @@ public class ItemInsumo {
 		this.cantidad = cantidad;
 	}
 
+	public ItemInsumoDTO toDTO() {
+		ItemInsumoDTO dto = new ItemInsumoDTO();
+		dto.setCantidad(cantidad);
+		dto.setDesperdicio(desperdicio);
+		dto.setId(id);
+		dto.setInsumo(insumo.toDTO());
+		return dto;
+	}
+
 }

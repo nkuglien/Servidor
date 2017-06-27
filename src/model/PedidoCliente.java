@@ -11,7 +11,6 @@ import dao.PedidoClienteDAO;
 
 public class PedidoCliente {
 	
-	private long id;
 	private Long nroPedido;
 	private Date fechaGeneracion;
 	private Date fechaDespacho;
@@ -24,30 +23,28 @@ public class PedidoCliente {
 	private EstadoPedidoCliente estado;
 	private String nota;
 	
+	public PedidoCliente() {
+	}
+	
 	public PedidoCliente(PedidoClienteDTO dto) {
 		this.nroPedido = dto.getNroPedido();
 		this.fechaGeneracion = dto.getFechaGeneracion();
 		this.fechaDespacho = dto.getFechaDespacho();
 		this.fechaProbableDespacho = dto.getFechaProbableDespacho();
-		this.cliente = new Cliente(dto.getCliente());
+		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente());
 		this.subtotal = dto.getSubtotal();
 		this.impuestos = dto.getImpuestos();
 		this.total = dto.getTotal();
 		this.estado = dto.getEstado();
 		this.setNota(dto.getNota());
-		List<ItemPedidoCliente> items = new ArrayList<ItemPedidoCliente>();
-		for(ItemPedidoClienteDTO item : dto.getItems()) {
-			items.add(new ItemPedidoCliente(item));
-		};
-		this.items = items;
-	}
+		if(dto.getItems()!=null) {
+			List<ItemPedidoCliente> items = new ArrayList<ItemPedidoCliente>();
+			for(ItemPedidoClienteDTO item : dto.getItems()) {
+				items.add(new ItemPedidoCliente(item));
+			};
+			this.items = items;	
+		}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public Long getNroPedido() {
@@ -162,7 +159,7 @@ public class PedidoCliente {
 
 	public PedidoClienteDTO toDTO() {
 		PedidoClienteDTO dto = new PedidoClienteDTO();
-		dto.setCliente(cliente.toDTO());
+		if(cliente!=null)dto.setCliente(cliente.toDTO());
 		dto.setEstado(estado);
 		dto.setFechaDespacho(fechaDespacho);
 		dto.setFechaGeneracion(fechaGeneracion);
@@ -172,10 +169,12 @@ public class PedidoCliente {
 		dto.setNroPedido(nroPedido);
 		dto.setSubtotal(subtotal);
 		dto.setTotal(subtotal);
-		
-		List<ItemPedidoClienteDTO> itemsDTO = new ArrayList<ItemPedidoClienteDTO>();
-		for (ItemPedidoCliente item : this.items) {
-			itemsDTO.add(item.toDTO());
+		if(this.getItems()!=null) {
+			List<ItemPedidoClienteDTO> itemsDTO = new ArrayList<ItemPedidoClienteDTO>();
+			for (ItemPedidoCliente item : this.items) {
+				itemsDTO.add(item.toDTO());
+			}
+			dto.setItems(itemsDTO);
 		}
 		return dto;
 	}

@@ -6,11 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.ClienteEntity;
 import entities.PrendaEntity;
-import entities.ValorConsignacionEntity;
 import entities.VariedadPrendaEntity;
-import model.Cliente;
 import model.Prenda;
 import model.VariedadPrenda;
 
@@ -25,11 +22,11 @@ public class PrendaDAO extends HibernateDAO {
 		return instancia;
 	}
 	
-	public Prenda save(Prenda cliente) {
+	public Prenda save(Prenda prenda) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		PrendaEntity entity = new PrendaEntity(cliente);
+		PrendaEntity entity = new PrendaEntity(prenda, true);
 		session.saveOrUpdate(entity);
 		
 		session.flush();
@@ -54,7 +51,7 @@ public class PrendaDAO extends HibernateDAO {
 		Session session = this.openSession();
 		session.beginTransaction();
 		
-		VariedadPrendaEntity entity = new VariedadPrendaEntity(variedadPrenda);
+		VariedadPrendaEntity entity = new VariedadPrendaEntity(variedadPrenda, true);
 		session.saveOrUpdate(entity);
 		
 		session.flush();
@@ -70,6 +67,36 @@ public class PrendaDAO extends HibernateDAO {
 		query.setParameter("codigo", codigo);
 		PrendaEntity prendaEntity = (PrendaEntity) query.uniqueResult();
 		return prendaEntity != null? prendaEntity.toBO() : null;
+	}
+
+	public void baja(Prenda prenda) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update PrendaEntity set enProduccion = false where codigo = :codigo");
+		query.setParameter("codigo", prenda.getCodigo());
+		query.executeUpdate();
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public VariedadPrenda getVariedadPrendaById(Long id) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from VariedadPrendaEntity where id = :id");
+		query.setParameter("id", id);
+		VariedadPrendaEntity variedadPrendaEntity = (VariedadPrendaEntity) query.uniqueResult();
+		return variedadPrendaEntity != null? variedadPrendaEntity.toBO(true) : null;
+	}
+
+	public void baja(VariedadPrenda variedadPrenda) {
+		Session session = this.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update VariedadPrendaEntity set enProduccion = false where id = :id");
+		query.setParameter("id", variedadPrenda.getId());
+		query.executeUpdate();
+		session.flush();
+		session.getTransaction().commit();
+		session.close();	
 	}
 
 }

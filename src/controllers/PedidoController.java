@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
+import DTO.InsumoDTO;
 import DTO.PedidoClienteDTO;
+import RemoteObject.TDAPedido;
+import dao.InsumoDAO;
 import dao.PedidoClienteDAO;
+import model.Insumo;
 import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;
 
 public class PedidoController {
+	
+	private static PedidoController instance;
+
+	public static PedidoController getInstance() {
+		if (instance == null) {
+			instance = new PedidoController();
+		}
+		return instance;
+	}
 
 	// ========================= MANEJO DE PEDIDOS =========================
 
@@ -66,6 +79,15 @@ public class PedidoController {
 		pedido.setEstado(estado);
 		pedido.save();
 		return pedido;
+	}
+
+	public List<PedidoClienteDTO> getAllPedidos() {
+		List<PedidoCliente> pedidos = PedidoClienteDAO.getInstance().getAllPedidos();
+		List<PedidoClienteDTO> pedidosDTO = new ArrayList<PedidoClienteDTO>();
+		for(PedidoCliente pedido : pedidos) {
+			pedidosDTO.add(pedido.toDTO());
+		}
+		return pedidosDTO;
 	}
 
 }

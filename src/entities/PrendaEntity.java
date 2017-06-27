@@ -43,18 +43,22 @@ public class PrendaEntity {
 		this.setAreas(new ArrayList<PrendaAreaProduccionEntity>());
 	}
 	
-	public PrendaEntity(Prenda prenda) {
+	public PrendaEntity(Prenda prenda, boolean copyInverseReferences) {
 		this.setCodigo(prenda.getCodigo());
 		this.setDescripcion(prenda.getDescripcion());
 		this.setEnProduccion(prenda.getEnProduccion());
-		this.setVariedadesEntity(prenda.getVariedades());
+		if (copyInverseReferences) {
+			this.setVariedadesEntity(prenda.getVariedades());
+		} else {
+			this.setVariedadesEntity(new ArrayList<>());
+		}
 		this.setAreasProduccionEntity(prenda.getAreas());
 	}
 	
 	private void setVariedadesEntity(List<VariedadPrenda> variedades) {
 		List<VariedadPrendaEntity> list = new ArrayList<VariedadPrendaEntity>();
 		for(VariedadPrenda variedad : variedades) {
-			list.add(new VariedadPrendaEntity(variedad));
+			list.add(new VariedadPrendaEntity(variedad, false));
 		}
 		this.setVariedades(list);		
 	}

@@ -9,9 +9,13 @@ public class ItemPedidoCliente {
 	private Integer cantidad;
 	private Float precioItem;
 	
+	public ItemPedidoCliente() {
+	}
+	
 	public ItemPedidoCliente(ItemPedidoClienteDTO item2) {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -44,8 +48,12 @@ public class ItemPedidoCliente {
 		this.precioItem = precioItem;
 	}
 	public ItemPedidoClienteDTO toDTO() {
-		// TODO Auto-generated method stub
-		return null;
+		ItemPedidoClienteDTO dto = new ItemPedidoClienteDTO();
+		dto.setId(id);
+		dto.setCantidad(cantidad);
+		dto.setPrecioItem(precioItem);		
+		if(item!=null)dto.setItem(item.toDTO());
+		return dto;
 	}
 	
 }

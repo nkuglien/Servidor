@@ -4,8 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.AreaProduccionDTO;
 import DTO.PrendaDTO;
+import dao.AreaProduccionDAO;
 import dao.PrendaDAO;
+import model.AreaProduccion;
 import model.Prenda;
 
 public class PrendaController {
@@ -32,6 +35,17 @@ public class PrendaController {
 	public PrendaDTO buscarPrenda(Long codigo) {
 		Prenda prenda = PrendaDAO.getInstance().getPrendaByCodigo(codigo);
 		return prenda != null? prenda.toDTO() : null;
+	}
+
+	public List<AreaProduccionDTO> getAllAreasProduccion() {
+		List<AreaProduccionDTO> areasDTO = new ArrayList<AreaProduccionDTO>();
+		List<AreaProduccion> areas = AreaProduccionDAO.getInstance().getAllAreasProduccion();
+
+		for (AreaProduccion area : areas) {
+			areasDTO.add(area.toDTO());
+		}
+
+		return areasDTO;
 	}
 
 }

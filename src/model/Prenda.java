@@ -48,6 +48,10 @@ public class Prenda {
 		this.setAreas(areas);
 		
 	}
+	
+	public void baja() {
+		PrendaDAO.getInstance().baja(this);
+	}
 
 	public Prenda save() {
 		return PrendaDAO.getInstance().save(this);
@@ -127,7 +131,7 @@ public class Prenda {
 		
 		List<PrendaAreaProduccionDTO> areasDTO = new ArrayList<PrendaAreaProduccionDTO>();
 		for(PrendaAreaProduccion area : this.getAreas()) {
-			areas.add(area.toDTO());
+			areasDTO.add(area.toDTO());
 		}
 		dto.setAreas(areasDTO);
 		return dto;

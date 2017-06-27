@@ -7,7 +7,7 @@ import model.Sucursal;
 public class TestSucursal {
 	
 	public static void main(String[] args) {
-		TestCliente.main(args);
+		TestCrearCliente.main(args);
 		Sucursal sucursal = createSucursal(1000, "Sucursal 1000", 9000, 1800, "Calle falsa 123");
 		
 		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit("20347444376");

@@ -14,26 +14,34 @@ import model.CuentaCorriente;
 import model.ValorConsignacion;
 
 public class ClienteDAO extends HibernateDAO {
-	
+
 	private static ClienteDAO instancia = null;
 
-	public static ClienteDAO getInstance(){
-		if(instancia == null) {
+	public static ClienteDAO getInstance() {
+		if (instancia == null) {
 			instancia = new ClienteDAO();
-		} 
+		}
 		return instancia;
 	}
-	
+
 	public Cliente save(Cliente cliente) {
-		Session session = this.openSession();
-		session.beginTransaction();
+		ClienteEntity entity = null;
+		Session session = null;
+		try {
+			session = this.openSession();
+			session.beginTransaction();
 		
-		ClienteEntity entity = new ClienteEntity(cliente);
-		session.saveOrUpdate(entity);
+			entity = new ClienteEntity(cliente);
+			session.saveOrUpdate(entity);
 		
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
+			session.flush();
+			session.getTransaction().commit();
+		} catch (RuntimeException re) {
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+		
 		return entity.toBO();
 	}
 
@@ -47,13 +55,13 @@ public class ClienteDAO extends HibernateDAO {
 		}
 		return clientes;
 	}
-	
+
 	public Cliente findClienteByNroCliente(long nroCliente) {
 		Session session = this.openSession();
 		Query query = session.createQuery("from ClienteEntity where nroCliente = :nroCliente");
 		query.setParameter("nroCliente", nroCliente);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
-		return clienteEntity != null? clienteEntity.toBO() : null;
+		return clienteEntity != null ? clienteEntity.toBO() : null;
 	}
 
 	public Cliente findClienteByCuit(String cuit) {
@@ -61,32 +69,32 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ClienteEntity where cuit = :cuit");
 		query.setParameter("cuit", cuit);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
-		return clienteEntity != null? clienteEntity.toBO() : null;
+		return clienteEntity != null ? clienteEntity.toBO() : null;
 	}
 
 	public CuentaCorriente save(CuentaCorriente cuentaCorriente) {
 		Session session = this.openSession();
 		session.beginTransaction();
-		
+
 		CuentaCorrienteEntity entity = new CuentaCorrienteEntity(cuentaCorriente);
 		session.saveOrUpdate(entity);
-		
+
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return entity.toBO();		
+		return entity.toBO();
 	}
 
 	public Cliente update(Cliente cliente) {
 		return save(cliente);
 	}
-	
+
 	public void baja(Cliente cliente) {
 		Session session = this.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("update ClienteEntity set activo = false where id = :id");
 		query.setParameter("id", cliente.getId());
-		query.executeUpdate();	
+		query.executeUpdate();
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
@@ -97,7 +105,7 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ValorConsignacionEntity where id = :idValorConsignado");
 		query.setParameter("id", idValorConsignado);
 		ValorConsignacionEntity valorConsignacionEntity = (ValorConsignacionEntity) query.uniqueResult();
-		return valorConsignacionEntity != null? valorConsignacionEntity.toBO() : null;
+		return valorConsignacionEntity != null ? valorConsignacionEntity.toBO() : null;
 	}
-	
+
 }

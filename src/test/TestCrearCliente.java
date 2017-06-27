@@ -2,7 +2,7 @@ package test;
 
 import model.Cliente;
 
-public class TestCliente {
+public class TestCrearCliente {
 
 	public static void main(String[] args) {
 		Cliente cliente = crearCliente(1, "Ezequiel", "French 2574", "1136214694", "20347444376", 1);
@@ -17,8 +17,7 @@ public class TestCliente {
 		cliente.addMovimiento(-800);
 		
 		cliente.save();
-
-		cliente.baja();
+		System.out.println("fin test cliente");
 		
 //		crearCliente(2, "Coco", "Colombres 235", "1143579364", "20049807693", 2);
 //		crearCliente(3, "Eneas", "Castro Barros 108", "1193414721", "12345678910", 3);
