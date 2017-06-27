@@ -22,10 +22,8 @@ public class InsumoDAO extends HibernateDAO {
 	
 	public Insumo save(Insumo insumo) {
 		Session session = this.openSession();
-		session.beginTransaction();
-		
-		session.saveOrUpdate(new InsumoEntity(insumo));
-		
+		session.beginTransaction();		
+		session.saveOrUpdate(new InsumoEntity(insumo));		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();

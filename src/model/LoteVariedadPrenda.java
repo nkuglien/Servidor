@@ -9,6 +9,19 @@ public class LoteVariedadPrenda extends Lote {
 	private Date fechaProduccion;
 	private Float costoProduccion;
 
+	public LoteVariedadPrenda(Long id, Integer cantDisponible, Posicion posicion, VariedadPrenda variedadPrenda, OrdenProduccion ordenProduccion,
+			Date fechaProduccion2, Float costoProduccion2) {
+		
+		this.setId(id);
+		this.setCantDisponible(cantDisponible);
+		this.setPosicion(posicion);
+		this.setVariedadPrenda(variedadPrenda);
+		this.setOrdenProduccion(ordenProduccion);
+		this.setFechaProduccion(fechaProduccion2);
+		this.setCostoProduccion(costoProduccion2);
+		
+	}
+
 	public VariedadPrenda getVariedadPrenda() {
 		return variedadPrenda;
 	}

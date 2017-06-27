@@ -6,6 +6,16 @@ public class Posicion {
 	private Boolean libre;
 	private Lote lote;
 
+	public Posicion(String codigo2, Boolean libre2, Lote loteBO) {
+		this(codigo2,libre2);
+		lote=loteBO;
+	}
+
+	public Posicion(String codigo2, Boolean libre2) {
+		codigo=codigo2;
+		libre=libre2;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}

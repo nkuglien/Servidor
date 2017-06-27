@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -11,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import model.AreaProduccion;
 
@@ -32,8 +30,7 @@ public class AreaProduccionEntity {
     @CollectionTable(name = "areas_produccion_lineas", joinColumns = { @JoinColumn(name = "codigo") })
 	private Map<String, Boolean> lineas;
 	
-	@Transient
-	private List<OrdenProduccionEsperaEntity> ordenesEspera;
+	
 	
 	public AreaProduccionEntity() {
 	}
@@ -68,13 +65,7 @@ public class AreaProduccionEntity {
 		this.lineas = lineas;
 	}
 	
-	public List<OrdenProduccionEsperaEntity> getOrdenesEspera() {
-		return ordenesEspera;
-	}
 	
-	public void setOrdenesEspera(List<OrdenProduccionEsperaEntity> ordenesEspera) {
-		this.ordenesEspera = ordenesEspera;
-	}
 
 	public AreaProduccion toBO() {
 		AreaProduccion area = new AreaProduccion();
