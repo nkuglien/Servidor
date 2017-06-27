@@ -93,4 +93,11 @@ public class AreaProduccion {
 		return dto;
 	}
 
+	public AreaProduccionDTO toDTO() {
+		AreaProduccionDTO dto = new AreaProduccionDTO();
+		dto.setCodigo(getCodigo());
+		dto.setNombre(getNombre());
+		return dto;
+	}
+
 }
