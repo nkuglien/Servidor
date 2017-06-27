@@ -51,7 +51,7 @@ public class OrdenProduccionEntity {
 		if(o.getVariedades()!=null){
 			List<VariedadPrendaEntity> variedades = new ArrayList<VariedadPrendaEntity> ();
 			for(VariedadPrenda p : o.getVariedades()){
-				variedades.add(new VariedadPrendaEntity(p));				
+				variedades.add(new VariedadPrendaEntity(p,true));				
 			}
 			setVariedades(variedades);			
 		}
