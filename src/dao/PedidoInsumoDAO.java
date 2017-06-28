@@ -56,8 +56,15 @@ public class PedidoInsumoDAO extends HibernateDAO {
 	}
 
 	public List<PedidoInsumo> GetPedidosPendientesInsumo(Insumo insumo) {
-		// TODO Auto-generated method stub
-		return null;
+		List<PedidoInsumo> retorno = new ArrayList<PedidoInsumo>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from PedidoInsumoEntity pie join InsumoEntity ie where  pie.estado <> 'TERMINADO' and ie.id = :idInsumo");
+		query.setParameter("idInsumo", insumo.getId());
+		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();
+		for(PedidoInsumoEntity pe : ped){
+			retorno.add(pe.toBO());
+		}
+		return retorno;
 	}
 
 }

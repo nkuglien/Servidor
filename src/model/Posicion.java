@@ -1,5 +1,7 @@
 package model;
 
+import dao.PosicionDAO;
+
 public class Posicion {
 
 	private String codigo;
@@ -38,6 +40,12 @@ public class Posicion {
 
 	public void setLote(Lote lote) {
 		this.lote = lote;
+	}
+
+	public static Posicion getPosicionLibre() {
+		PosicionDAO DAO = PosicionDAO.getInstance();
+		Posicion pos = DAO.getPosicionVacia();
+		return pos;
 	}
 
 }

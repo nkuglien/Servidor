@@ -24,6 +24,14 @@ public class LoteInsumo extends Lote {
 		
 	}
 
+	public LoteInsumo(PedidoInsumo pedidoInsumo2) {
+		this.setPedidoInsumo(pedidoInsumo2);
+		this.setInsumo(pedidoInsumo2.getInsumo());
+		this.setCantDisponible(pedidoInsumo2.getCantidad());
+		this.setPrecioCompra(pedidoInsumo2.getPrecioUnidad());
+		this.setPosicion(Posicion.getPosicionLibre());
+	}
+
 	public Insumo getInsumo() {
 		return insumo;
 	}
@@ -54,5 +62,9 @@ public class LoteInsumo extends Lote {
 
 	public void setReservas(List<ReservaInsumo> reservas) {
 		this.reservas = reservas;
+	}
+	
+	public void save(){
+	 
 	}
 }

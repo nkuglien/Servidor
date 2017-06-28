@@ -27,12 +27,12 @@ public class OrdenProduccion {
 		//ejecuta intentarArmar
 	}
 	
-	public void intentarArmarPedido(){
+	public void intentarProducir() {
 		//Traer todos los insumos que requiere la generacion que aun no haya reservado
-		//Verificar que los insumos esten
-		//Reservarlos
-		//si puede se pone lista para producir
-		// si no puede se pone  a la espera del pedido de insumo		
+				//Verificar que los insumos esten
+				//Reservarlos
+				//si puede se pone lista para producir
+				// si no puede se pone  a la espera del pedido de insumo
 		
 	}
 	
@@ -91,6 +91,8 @@ public class OrdenProduccion {
 	public void setInsumos(List<ReservaInsumo> insumos) {
 		this.insumos = insumos;
 	}
+
+	
 	
 	
 	

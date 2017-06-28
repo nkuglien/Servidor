@@ -57,7 +57,7 @@ public class PosicionEntity {
 		this.lote = lote;
 	}
 
-	public Object toBO() {
+	public Posicion toBO() {
 		
 		return toBO(true);
 	}

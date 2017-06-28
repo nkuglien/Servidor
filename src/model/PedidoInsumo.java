@@ -43,6 +43,26 @@ public class PedidoInsumo {
 	}
 	
 	
+	public void CompletarPedidoInsumo(Proveedor proveedor, Date fechaDespacho, Float precioUnidad){
+		this.setProveedor(proveedor);
+		this.setPrecioUnidad(precioUnidad);
+		this.setFechaDespacho(fechaDespacho);
+		this.setEstado("COMPLETO");
+		this.save();
+	}
+	
+	public void TerminarPedidoInsumo(Date FechaRealDespacho){
+		this.setFechaDespachoReal(FechaRealDespacho);
+		this.setEstado("Terminado");
+		if(this.getOrdenesProduccion()!=null){
+			for(OrdenProduccion o : this.getOrdenesProduccion()){
+				o.intentarProducir();
+			}
+		}
+		this.save();
+		LoteInsumo lote = new LoteInsumo(this);
+		lote.save();
+	}
 	
 	
 	private void save() {
