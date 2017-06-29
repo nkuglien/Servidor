@@ -1,5 +1,7 @@
 package model;
 
+import dao.ReservaInsumoDAO;
+
 public class ReservaInsumo {
 
 	private int id;
@@ -45,7 +47,8 @@ public class ReservaInsumo {
 		this.id = id;
 	}
 	public void save() {
-		// TODO Auto-generated method stub
+		ReservaInsumoDAO dao = ReservaInsumoDAO.getInstance();
+		dao.save(this);
 		
 	}
 

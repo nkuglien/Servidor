@@ -130,6 +130,9 @@ public class OrdenProduccion {
 		}
 		this.setEstado("TERMINADO");
 		this.save();
+		for(PedidoCliente pedido : getPedidoCliente()){
+			pedido.intentarArmar();
+		}
 	}
 	
 	public List<ItemInsumo> getInsumosFaltantes(){

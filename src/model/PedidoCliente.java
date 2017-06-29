@@ -178,5 +178,10 @@ public class PedidoCliente {
 		}
 		return dto;
 	}
+
+	public void intentarArmar() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

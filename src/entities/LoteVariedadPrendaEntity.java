@@ -38,6 +38,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 		setId(lote.getId());
 		if(lote.getPosicion()!=null)
 			setPosicion(new PosicionEntity(lote.getPosicion()));
+		setCantidad(lote.getCantidad());
 	}
 
 	public VariedadPrendaEntity getVariedadPrenda() {
@@ -78,7 +79,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	@Override
 	public Lote toBO(Boolean IncluyeReserva){
 		
-		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantDisponible(),getPosicion().toBO(false),variedadPrenda.toBO(false),ordenProduccion.toBO(),fechaProduccion,costoProduccion);
+		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),getPosicion().toBO(false),variedadPrenda.toBO(false),ordenProduccion.toBO(),fechaProduccion,costoProduccion);
 		return lote;
 	}
 	

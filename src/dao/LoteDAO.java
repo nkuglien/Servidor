@@ -40,8 +40,15 @@ public class LoteDAO extends HibernateDAO {
 	}
 
 	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.openSession();
+			Query query = session.createQuery("from LoteInsumoEntity li join insumo i where i.id = :idInsumo ");
+			query.setParameter("idInsumo", insumo.getId());
+			List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
+			List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
+			for(LoteInsumoEntity lo : lotes){
+				retorno.add(lo.toBO());
+			}
+			return retorno;
 	}
 	
 	//public Insumo findByCodigo(long codigo) {
