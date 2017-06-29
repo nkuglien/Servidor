@@ -159,6 +159,15 @@ public class VariedadPrenda {
 		}
 		dto.setInsumos(insumosList);
 		return dto;
+	}
+
+	public void recalcularPrecio() {
+		Float total =(float) 0;
+		for(ItemInsumo in : this.getInsumos() ){
+			total=total+ in.getInsumo().getPrecio()*in.getCantidad();
+		}
+		this.setPrecioVentaActual(total);
+		
 	}	
 
 }

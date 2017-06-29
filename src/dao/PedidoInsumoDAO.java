@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import entities.InsumoEntity;
 import entities.PedidoInsumoEntity;
 import model.Insumo;
+import model.OrdenProduccion;
 import model.PedidoInsumo;
 
 public class PedidoInsumoDAO extends HibernateDAO {
@@ -65,6 +66,15 @@ public class PedidoInsumoDAO extends HibernateDAO {
 			retorno.add(pe.toBO());
 		}
 		return retorno;
+	}
+
+	public boolean hayPedidoPendiente(Insumo insumo, OrdenProduccion ordenProduccion) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from PedidoInsumoEntity pie join InsumoEntity ie join OrdenProduccionEntity op where  pie.estado <> 'TERMINADO' and ie.id = :idInsumo and op.id =:idOrden");
+		query.setParameter("idInsumo", insumo.getId());
+		query.setParameter("idOrden", ordenProduccion.getId());
+		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();	
+		return !ped.isEmpty();
 	}
 
 }

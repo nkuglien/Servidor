@@ -10,17 +10,19 @@ public class Insumo {
 	private String descripcion;
 	private String nombre;
 	private Integer stockMinimo;
+	private Float precio;
 	private Integer cantCompra;
 	
 	public Insumo() {
 	}
 	
-	public Insumo(long codigo, String descripcion, String nombre, int stockMinimo, int cantCompra) {
+	public Insumo(long codigo, String descripcion, String nombre, int stockMinimo, int cantCompra,Float precio) {
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);
 		this.setNombre(nombre);
 		this.setStockMinimo(stockMinimo);
 		this.setCantCompra(cantCompra);
+		this.setPrecio(precio);
 	}
 	
 	public Insumo(InsumoDTO insumo) {
@@ -93,6 +95,14 @@ public class Insumo {
 		dto.setStockMinimo(stockMinimo);
 		dto.setId(id);
 		return dto;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
 	}
 
 }

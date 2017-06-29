@@ -3,6 +3,7 @@ package model;
 public class Lote {
 
 	private Long id;
+	private Integer cantidad;
 	private Integer cantDisponible;
 	private Posicion posicion;
 
@@ -28,6 +29,14 @@ public class Lote {
 
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 
 }

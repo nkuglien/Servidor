@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-import entities.ReservaInsumoEntity;
+import dao.LoteDAO;
 
 public class LoteInsumo extends Lote {
 
@@ -12,9 +12,10 @@ public class LoteInsumo extends Lote {
 	private List<ReservaInsumo> reservas;
 	
 	
-	public LoteInsumo(Long id, Integer cantDisponible, Posicion posicion, Insumo insumo, PedidoInsumo pedido, Float precioCompra2,
+	public LoteInsumo(Long id,Integer cantidad, Integer cantDisponible, Posicion posicion, Insumo insumo, PedidoInsumo pedido, Float precioCompra2,
 			List<ReservaInsumo> reservasBO) {
 		this.setId(id);
+		this.setCantidad(cantidad);
 		this.setCantDisponible(cantDisponible);
 		this.setPosicion(posicion);
 		this.setInsumo(insumo);
@@ -27,6 +28,7 @@ public class LoteInsumo extends Lote {
 	public LoteInsumo(PedidoInsumo pedidoInsumo2) {
 		this.setPedidoInsumo(pedidoInsumo2);
 		this.setInsumo(pedidoInsumo2.getInsumo());
+		this.setCantidad(pedidoInsumo2.getCantidad());
 		this.setCantDisponible(pedidoInsumo2.getCantidad());
 		this.setPrecioCompra(pedidoInsumo2.getPrecioUnidad());
 		this.setPosicion(Posicion.getPosicionLibre());
@@ -65,6 +67,7 @@ public class LoteInsumo extends Lote {
 	}
 	
 	public void save(){
-	 
+	 LoteDAO dao = LoteDAO.getInstance();
+	 dao.save(this);
 	}
 }

@@ -46,6 +46,19 @@ public class PrendaDAO extends HibernateDAO {
 		}
 		return prendas;
 	}
+	
+	
+	public List<VariedadPrenda> getAllVariedadesPrenda(Prenda prenda) {
+		List<VariedadPrenda> variedades = new ArrayList<VariedadPrenda>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from VariedadPrendaEntity vp join PrendaEntity p where p.codigo= :codigo");
+		query.setParameter("codigo", prenda.getCodigo());
+		List<VariedadPrendaEntity> entity = query.list();
+		for (VariedadPrendaEntity vp : entity) {
+			variedades.add(vp.toBO(true));
+		}
+		return variedades;
+	}
 
 	public VariedadPrenda saveVarieadad(VariedadPrenda variedadPrenda) {
 		Session session = this.openSession();

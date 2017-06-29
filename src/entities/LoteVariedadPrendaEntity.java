@@ -19,7 +19,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 
 	@ManyToOne
 	private VariedadPrendaEntity variedadPrenda;
-	@OneToOne
+	@ManyToOne
 	private OrdenProduccionEntity ordenProduccion;
 	private Date fechaProduccion;
 	private Float costoProduccion;

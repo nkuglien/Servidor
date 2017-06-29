@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import dao.LoteDAO;
+
 public class LoteVariedadPrenda extends Lote {
 
 	private VariedadPrenda variedadPrenda;
@@ -19,6 +21,16 @@ public class LoteVariedadPrenda extends Lote {
 		this.setOrdenProduccion(ordenProduccion);
 		this.setFechaProduccion(fechaProduccion2);
 		this.setCostoProduccion(costoProduccion2);
+		
+	}
+
+	public LoteVariedadPrenda(VariedadPrenda vp, OrdenProduccion orden) {
+		variedadPrenda=vp;
+		ordenProduccion = orden;
+		fechaProduccion= new Date();
+		costoProduccion = vp.getCostoProduccionActual();
+		setCantidad(vp.getCantidadProduccionFija());
+		setPosicion(Posicion.getPosicionLibre());
 		
 	}
 
@@ -52,6 +64,13 @@ public class LoteVariedadPrenda extends Lote {
 
 	public void setCostoProduccion(Float costoProduccion) {
 		this.costoProduccion = costoProduccion;
+	}
+
+	public void save() {
+		LoteDAO lote = LoteDAO.getInstance();
+		lote.save(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

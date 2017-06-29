@@ -53,13 +53,15 @@ public class PedidoInsumo {
 	
 	public void TerminarPedidoInsumo(Date FechaRealDespacho){
 		this.setFechaDespachoReal(FechaRealDespacho);
-		this.setEstado("Terminado");
+		this.setEstado("TERMINADO");
 		if(this.getOrdenesProduccion()!=null){
 			for(OrdenProduccion o : this.getOrdenesProduccion()){
-				o.intentarProducir();
+				o.intentarCompletar();
 			}
 		}
 		this.save();
+		this.getInsumo().setPrecio(this.getPrecioUnidad());
+		this.getInsumo().save();
 		LoteInsumo lote = new LoteInsumo(this);
 		lote.save();
 	}

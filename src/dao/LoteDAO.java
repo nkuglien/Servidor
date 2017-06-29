@@ -38,6 +38,11 @@ public class LoteDAO extends HibernateDAO {
 		session.close();
 		return lote;
 	}
+
+	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	//public Insumo findByCodigo(long codigo) {
 	//	Session session = this.openSession();

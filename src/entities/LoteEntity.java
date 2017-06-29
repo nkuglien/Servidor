@@ -19,6 +19,7 @@ public class LoteEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	private Integer cantidad;
 	private Integer cantDisponible;
 	@OneToOne(mappedBy="lote")
 	private PosicionEntity posicion;
@@ -54,6 +55,14 @@ public class LoteEntity {
 	public Lote toBO() {
 		
 		return toBO(true);
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 	
 }

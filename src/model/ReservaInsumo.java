@@ -14,6 +14,12 @@ public class ReservaInsumo {
 		loteInsumo=lote2;
 		cantidad=cantidad2;
 	}
+	public ReservaInsumo( OrdenProduccion orden2, LoteInsumo lote2, int cantidad2) {
+		
+		orden=orden2;
+		loteInsumo=lote2;
+		cantidad=cantidad2;
+	}
 	public OrdenProduccion getOrden() {
 		return orden;
 	}
@@ -37,6 +43,10 @@ public class ReservaInsumo {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

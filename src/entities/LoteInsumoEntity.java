@@ -42,6 +42,8 @@ public class LoteInsumoEntity extends LoteEntity{
 			}
 			setReservas(re);
 		}
+		setCantDisponible(loteInsumo.getCantDisponible());
+		setCantidad(loteInsumo.getCantidad());
 	}
 
 	public LoteInsumoEntity() {}
@@ -92,7 +94,7 @@ public class LoteInsumoEntity extends LoteEntity{
 			 }
 		 }
 		
-		LoteInsumo lote = new LoteInsumo(getId(),getCantDisponible(),getPosicion().toBO(false),insumo.toBO(),pedidoInsumo.toBO(),precioCompra,reservasBO);
+		LoteInsumo lote = new LoteInsumo(getId(),getCantidad(), getCantDisponible(),getPosicion().toBO(false),insumo.toBO(),pedidoInsumo.toBO(),precioCompra,reservasBO);
 		return lote;
 	}
 	

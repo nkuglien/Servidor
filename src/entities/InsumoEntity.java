@@ -33,6 +33,7 @@ public class InsumoEntity {
 	@Column(name = "cantidad_compra")
 	private Integer cantCompra;
 
+	private Float precio;
 	public InsumoEntity() {
 	}
 
@@ -43,6 +44,7 @@ public class InsumoEntity {
 		this.setNombre(insumo.getNombre());
 		this.setStockMinimo(insumo.getStockMinimo());
 		this.setCantCompra(insumo.getCantCompra());
+		this.setPrecio(insumo.getPrecio());
 	}
 
 	public Insumo toBO() {
@@ -53,6 +55,7 @@ public class InsumoEntity {
 		insumo.setNombre(this.getNombre());
 		insumo.setStockMinimo(this.getStockMinimo());
 		insumo.setCantCompra(this.getCantCompra());
+		insumo.setPrecio(this.getPrecio());
 		return insumo;
 	}
 
@@ -102,6 +105,14 @@ public class InsumoEntity {
 
 	public void setCantCompra(Integer cantCompra) {
 		this.cantCompra = cantCompra;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
 	}
 
 }
