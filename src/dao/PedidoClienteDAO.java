@@ -6,11 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import DTO.InsumoDTO;
-import DTO.PedidoClienteDTO;
-import entities.InsumoEntity;
 import entities.PedidoClienteEntity;
-import model.Insumo;
 import model.PedidoCliente;
 
 public class PedidoClienteDAO extends HibernateDAO {
@@ -57,6 +53,18 @@ public class PedidoClienteDAO extends HibernateDAO {
 		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
 		Session session = this.openSession();
 		Query query = session.createQuery("from PedidoClienteEntity");
+		List<PedidoClienteEntity> pedidosEntity = query.list();
+		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
+			pedidos.add(pedidoEntity.toBO(true));
+		}
+		return pedidos;
+	}
+
+	public List<PedidoCliente> getPedidosByCliente(String cuit) {
+		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from PedidoClienteEntity p where p.cliente.cuit = :cuit");
+		query.setParameter("cuit", cuit);
 		List<PedidoClienteEntity> pedidosEntity = query.list();
 		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
 			pedidos.add(pedidoEntity.toBO(true));

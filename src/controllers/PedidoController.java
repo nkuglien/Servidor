@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
-import DTO.InsumoDTO;
 import DTO.PedidoClienteDTO;
-import RemoteObject.TDAPedido;
-import dao.InsumoDAO;
 import dao.PedidoClienteDAO;
-import model.Insumo;
 import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;
@@ -34,8 +30,7 @@ public class PedidoController {
 	// el cliente crea un pedido
 	public PedidoCliente crearPedido(PedidoClienteDTO dto) {
 		PedidoCliente pedido = new PedidoCliente(dto);
-		pedido.save();
-		return pedido;
+		return pedido.save();
 	}
 
 	// la sucursal lo valida: lo aprueba, o lo rechaza (alcarando por que)
@@ -86,6 +81,15 @@ public class PedidoController {
 
 	public List<PedidoClienteDTO> getAllPedidos() {
 		List<PedidoCliente> pedidos = PedidoClienteDAO.getInstance().getAllPedidos();
+		List<PedidoClienteDTO> pedidosDTO = new ArrayList<PedidoClienteDTO>();
+		for(PedidoCliente pedido : pedidos) {
+			pedidosDTO.add(pedido.toDTO());
+		}
+		return pedidosDTO;
+	}
+
+	public List<PedidoClienteDTO> getPedidosByCliente(String cuit) {
+		List<PedidoCliente> pedidos = PedidoClienteDAO.getInstance().getPedidosByCliente(cuit);
 		List<PedidoClienteDTO> pedidosDTO = new ArrayList<PedidoClienteDTO>();
 		for(PedidoCliente pedido : pedidos) {
 			pedidosDTO.add(pedido.toDTO());

@@ -42,7 +42,7 @@ public class PedidoCliente {
 		this.fechaGeneracion = dto.getFechaGeneracion();
 		this.fechaDespacho = dto.getFechaDespacho();
 		this.fechaProbableDespacho = dto.getFechaProbableDespacho();
-		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente());
+		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente(), false);
 		this.subtotal = dto.getSubtotal();
 		this.impuestos = dto.getImpuestos();
 		this.total = dto.getTotal();
@@ -171,8 +171,8 @@ public class PedidoCliente {
 		return dto;
 	}
 
-	public void save() {
-		PedidoClienteDAO.getInstance().save(this);		
+	public PedidoCliente save() {
+		return PedidoClienteDAO.getInstance().save(this);		
 	}
 
 	public PedidoClienteDTO toDTO() {

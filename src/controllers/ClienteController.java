@@ -31,18 +31,18 @@ public class ClienteController {
 	}
 
 	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
-		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
+		ClienteDAO.getInstance().save(new Cliente(clienteDTO, true));
 		return clienteDTO;
 
 	}
 
 	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
-		ClienteDAO.getInstance().baja(new Cliente(cliente));
+		ClienteDAO.getInstance().baja(new Cliente(cliente, true));
 		return cliente;
 	}
 
 	public ClienteDTO modificarCliente(ClienteDTO dto) throws RemoteException {
-		Cliente cliente = ClienteDAO.getInstance().update(new Cliente(dto));
+		Cliente cliente = ClienteDAO.getInstance().update(new Cliente(dto, true));
 		return cliente != null ? cliente.toDTO() : null;
 	}
 
