@@ -85,4 +85,13 @@ public class PedidoController {
 		return pedidosDTO;
 	}
 
+	public List<PedidoClienteDTO> getPedidosByCliente(String cuit) {
+		List<PedidoCliente> pedidos = PedidoClienteDAO.getInstance().getPedidosByCliente(cuit);
+		List<PedidoClienteDTO> pedidosDTO = new ArrayList<PedidoClienteDTO>();
+		for(PedidoCliente pedido : pedidos) {
+			pedidosDTO.add(pedido.toDTO());
+		}
+		return pedidosDTO;
+	}
+
 }

@@ -28,8 +28,7 @@ public class PedidoRemoto extends UnicastRemoteObject implements TDAPedido {
 
 	@Override
 	public List<PedidoClienteDTO> getPedidosByCliente(String cuit) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return PedidoController.getInstance().getPedidosByCliente(cuit);
 	}
 
 }
