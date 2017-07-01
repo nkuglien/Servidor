@@ -35,9 +35,13 @@ public class TestPrenda {
 		
 		
 		VariedadPrenda rojaXL = crearVariedad(remera, "XL", "Roja", true, 50, 100, 200);
-		VariedadPrenda rojaS = crearVariedad(remera, "S", "Roja", true, 50, 100, 200);
+		VariedadPrenda rojaS = crearVariedad(remera, "S", "Verde", true, 50, 100, 200);
 		rojaXL.save();	
-		
+		rojaS.save();
+		VariedadPrenda rojasdXL = crearVariedad(jean, "XS", "Azul", true, 50, 100, 200);
+		VariedadPrenda rojasdS = crearVariedad(jean, "M", "Roja", true, 50, 100, 200);
+		rojasdXL.save();	
+		rojasdS.save();
 		Prenda remeraRecuperada = PrendaDAO.getInstance().getAllPrendas().get(0);
 		System.out.println(remeraRecuperada);		
 		

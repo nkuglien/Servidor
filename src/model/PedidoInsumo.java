@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import DTO.PedidoInsumoDTO;
 import dao.PedidoInsumoDAO;
 
 public class PedidoInsumo {
@@ -105,6 +106,7 @@ public class PedidoInsumo {
 		insumo=insumo2;
 		cantidad=cantidad2;
 		ordenesProduccion=ordenes2;	
+		precioUnidad=precioUnidad2;
 		
 	}
 
@@ -192,6 +194,14 @@ public class PedidoInsumo {
 
 	public void setOrdenesProduccion(List<OrdenProduccion> ordenesProduccion) {
 		this.ordenesProduccion = ordenesProduccion;
+	}
+
+
+	public PedidoInsumoDTO toDTO() {
+		String provnombre="";
+		if(proveedor!=null) provnombre=proveedor.getNombre();
+		PedidoInsumoDTO dto = new PedidoInsumoDTO(id,provnombre,fechaGeneracion, fechaDespacho, fechaDespachoReal,estado,insumo.getDescripcion(),cantidad,precioUnidad);
+		return dto;
 	}
 
 }

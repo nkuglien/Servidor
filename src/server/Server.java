@@ -8,12 +8,14 @@ import RemoteObject.TDACliente;
 import RemoteObject.TDAInsumo;
 import RemoteObject.TDAOrdenProduccion;
 import RemoteObject.TDAPedido;
+import RemoteObject.TDAPedidoInsumo;
 import RemoteObject.TDAPrenda;
 import RemoteObject.TDAProveedor;
 import RemoteObject.TDASucursal;
 import RemoteObjects.ClienteRemoto;
 import RemoteObjects.InsumoRemoto;
 import RemoteObjects.OrdenProduccionRemoto;
+import RemoteObjects.PedidoInsumoRemoto;
 import RemoteObjects.PedidoRemoto;
 import RemoteObjects.PrendaRemoto;
 import RemoteObjects.ProveedorRemoto;
@@ -52,7 +54,10 @@ public class Server {
 			Naming.bind("//localhost:1099/PedidoRemoto", pedidoRemote);
 			
 			TDAOrdenProduccion ordenProduccionRemoto = new OrdenProduccionRemoto();
-			Naming.bind("//localhost:1099/OordenProduccionRemoto", ordenProduccionRemoto);
+			Naming.bind("//localhost:1099/OrdenProduccionRemoto", ordenProduccionRemoto);
+			
+			TDAPedidoInsumo pedidoInsumo = new PedidoInsumoRemoto();
+			Naming.bind("//localhost:1099/PedidoInsumoRemoto", pedidoInsumo);
 			
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {

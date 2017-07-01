@@ -10,17 +10,12 @@ public class TestProveedor {
 		TestInsumo.main(args);
 		
 		Proveedor proveedor = crearProveedor("Proveedor Carlitos");
+		Proveedor proveedor2 = crearProveedor("Alfredo marcos");
+		Proveedor proveedor3 = crearProveedor("Armando paredes");
 		
-		Insumo insumo = InsumoDAO.getInstance().findByCodigo(1000);
-		proveedor.altaInsumo(insumo, 10);
 		
-		insumo = InsumoDAO.getInstance().findByCodigo(1001);
-		proveedor.altaInsumo(insumo, 20);
 		
-		insumo = InsumoDAO.getInstance().findByCodigo(1003);
-		proveedor.altaInsumo(insumo, 30);
 		
-		proveedor.save();
 	}
 	
 	private static Proveedor crearProveedor(String nombre) {

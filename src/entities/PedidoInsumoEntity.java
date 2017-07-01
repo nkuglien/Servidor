@@ -153,7 +153,10 @@ public class PedidoInsumoEntity {
 				ordenes.add(o.toBO());				
 			}			
 		}
-		PedidoInsumo pedido = new PedidoInsumo(this.getId(),this.getEstado(),this.getFechaGeneracion(),this.getFechaDespacho(),this.getFechaDespachoReal(),this.getProveedor().toBO(),this.getInsumo().toBO(),this.getPrecioUnidad(), this.getCantidad(),ordenes);
+		Proveedor prov=null;
+		if(this.getProveedor()!=null)
+			prov=this.getProveedor().toBO();
+		PedidoInsumo pedido = new PedidoInsumo(this.getId(),this.getEstado(),this.getFechaGeneracion(),this.getFechaDespacho(),this.getFechaDespachoReal(),prov,this.getInsumo().toBO(),this.getPrecioUnidad(), this.getCantidad(),ordenes);
 			
 		
 		return pedido;

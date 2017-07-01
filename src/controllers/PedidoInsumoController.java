@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ClienteDTO;
+import DTO.PedidoInsumoDTO;
 import dao.ClienteDAO;
+import dao.PedidoInsumoDAO;
 import model.Cliente;
+import model.PedidoInsumo;
 
 public class PedidoInsumoController {
 
@@ -19,36 +22,16 @@ public class PedidoInsumoController {
 		return instance;
 	}
 
-	public List<ClienteDTO> getAllClientes() throws RemoteException {
-		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
-		List<Cliente> clientes = ClienteDAO.getInstance().getAllClientes();
+	public List<PedidoInsumoDTO> getAllPedidos() throws RemoteException {
+		List<PedidoInsumoDTO> pedidosDTO = new ArrayList<PedidoInsumoDTO>();
+		List<PedidoInsumo> pedidos = PedidoInsumoDAO.getInstance().getAllInsumos();
 
-		for (Cliente cliente : clientes) {
-			clientesDTO.add(cliente.toDTO());
+		for (PedidoInsumo ped : pedidos) {
+			pedidosDTO.add(ped.toDTO());
 		}
-
-		return clientesDTO;
+		return pedidosDTO;
 	}
 
-	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
-		ClienteDAO.getInstance().save(new Cliente(clienteDTO));
-		return clienteDTO;
-
-	}
-
-	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
-		ClienteDAO.getInstance().baja(new Cliente(cliente));
-		return cliente;
-	}
-
-	public ClienteDTO modificarCliente(ClienteDTO dto) throws RemoteException {
-		Cliente cliente = ClienteDAO.getInstance().update(new Cliente(dto));
-		return cliente != null ? cliente.toDTO() : null;
-	}
-
-	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
-		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit(cuit);
-		return cliente != null ? cliente.toDTO() : null;
-	}
+	
 
 }

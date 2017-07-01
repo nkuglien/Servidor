@@ -5,10 +5,14 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import DTO.ClienteDTO;
+import DTO.PedidoClienteDTO;
+import DTO.PedidoInsumoDTO;
 import RemoteObject.TDACliente;
+import RemoteObject.TDAPedidoInsumo;
 import controllers.ClienteController;
+import controllers.PedidoInsumoController;
 
-public class PedidoInsumoRemoto extends UnicastRemoteObject implements TDACliente {
+public class PedidoInsumoRemoto extends UnicastRemoteObject implements TDAPedidoInsumo {
 	
 	private static final long serialVersionUID = -1395733353845311456L;
 
@@ -17,32 +21,10 @@ public class PedidoInsumoRemoto extends UnicastRemoteObject implements TDAClient
 	}
 
 	@Override
-	public List<ClienteDTO> getAllClientes() throws RemoteException {
-
-		return ClienteController.getInstance().getAllClientes();
+	public List<PedidoInsumoDTO> getAllPedidos() throws RemoteException {
+		return PedidoInsumoController.getInstance().getAllPedidos();
 	}
 
-	@Override
-	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
-		return ClienteController.getInstance().altaCliente(clienteDTO);
-
-	}
-
-	@Override
-	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteController.getInstance().bajaCliente(cliente);
-	}
-
-	@Override
-	public ClienteDTO modificarCliente(ClienteDTO cliente) throws RemoteException {
-		return ClienteController.getInstance().modificarCliente(cliente);
-
-	}
-
-	@Override
-	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
-		return ClienteController.getInstance().buscarCliente(cuit);
-
-	}
+	
 
 }
