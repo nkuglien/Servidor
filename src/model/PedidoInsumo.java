@@ -69,9 +69,7 @@ public class PedidoInsumo {
 	
 	
 	private void save() {
-		PedidoInsumoDAO DAO = PedidoInsumoDAO.getInstance();
-		DAO.save(this);
-		
+		PedidoInsumoDAO.getInstance().save(this);
 	}
 
 

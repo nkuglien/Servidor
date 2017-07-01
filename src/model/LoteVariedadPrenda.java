@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+import DTO.LoteVariedadPrendaDTO;
 import dao.LoteDAO;
 
 public class LoteVariedadPrenda extends Lote {
@@ -34,6 +35,15 @@ public class LoteVariedadPrenda extends Lote {
 		setCantDisponible(vp.getCantidadProduccionFija());
 		setPosicion(Posicion.getPosicionLibre());
 		
+	}
+
+
+
+	public LoteVariedadPrenda(LoteVariedadPrendaDTO dto) {
+		variedadPrenda = new VariedadPrenda(dto.getVariedadPrenda());
+		ordenProduccion = new OrdenProduccion(dto.getOrdenProduccion());
+		fechaProduccion = dto.getFechaProduccion();
+		costoProduccion = dto.getCostoProduccion();
 	}
 
 	public VariedadPrenda getVariedadPrenda() {

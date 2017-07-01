@@ -1,5 +1,8 @@
 package model;
 
+import DTO.ReservaVariedadPrendaDTO;
+import dao.LoteDAO;
+
 public class ReservaVariedadPrenda {
 	
 	private int id;
@@ -7,6 +10,19 @@ public class ReservaVariedadPrenda {
 	private LoteVariedadPrenda lote;
 	private int cantidad;
 	
+	
+	public ReservaVariedadPrenda(ReservaVariedadPrendaDTO dto) {
+		this.id = dto.getId();
+		this.pedido = new PedidoCliente(dto.getPedido());
+		this.lote = new LoteVariedadPrenda(dto.getLote());
+		this.cantidad = dto.getCantidad();
+	}
+	
+	public ReservaVariedadPrenda(PedidoCliente p, LoteVariedadPrenda l, int cantidad) {
+		this.pedido = p;
+		this.lote = l;
+		this.cantidad = cantidad;
+	}
 	
 	public int getId() {
 		return id;

@@ -52,6 +52,19 @@ public class LoteDAO extends HibernateDAO {
 			return retorno;
 	}
 	
+	public List<LoteVariedadPrenda> getLotesConDisponibles(VariedadPrenda vp) {
+//		Session session = this.openSession();
+//		Query query = session.createQuery("select li from VariedadPrendaEntity li join li.insumo i where i.id = :idInsumo ");
+//		query.setParameter("idInsumo", insumo.getId());
+//		List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
+//		List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
+//		for(LoteInsumoEntity lo : lotes){
+//			retorno.add(lo.toBO());
+//		}
+//		return retorno;
+		return null;
+	}
+	
 	
 	public int getStock(VariedadPrenda variedad) {
 		Session session = this.openSession();

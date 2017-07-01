@@ -19,13 +19,12 @@ import model.OrdenProduccion;
 import model.PedidoInsumo;
 import model.Proveedor;
 
-
 @Entity
-@Table(name="PedidoInsumo")
+@Table(name = "PedidoInsumo")
 public class PedidoInsumoEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
 	private ProveedorEntity proveedor;
@@ -36,31 +35,34 @@ public class PedidoInsumoEntity {
 	@ManyToOne
 	private InsumoEntity insumo;
 	private int cantidad;
-	private Float precioUnidad;	
+	private Float precioUnidad;
 	@OneToMany
 	private List<OrdenProduccionEntity> ordenesProduccion;
 
-	public PedidoInsumoEntity(){}
-	
-	public PedidoInsumoEntity(PedidoInsumo pedido){
+	public PedidoInsumoEntity() {
+	}
+
+	public PedidoInsumoEntity(PedidoInsumo pedido) {
 		setCantidad(pedido.getCantidad());
 		setEstado(pedido.getEstado());
 		setFechaDespacho(pedido.getFechaDespacho());
 		setFechaDespachoReal(pedido.getFechaDespachoReal());
 		setFechaGeneracion(pedido.getFechaGeneracion());
 		setId(pedido.getId());
-		setInsumo(new InsumoEntity( pedido.getInsumo()));
-		if(pedido.getOrdenesProduccion()!=null){
+		setInsumo(new InsumoEntity(pedido.getInsumo()));
+		if (pedido.getOrdenesProduccion() != null) {
 			List<OrdenProduccionEntity> ordenes = new ArrayList<OrdenProduccionEntity>();
-			for(OrdenProduccion o :pedido.getOrdenesProduccion() ){
-				ordenes.add(new OrdenProduccionEntity(o));				
+			for (OrdenProduccion o : pedido.getOrdenesProduccion()) {
+				ordenes.add(new OrdenProduccionEntity(o));
 			}
 			setOrdenesProduccion(ordenes);
 		}
 		setPrecioUnidad(pedido.getPrecioUnidad());
-		setProveedor(new ProveedorEntity( pedido.getProveedor()));
+		if (pedido.getProveedor() != null) {
+			setProveedor(new ProveedorEntity(pedido.getProveedor()));
+		}
 	}
-	
+
 	public InsumoEntity getInsumo() {
 		return insumo;
 	}
@@ -85,9 +87,6 @@ public class PedidoInsumoEntity {
 		this.precioUnidad = precioUnidad;
 	}
 
-
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -95,11 +94,11 @@ public class PedidoInsumoEntity {
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -136,8 +135,6 @@ public class PedidoInsumoEntity {
 		this.fechaDespachoReal = fechaDespachoReal;
 	}
 
-	
-
 	public List<OrdenProduccionEntity> getOrdenesProduccion() {
 		return ordenesProduccion;
 	}
@@ -148,17 +145,16 @@ public class PedidoInsumoEntity {
 
 	public PedidoInsumo toBO() {
 		List<OrdenProduccion> ordenes = new ArrayList<OrdenProduccion>();
-		if(this.getOrdenesProduccion()!=null){			
-			for(OrdenProduccionEntity o :this.getOrdenesProduccion() ){
-				ordenes.add(o.toBO());				
-			}			
+		if (this.getOrdenesProduccion() != null) {
+			for (OrdenProduccionEntity o : this.getOrdenesProduccion()) {
+				ordenes.add(o.toBO());
+			}
 		}
 		Proveedor prov=null;
 		if(this.getProveedor()!=null)
 			prov=this.getProveedor().toBO();
 		PedidoInsumo pedido = new PedidoInsumo(this.getId(),this.getEstado(),this.getFechaGeneracion(),this.getFechaDespacho(),this.getFechaDespachoReal(),prov,this.getInsumo().toBO(),this.getPrecioUnidad(), this.getCantidad(),ordenes);
-			
-		
+	
 		return pedido;
 	}
 

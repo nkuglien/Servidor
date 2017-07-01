@@ -15,8 +15,6 @@ import model.VariedadPrenda;
 public class TestPrenda {
 
 	public static void main(String[] args) {
-		TestAreaProduccion.main(args);
-		TestInsumo.main(args);
 		
 		Prenda remera = crearPrenda(1000, "Remera", true);
 
