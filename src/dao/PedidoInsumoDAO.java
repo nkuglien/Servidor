@@ -52,6 +52,16 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		}
 		return insumos;
 	}
+	
+	public PedidoInsumo getPedido(Long id) {		
+		Session session = this.openSession();
+		Query query = session.createQuery("from PedidoInsumoEntity where id = :idPedido");
+		query.setParameter("idPedido", id);
+		PedidoInsumoEntity pedidoInsumoEntity = (PedidoInsumoEntity) query.uniqueResult();
+		
+		return pedidoInsumoEntity.toBO();
+	}
+	
 
 	public PedidoInsumo update(PedidoInsumo pedido) {
 		return save(pedido);

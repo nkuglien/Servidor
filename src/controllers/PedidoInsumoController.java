@@ -2,14 +2,14 @@ package controllers;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import DTO.ClienteDTO;
 import DTO.PedidoInsumoDTO;
-import dao.ClienteDAO;
 import dao.PedidoInsumoDAO;
-import model.Cliente;
+import dao.ProveedorDAO;
 import model.PedidoInsumo;
+import model.Proveedor;
 
 public class PedidoInsumoController {
 
@@ -30,6 +30,19 @@ public class PedidoInsumoController {
 			pedidosDTO.add(ped.toDTO());
 		}
 		return pedidosDTO;
+	}
+
+	public void completarPedido(Long id, Long idProveedor, Date fechaDespacho, float precioUnidad) {
+		PedidoInsumo pedido = PedidoInsumoDAO.getInstance().getPedido(id);
+		Proveedor prove = ProveedorDAO.getInstance().findProveedorById(idProveedor);
+		pedido.CompletarPedidoInsumo(prove, fechaDespacho, precioUnidad);
+		
+	}
+
+	public void terminarPedido(Long id, Date fechaDespachoReal) {
+		PedidoInsumo pedido = PedidoInsumoDAO.getInstance().getPedido(id);
+		pedido.TerminarPedidoInsumo(fechaDespachoReal);
+		
 	}
 
 
