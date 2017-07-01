@@ -1,6 +1,6 @@
 package model;
 
-public class ReservaLoteVariedadPrenda {
+public class ReservaVariedadPrenda {
 	
 	private int id;
 	private PedidoCliente pedido;

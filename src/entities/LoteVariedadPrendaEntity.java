@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +25,9 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	private OrdenProduccionEntity ordenProduccion;
 	private Date fechaProduccion;
 	private Float costoProduccion;
-	
+	@OneToMany
+	@JoinColumn(name="idLote")
+	private List<ReservaVariedadPrendaEntity> reservas;
 	
 	public LoteVariedadPrendaEntity(){};
 	

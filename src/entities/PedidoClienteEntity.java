@@ -65,6 +65,13 @@ public class PedidoClienteEntity {
 	@Column(name = "nota")
 	private String nota;
 	
+	@OneToMany
+	@JoinColumn(name="idPedidoCliente")
+	private List<ReservaVariedadPrendaEntity> reservas;
+	
+	
+	
+	
 	public PedidoClienteEntity() {
 	}
 	
@@ -210,6 +217,14 @@ public class PedidoClienteEntity {
 
 	public void setNota(String nota) {
 		this.nota = nota;
+	}
+
+	public List<ReservaVariedadPrendaEntity> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<ReservaVariedadPrendaEntity> reservas) {
+		this.reservas = reservas;
 	}
 
 }

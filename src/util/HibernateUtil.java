@@ -22,6 +22,7 @@ import entities.PrendaAreaProduccionEntity;
 import entities.PrendaEntity;
 import entities.ProveedorEntity;
 import entities.ReservaInsumoEntity;
+import entities.ReservaVariedadPrendaEntity;
 import entities.SucursalEntity;
 import entities.ValorConsignacionEntity;
 import entities.VariedadPrendaEntity;
@@ -54,6 +55,7 @@ public class HibernateUtil {
 			config.addAnnotatedClass(LoteInsumoEntity.class);
 			config.addAnnotatedClass(LoteVariedadPrendaEntity.class);
 			config.addAnnotatedClass(PedidoInsumoEntity.class);
+			config.addAnnotatedClass(ReservaVariedadPrendaEntity.class);
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
