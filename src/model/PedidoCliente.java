@@ -153,8 +153,8 @@ public class PedidoCliente {
 		return dto;
 	}
 
-	public void save() {
-		PedidoClienteDAO.getInstance().save(this);		
+	public PedidoCliente save() {
+		return PedidoClienteDAO.getInstance().save(this);		
 	}
 
 	public PedidoClienteDTO toDTO() {

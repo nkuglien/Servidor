@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
-import DTO.InsumoDTO;
 import DTO.PedidoClienteDTO;
-import RemoteObject.TDAPedido;
-import dao.InsumoDAO;
 import dao.PedidoClienteDAO;
-import model.Insumo;
 import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;
@@ -34,8 +30,7 @@ public class PedidoController {
 	// el cliente crea un pedido
 	public PedidoCliente crearPedido(PedidoClienteDTO dto) {
 		PedidoCliente pedido = new PedidoCliente(dto);
-		pedido.save();
-		return pedido;
+		return pedido.save();
 	}
 
 	// la sucursal lo valida: lo aprueba, o lo rechaza (alcarando por que)
