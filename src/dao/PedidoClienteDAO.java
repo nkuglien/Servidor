@@ -24,8 +24,8 @@ public class PedidoClienteDAO extends HibernateDAO {
 		Session session = this.openSession();
 		Query query = session.createQuery("from PedidoClienteEntity where nroPedido = :nroPedido");
 		query.setParameter("nroPedido", nroPedido);
-		PedidoClienteEntity pedidosEntity = (PedidoClienteEntity) query.uniqueResult();
-		return pedidosEntity.toBO(true);
+		PedidoClienteEntity pedidoClienteEntity = (PedidoClienteEntity) query.uniqueResult();
+		return pedidoClienteEntity != null ? pedidoClienteEntity.toBO(true) : null;
 	}
 
 	public PedidoCliente save(PedidoCliente pedidoCliente) {

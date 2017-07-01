@@ -2,11 +2,14 @@ package controllers;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import DTO.ClienteDTO;
-import dao.ClienteDAO;
-import model.Cliente;
+import DTO.PedidoInsumoDTO;
+import dao.PedidoInsumoDAO;
+import dao.ProveedorDAO;
+import model.PedidoInsumo;
+import model.Proveedor;
 
 public class PedidoInsumoController {
 
@@ -19,36 +22,29 @@ public class PedidoInsumoController {
 		return instance;
 	}
 
-	public List<ClienteDTO> getAllClientes() throws RemoteException {
-		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
-		List<Cliente> clientes = ClienteDAO.getInstance().getAllClientes();
+	public List<PedidoInsumoDTO> getAllPedidos() throws RemoteException {
+		List<PedidoInsumoDTO> pedidosDTO = new ArrayList<PedidoInsumoDTO>();
+		List<PedidoInsumo> pedidos = PedidoInsumoDAO.getInstance().getAllInsumos();
 
-		for (Cliente cliente : clientes) {
-			clientesDTO.add(cliente.toDTO());
+		for (PedidoInsumo ped : pedidos) {
+			pedidosDTO.add(ped.toDTO());
 		}
-
-		return clientesDTO;
+		return pedidosDTO;
 	}
 
-	public ClienteDTO altaCliente(ClienteDTO clienteDTO) throws RemoteException {
-		ClienteDAO.getInstance().save(new Cliente(clienteDTO, true));
-		return clienteDTO;
-
+	public void completarPedido(Long id, Long idProveedor, Date fechaDespacho, float precioUnidad) {
+		PedidoInsumo pedido = PedidoInsumoDAO.getInstance().getPedido(id);
+		Proveedor prove = ProveedorDAO.getInstance().findProveedorById(idProveedor);
+		pedido.CompletarPedidoInsumo(prove, fechaDespacho, precioUnidad);
+		
 	}
 
-	public ClienteDTO bajaCliente(ClienteDTO cliente) throws RemoteException {
-		ClienteDAO.getInstance().baja(new Cliente(cliente, true));
-		return cliente;
+	public void terminarPedido(Long id, Date fechaDespachoReal) {
+		PedidoInsumo pedido = PedidoInsumoDAO.getInstance().getPedido(id);
+		pedido.TerminarPedidoInsumo(fechaDespachoReal);
+		
 	}
 
-	public ClienteDTO modificarCliente(ClienteDTO dto) throws RemoteException {
-		Cliente cliente = ClienteDAO.getInstance().update(new Cliente(dto, true));
-		return cliente != null ? cliente.toDTO() : null;
-	}
 
-	public ClienteDTO buscarCliente(String cuit) throws RemoteException {
-		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit(cuit);
-		return cliente != null ? cliente.toDTO() : null;
-	}
 
 }

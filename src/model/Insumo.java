@@ -2,6 +2,7 @@ package model;
 
 import DTO.InsumoDTO;
 import dao.InsumoDAO;
+import dao.LoteDAO;
 
 public class Insumo {
 
@@ -94,6 +95,7 @@ public class Insumo {
 		dto.setNombre(nombre);
 		dto.setStockMinimo(stockMinimo);
 		dto.setId(id);
+		dto.setStock(LoteDAO.getInstance().getStock(this));
 		return dto;
 	}
 
@@ -104,5 +106,7 @@ public class Insumo {
 	public void setPrecio(Float precio) {
 		this.precio = precio;
 	}
+
+	
 
 }

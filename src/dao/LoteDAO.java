@@ -84,6 +84,18 @@ public class LoteDAO extends HibernateDAO {
 			}
 			return cantidad;
 	}
+
+	public Integer getStock(Insumo insumo) {
+		Session session = this.openSession();
+		Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo ins where li.cantDisponible > 0 and ins.id= :idInsumo");
+		query.setParameter("idInsumo", insumo.getId());
+		List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
+		int cantidad =0;
+		for(LoteInsumoEntity lo : lotes){
+			cantidad=cantidad + lo.getCantDisponible();
+		}
+		return cantidad;
+	}
 	
 	//public Insumo findByCodigo(long codigo) {
 	//	Session session = this.openSession();
