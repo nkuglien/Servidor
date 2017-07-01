@@ -26,11 +26,12 @@ public class PedidoInsumoDAO extends HibernateDAO {
 	public PedidoInsumo save(PedidoInsumo insumo) {
 		Session session = this.openSession();
 		session.beginTransaction();		
-		session.saveOrUpdate(new PedidoInsumoEntity(insumo));		
+		PedidoInsumoEntity pedidoInsumoEntity = new PedidoInsumoEntity(insumo);
+		session.saveOrUpdate(pedidoInsumoEntity);		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return insumo;
+		return pedidoInsumoEntity.toBO();
 	}
 	
 	//public Insumo findByCodigo(long codigo) {
@@ -59,7 +60,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 	public List<PedidoInsumo> GetPedidosPendientesInsumo(Insumo insumo) {
 		List<PedidoInsumo> retorno = new ArrayList<PedidoInsumo>();
 		Session session = this.openSession();
-		Query query = session.createQuery("from PedidoInsumoEntity pie join InsumoEntity ie where  pie.estado <> 'TERMINADO' and ie.id = :idInsumo");
+		Query query = session.createQuery("from PedidoInsumoEntity pie where  pie.estado != 'TERMINADO' and pie.insumo.id = :idInsumo");
 		query.setParameter("idInsumo", insumo.getId());
 		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();
 		for(PedidoInsumoEntity pe : ped){
@@ -70,7 +71,8 @@ public class PedidoInsumoDAO extends HibernateDAO {
 
 	public boolean hayPedidoPendiente(Insumo insumo, OrdenProduccion ordenProduccion) {
 		Session session = this.openSession();
-		Query query = session.createQuery("from PedidoInsumoEntity pie join InsumoEntity ie join OrdenProduccionEntity op where  pie.estado <> 'TERMINADO' and ie.id = :idInsumo and op.id =:idOrden");
+		Query query = session.createQuery("select pie from PedidoInsumoEntity pie join pie.ordenesProduccion ope where"
+				+ " pie.estado != 'TERMINADO' and pie.insumo.id = :idInsumo and ope.id =:idOrden");
 		query.setParameter("idInsumo", insumo.getId());
 		query.setParameter("idOrden", ordenProduccion.getId());
 		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();	

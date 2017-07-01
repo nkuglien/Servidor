@@ -8,8 +8,12 @@ import DTO.ClienteDTO;
 import DTO.OrdenProduccionDTO;
 import dao.ClienteDAO;
 import dao.OrdenProduccionDAO;
+import dao.PrendaDAO;
 import model.Cliente;
 import model.OrdenProduccion;
+import model.PedidoCliente;
+import model.Prenda;
+import model.VariedadPrenda;
 
 public class OrdenProduccionController {
 
@@ -48,6 +52,24 @@ public class OrdenProduccionController {
 		
 		return ordenBD.toDTO();
 
+	}
+	
+
+	public OrdenProduccion generarOrdenCompleta(Prenda prenda, PedidoCliente pedido) {
+		PrendaDAO dao = PrendaDAO.getInstance();
+		List<VariedadPrenda> variedades = dao.getAllVariedadesPrenda(prenda);
+		return generarOrdenParcial(variedades, pedido);
+	}
+
+	public OrdenProduccion generarOrdenParcial(List<VariedadPrenda> variedades, PedidoCliente pedido) {
+		// Se fija si ya no hay ordenes de produccion que puedan satisfacer el pedido
+
+		OrdenProduccionDAO dao = OrdenProduccionDAO.getInstance();
+		OrdenProduccion orden = new OrdenProduccion(variedades, pedido);
+
+		// Se guarda en la base de datos en estado de espera
+		orden.intentarCompletar();
+		return orden;
 	}
 
 	
