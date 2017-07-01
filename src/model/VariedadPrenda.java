@@ -5,6 +5,7 @@ import java.util.List;
 
 import DTO.ItemInsumoDTO;
 import DTO.VariedadPrendaDTO;
+import dao.LoteDAO;
 import dao.PrendaDAO;
 
 public class VariedadPrenda {
@@ -152,12 +153,13 @@ public class VariedadPrenda {
 		dto.setCantidadProduccionFija(cantidadProduccionFija);
 		dto.setPrecioVentaActual(precioVentaActual);
 		dto.setCostoProduccionActual(costoProduccionActual);
-		
+		dto.setStock(LoteDAO.getInstance().getStock(this));		
 		List<ItemInsumoDTO> insumosList = new ArrayList<ItemInsumoDTO>();
 		for (ItemInsumo insumo : insumos) {
 			insumosList.add(insumo.toDTO());
 		}
 		dto.setInsumos(insumosList);
+		
 		return dto;
 	}
 

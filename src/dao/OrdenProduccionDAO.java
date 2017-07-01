@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import DTO.OrdenProduccionDTO;
 import entities.OrdenProduccionEntity;
 import entities.PedidoInsumoEntity;
 import model.Insumo;
@@ -50,6 +51,14 @@ public class OrdenProduccionDAO extends HibernateDAO {
 			retorno.add(or.toBO());
 		}
 		return retorno;
+	}
+
+	public OrdenProduccion getByID(Long id) {
+			Session session = this.openSession();
+			Query query = session.createQuery("from OrdenProduccionEntity where id = :idOrden ");
+			query.setParameter("idOrden", id);
+			OrdenProduccionEntity orden = (OrdenProduccionEntity) query.uniqueResult();
+			return orden != null? orden.toBO() : null;
 	}
 
 	

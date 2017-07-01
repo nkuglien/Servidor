@@ -14,6 +14,7 @@ import model.Lote;
 import model.LoteInsumo;
 import model.LoteVariedadPrenda;
 import model.PedidoInsumo;
+import model.VariedadPrenda;
 
 public class LoteDAO extends HibernateDAO {
 
@@ -41,7 +42,7 @@ public class LoteDAO extends HibernateDAO {
 
 	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {
 		Session session = this.openSession();
-			Query query = session.createQuery("from LoteInsumoEntity li join insumo i where i.id = :idInsumo ");
+			Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo i where i.id = :idInsumo ");
 			query.setParameter("idInsumo", insumo.getId());
 			List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
 			List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
@@ -49,6 +50,19 @@ public class LoteDAO extends HibernateDAO {
 				retorno.add(lo.toBO());
 			}
 			return retorno;
+	}
+	
+	
+	public int getStock(VariedadPrenda variedad) {
+		Session session = this.openSession();
+			Query query = session.createQuery("select lvp from LoteVariedadPrendaEntity lvp join lvp.variedadPrenda vpe where lvp.cantDisponible > 0 and vpe.id= :idVariedad");
+			query.setParameter("idVariedad", variedad.getId());
+			List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
+			int cantidad =0;
+			for(LoteVariedadPrendaEntity lo : lotes){
+				cantidad=cantidad + lo.getCantDisponible();
+			}
+			return cantidad;
 	}
 	
 	//public Insumo findByCodigo(long codigo) {

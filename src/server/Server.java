@@ -6,12 +6,14 @@ import java.rmi.registry.Registry;
 
 import RemoteObject.TDACliente;
 import RemoteObject.TDAInsumo;
+import RemoteObject.TDAOrdenProduccion;
 import RemoteObject.TDAPedido;
 import RemoteObject.TDAPrenda;
 import RemoteObject.TDAProveedor;
 import RemoteObject.TDASucursal;
 import RemoteObjects.ClienteRemoto;
 import RemoteObjects.InsumoRemoto;
+import RemoteObjects.OrdenProduccionRemoto;
 import RemoteObjects.PedidoRemoto;
 import RemoteObjects.PrendaRemoto;
 import RemoteObjects.ProveedorRemoto;
@@ -48,6 +50,9 @@ public class Server {
 			
 			TDAPedido pedidoRemote = new PedidoRemoto();
 			Naming.bind("//localhost:1099/PedidoRemoto", pedidoRemote);
+			
+			TDAOrdenProduccion ordenProduccionRemoto = new OrdenProduccionRemoto();
+			Naming.bind("//localhost:1099/OordenProduccionRemoto", ordenProduccionRemoto);
 			
 			System.out.println("Servicios registrados exitosamente");
 		} catch (Exception e) {

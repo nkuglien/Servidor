@@ -121,6 +121,7 @@ public class Prenda {
 		PrendaDTO dto = new PrendaDTO();
 		dto.setCodigo(this.getCodigo());
 		dto.setDescripcion(this.getDescripcion());
+		System.out.println(dto.getDescripcion());
 		dto.setEnProduccion(this.getEnProduccion());
 		
 		List<VariedadPrendaDTO> vaiedadesDTO = new ArrayList<VariedadPrendaDTO>();

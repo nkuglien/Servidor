@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import DTO.OrdenProduccionDTO;
+import DTO.VariedadPrendaDTO;
 import dao.LoteDAO;
 import dao.OrdenProduccionDAO;
 import dao.PedidoInsumoDAO;
@@ -223,6 +225,14 @@ public class OrdenProduccion {
 
 	public void setInsumos(List<ReservaInsumo> insumos) {
 		this.insumos = insumos;
+	}
+	public OrdenProduccionDTO toDTO() {
+		List<VariedadPrendaDTO> dtoPrenda= new ArrayList<VariedadPrendaDTO>();
+		for(VariedadPrenda v : variedades){
+			dtoPrenda.add(v.toDTO());
+		}
+		OrdenProduccionDTO dto = new OrdenProduccionDTO(id,fecha, estado,dtoPrenda);
+		return dto;
 	}
 
 	
