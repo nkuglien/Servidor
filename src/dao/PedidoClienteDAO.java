@@ -21,8 +21,11 @@ public class PedidoClienteDAO extends HibernateDAO {
 	}
 
 	public PedidoCliente getByNroPedido(Long nroPedido) {
-		//TODO
-		return null;
+		Session session = this.openSession();
+		Query query = session.createQuery("from PedidoClienteEntity where nroPedido = :nroPedido");
+		query.setParameter("nroPedido", nroPedido);
+		PedidoClienteEntity pedidoClienteEntity = (PedidoClienteEntity) query.uniqueResult();
+		return pedidoClienteEntity != null ? pedidoClienteEntity.toBO(true) : null;
 	}
 
 	public PedidoCliente save(PedidoCliente pedidoCliente) {
