@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,13 +12,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import model.LoteInsumo;
+import model.PedidoInsumo;
 import model.ReservaInsumo;
 
 @Entity
 @Table(name="LoteInsumo")
 public class LoteInsumoEntity extends LoteEntity{
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private InsumoEntity insumo;
 	@OneToOne
 	private PedidoInsumoEntity pedidoInsumo;	
@@ -94,7 +96,9 @@ public class LoteInsumoEntity extends LoteEntity{
 			 }
 		 }
 		
-		LoteInsumo lote = new LoteInsumo(getId(),getCantidad(), getCantDisponible(),getPosicion().toBO(false),insumo.toBO(),pedidoInsumo.toBO(),precioCompra,reservasBO);
+		PedidoInsumo pi = null;
+		if(pedidoInsumo!=null) pi=pedidoInsumo.toBO();
+		LoteInsumo lote = new LoteInsumo(getId(),getCantidad(), getCantDisponible(),getPosicion().toBO(false),insumo.toBO(),pi,precioCompra,reservasBO);
 		return lote;
 	}
 	

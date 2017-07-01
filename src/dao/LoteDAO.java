@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import entities.LoteEntity;
 import entities.LoteInsumoEntity;
 import entities.LoteVariedadPrendaEntity;
 import entities.PedidoInsumoEntity;
@@ -29,15 +30,21 @@ public class LoteDAO extends HibernateDAO {
 	
 	public Lote save(Lote lote) {
 		Session session = this.openSession();
-		session.beginTransaction();		
-		if(lote instanceof LoteInsumo)
-			session.saveOrUpdate(new LoteInsumoEntity((LoteInsumo)lote));		
-		if(lote instanceof LoteVariedadPrenda)
-			session.saveOrUpdate(new LoteVariedadPrendaEntity((LoteVariedadPrenda)lote));	
+		session.beginTransaction();	
+		LoteEntity le = null;
+		if(lote instanceof LoteInsumo){
+			le = new LoteInsumoEntity((LoteInsumo)lote);
+			session.saveOrUpdate(le);		
+		}
+		if(lote instanceof LoteVariedadPrenda)  {
+			le = new LoteVariedadPrendaEntity((LoteVariedadPrenda)lote);
+			session.saveOrUpdate(le);	
+		}
+			
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return lote;
+		return le.toBO();
 	}
 
 	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {

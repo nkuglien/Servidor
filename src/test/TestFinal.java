@@ -11,6 +11,7 @@ import dao.InsumoDAO;
 import model.AreaProduccion;
 import model.Cliente;
 import model.Insumo;
+import model.LoteVariedadPrenda;
 import model.Prenda;
 import model.Proveedor;
 import model.Sucursal;
@@ -20,7 +21,7 @@ public class TestFinal {
 	public static void main(String[] args) {
 		TestAreaProduccion.main(args);
 		TestCrearCliente.main(args);
-		TestCrearPedido.main(args);
+//		TestCrearPedido.main(args);
 		TestInsumo.main(args);
 		try {
 			TestPedidoInsumoOrdenProduccion.main(args);
@@ -30,7 +31,9 @@ public class TestFinal {
 		}
 		TestPrenda.main(args);
 		TestProveedor.main(args);
-		TestSucursal.main(args);
+//		TestSucursal.main(args);
+		
+		
 		
 	}
 	

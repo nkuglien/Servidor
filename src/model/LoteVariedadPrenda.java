@@ -46,6 +46,10 @@ public class LoteVariedadPrenda extends Lote {
 		costoProduccion = dto.getCostoProduccion();
 	}
 
+	public LoteVariedadPrenda() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public VariedadPrenda getVariedadPrenda() {
 		return variedadPrenda;
 	}

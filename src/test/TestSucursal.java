@@ -12,11 +12,7 @@ public class TestSucursal {
 		Cliente cliente = ClienteDAO.getInstance().findClienteByCuit("20347444376");
 		sucursal.altaCliente(cliente);
 		sucursal.save();
-		
-		Sucursal sucursal2 = createSucursal(2000, "Sucursal 2000", 9000, 1800, "Lima 747");
-		Cliente cliente1 = ClienteDAO.getInstance().findClienteByCuit("20347444376");
-		sucursal2.altaCliente(cliente1);
-		sucursal2.save();
+	
 
 	}
 

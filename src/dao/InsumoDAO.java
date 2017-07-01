@@ -22,12 +22,13 @@ public class InsumoDAO extends HibernateDAO {
 	
 	public Insumo save(Insumo insumo) {
 		Session session = this.openSession();
-		session.beginTransaction();		
-		session.saveOrUpdate(new InsumoEntity(insumo));		
+		session.beginTransaction();	
+		InsumoEntity i = new InsumoEntity(insumo);
+		session.saveOrUpdate(i);		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return insumo;
+		return i.toBO();
 	}
 	
 	public Insumo findByCodigo(long codigo) {

@@ -34,6 +34,10 @@ public class LoteInsumo extends Lote {
 		this.setPosicion(Posicion.getPosicionLibre());
 	}
 
+	public LoteInsumo() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Insumo getInsumo() {
 		return insumo;
 	}

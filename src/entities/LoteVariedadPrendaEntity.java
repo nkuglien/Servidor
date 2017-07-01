@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,15 +12,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import controllers.OrdenProduccionController;
 import model.Lote;
 import model.LoteInsumo;
 import model.LoteVariedadPrenda;
+import model.OrdenProduccion;
+import model.PedidoInsumo;
 import model.ReservaInsumo;
 @Entity
 @Table(name="LoteVariedad")
 public class LoteVariedadPrendaEntity extends LoteEntity {
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private VariedadPrendaEntity variedadPrenda;
 	@ManyToOne
 	private OrdenProduccionEntity ordenProduccion;
@@ -82,8 +86,9 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	}
 	@Override
 	public Lote toBO(Boolean IncluyeReserva){
-		
-		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),getPosicion().toBO(false),variedadPrenda.toBO(false),ordenProduccion.toBO(),fechaProduccion,costoProduccion);
+		OrdenProduccion op = null;
+		if(ordenProduccion!=null) op=ordenProduccion.toBO();
+		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),getPosicion().toBO(false),variedadPrenda.toBO(false),op,fechaProduccion,costoProduccion);
 		return lote;
 	}
 	
