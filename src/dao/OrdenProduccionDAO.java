@@ -27,11 +27,12 @@ public class OrdenProduccionDAO extends HibernateDAO {
 	public OrdenProduccion save(OrdenProduccion orden) {
 		Session session = this.openSession();
 		session.beginTransaction();		
-		session.saveOrUpdate(new OrdenProduccionEntity(orden));		
+		OrdenProduccionEntity ope = new OrdenProduccionEntity(orden);
+		session.saveOrUpdate(ope);		
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
-		return orden;
+		return ope.toBO();
 	}
 	
 	//public Insumo findByCodigo(long codigo) {

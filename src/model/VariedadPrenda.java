@@ -138,8 +138,8 @@ public class VariedadPrenda {
 		this.precioVentaActual = precioVentaActual;
 	}
 
-	public boolean hayStock() {
-		return true;
+	public int getStock() {
+		return LoteDAO.getInstance().getStock(this);
 	}
 
 
