@@ -41,7 +41,7 @@ public class Cliente {
 		this.setPedidos(new ArrayList<PedidoCliente>());
 	}
 
-	public Cliente(ClienteDTO cliente) {
+	public Cliente(ClienteDTO cliente, boolean copyInverseReferences) {
 		this.setNroLegajo(cliente.getNroLegajo());
 		this.setNombre(cliente.getNombre());
 		this.setDireccion(cliente.getDireccion());
@@ -58,8 +58,10 @@ public class Cliente {
 		this.valores = valores;
 
 		List<PedidoCliente> pedidos = new ArrayList<PedidoCliente>();
-		for (PedidoClienteDTO ped : cliente.getPedidos()) {
-			pedidos.add(new PedidoCliente(ped));
+		if(copyInverseReferences) {
+			for (PedidoClienteDTO ped : cliente.getPedidos()) {
+				pedidos.add(new PedidoCliente(ped));
+			}
 		}
 		this.pedidos = pedidos;
 	}

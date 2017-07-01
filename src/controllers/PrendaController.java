@@ -6,10 +6,12 @@ import java.util.List;
 
 import DTO.AreaProduccionDTO;
 import DTO.PrendaDTO;
+import DTO.VariedadPrendaDTO;
 import dao.AreaProduccionDAO;
 import dao.PrendaDAO;
 import model.AreaProduccion;
 import model.Prenda;
+import model.VariedadPrenda;
 
 public class PrendaController {
 	private static PrendaController instance;
@@ -46,6 +48,11 @@ public class PrendaController {
 		}
 
 		return areasDTO;
+	}
+
+	public VariedadPrendaDTO buscarVariedad(Long id) {
+		VariedadPrenda variedad = PrendaDAO.getInstance().getVariedadPrendaById(id);
+		return variedad != null? variedad.toDTO() : null;
 	}
 
 }

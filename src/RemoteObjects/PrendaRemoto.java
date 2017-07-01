@@ -9,7 +9,6 @@ import DTO.PrendaDTO;
 import DTO.VariedadPrendaDTO;
 import RemoteObject.TDAPrenda;
 import controllers.PrendaController;
-import dao.PrendaDAO;
 import model.Prenda;
 import model.VariedadPrenda;
 
@@ -71,6 +70,10 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 		vp.baja();
 	}
 
+	@Override
+	public VariedadPrendaDTO buscarVariedad(Long id) throws RemoteException {
+		return PrendaController.getInstance().buscarVariedad(id);
+	}
 
 
 }

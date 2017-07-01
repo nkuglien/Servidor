@@ -21,4 +21,14 @@ public class PedidoRemoto extends UnicastRemoteObject implements TDAPedido {
 		return PedidoController.getInstance().getAllPedidos();
 	}
 
+	@Override
+	public PedidoClienteDTO cargarPedidoCliente(PedidoClienteDTO dto) throws RemoteException {
+		return PedidoController.getInstance().crearPedido(dto).toDTO();
+	}
+
+	@Override
+	public List<PedidoClienteDTO> getPedidosByCliente(String cuit) throws RemoteException {
+		return PedidoController.getInstance().getPedidosByCliente(cuit);
+	}
+
 }
