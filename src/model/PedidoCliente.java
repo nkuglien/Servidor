@@ -31,7 +31,7 @@ public class PedidoCliente {
 		this.fechaGeneracion = dto.getFechaGeneracion();
 		this.fechaDespacho = dto.getFechaDespacho();
 		this.fechaProbableDespacho = dto.getFechaProbableDespacho();
-		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente());
+		if(dto.getCliente()!=null)this.cliente = new Cliente(dto.getCliente(), false);
 		this.subtotal = dto.getSubtotal();
 		this.impuestos = dto.getImpuestos();
 		this.total = dto.getTotal();

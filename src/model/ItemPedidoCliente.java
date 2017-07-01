@@ -12,8 +12,11 @@ public class ItemPedidoCliente {
 	public ItemPedidoCliente() {
 	}
 	
-	public ItemPedidoCliente(ItemPedidoClienteDTO item2) {
-		// TODO Auto-generated constructor stub
+	public ItemPedidoCliente(ItemPedidoClienteDTO item) {
+		this.setId(item.getId());
+		this.setItem(new VariedadPrenda(item.getItem()));
+		this.setCantidad(item.getCantidad());
+		this.setPrecioItem(item.getPrecioItem());
 	}
 	
 	public Long getId() {
