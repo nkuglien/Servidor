@@ -1,12 +1,13 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
 import DTO.PedidoClienteDTO;
 import dao.PedidoClienteDAO;
-import model.ItemPedidoCliente;
 import model.PedidoCliente;
 import model.VariedadPrenda;
 
@@ -67,14 +68,20 @@ public class PedidoController {
 	}
 
 	// el cliente acepta o cancela el pedido validado por la sucursal
-	public PedidoCliente aceptarPedidoCliente(Long nroPedido, boolean isAceptado) {
+	public PedidoCliente cambiarEstadoPedidoCliente(Long nroPedido, EstadoPedidoCliente estado) {
 		PedidoCliente pedido = getPedidoCliente(nroPedido);
-		if(isAceptado) {
-			pedido.setEstado(EstadoPedidoCliente.ACEPTADO);
+		if(EstadoPedidoCliente.VALIDADO.equals(estado)) {
+			pedido.setFechaProbableDespacho(obtenerFechaProbableDespacho());
+		} else if(EstadoPedidoCliente.RECHAZADO.equals(estado)) {
+			
+		} else if(EstadoPedidoCliente.ACEPTADO.equals(estado)) {
 			pedido.intentarArmar();
-		} else {
-			pedido.setEstado(EstadoPedidoCliente.CANCELADO);
+		} else if(EstadoPedidoCliente.CANCELADO.equals(estado)) {
+			
+		} else if(EstadoPedidoCliente.COMPLETO.equals(estado)) {
+			
 		}
+		pedido.setEstado(estado);
 		pedido.save();
 		return pedido;
 	}
@@ -95,6 +102,15 @@ public class PedidoController {
 			pedidosDTO.add(pedido.toDTO());
 		}
 		return pedidosDTO;
+	}
+	
+	private Date obtenerFechaProbableDespacho() {
+		Date probableDespacho = new Date();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(probableDespacho); 
+		c.add(Calendar.DATE, 15);
+		probableDespacho = c.getTime();
+		return probableDespacho;
 	}
 
 }
