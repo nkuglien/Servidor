@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,27 +10,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import model.LoteVariedadPrenda;
+import model.ReservaVariedadPrenda;
+
 @Entity
 @Table(name="ReservaVariedadPrenda")
 public class ReservaVariedadPrendaEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@ManyToOne
 	@JoinColumn(name="idPedidoCliente")
 	private PedidoClienteEntity pedido;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.ALL})
 	@JoinColumn(name="idLote")
 	private LoteVariedadPrendaEntity lote;
 	private int cantidad;
 	
+	public ReservaVariedadPrendaEntity() {
+
+	}
 	
-	
-	public int getId() {
+	public ReservaVariedadPrendaEntity(ReservaVariedadPrenda r) {
+		id = r.getId();
+		pedido = new PedidoClienteEntity(r.getPedido(), false);
+		lote = new LoteVariedadPrendaEntity(r.getLote(), false);
+
+		cantidad = r.getCantidad();
+	}
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public PedidoClienteEntity getPedido() {
@@ -49,6 +62,11 @@ public class ReservaVariedadPrendaEntity {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	public ReservaVariedadPrenda toBO() {
+		ReservaVariedadPrenda r = new ReservaVariedadPrenda(pedido.toBO(false), (LoteVariedadPrenda)lote.toBO(), cantidad);
+		r.setId(id);
+		return r;
 	}
 	
 	

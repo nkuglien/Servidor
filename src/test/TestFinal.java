@@ -19,6 +19,7 @@ import model.Sucursal;
 public class TestFinal {
 
 	public static void main(String[] args) {
+		TestPosiciones.main(null);
 		TestAreaProduccion.main(args);
 		TestCrearCliente.main(args);
 //		TestCrearPedido.main(args);
@@ -33,7 +34,7 @@ public class TestFinal {
 		TestProveedor.main(args);
 //		TestSucursal.main(args);
 		
-		
+		System.out.println("listo test final");
 		
 	}
 	

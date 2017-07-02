@@ -88,7 +88,7 @@ public class ClienteEntity {
 	private void setPedidosEntity(List<PedidoCliente> pedidos) {
 		List<PedidoClienteEntity> list = new ArrayList<PedidoClienteEntity>();
 		for(PedidoCliente pedido : pedidos) {
-			list.add(new PedidoClienteEntity(pedido));
+			list.add(new PedidoClienteEntity(pedido, true));
 		}
 		this.setPedidos(list);		
 	}

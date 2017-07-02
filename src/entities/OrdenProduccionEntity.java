@@ -44,7 +44,7 @@ public class OrdenProduccionEntity {
 		if (o.getPedidoCliente() != null) {
 			List<PedidoClienteEntity> pedidos = new ArrayList<PedidoClienteEntity>();
 			for (PedidoCliente p : o.getPedidoCliente()) {
-				pedidos.add(new PedidoClienteEntity(p));
+				pedidos.add(new PedidoClienteEntity(p, true));
 			}
 			setPedidoCliente(pedidos);
 		}
