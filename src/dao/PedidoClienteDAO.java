@@ -25,11 +25,14 @@ public class PedidoClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from PedidoClienteEntity where nroPedido = :nroPedido");
 		query.setParameter("nroPedido", nroPedido);
 		PedidoClienteEntity pedidoClienteEntity = (PedidoClienteEntity) query.uniqueResult();
-		return pedidoClienteEntity != null ? pedidoClienteEntity.toBO(true) : null;
+		PedidoCliente toReturn = pedidoClienteEntity != null ? pedidoClienteEntity.toBO(true) : null;
+		session.close();//SESSIONCLOSE
+		return toReturn;
 	}
 
 	public PedidoCliente save(PedidoCliente pedidoCliente) {
 		PedidoClienteEntity entity = null;
+		PedidoCliente toReturn = null;
 		Session session = null;
 		try {
 			session = this.openSession();
@@ -40,13 +43,14 @@ public class PedidoClienteDAO extends HibernateDAO {
 		
 			session.flush();
 			session.getTransaction().commit();
+			toReturn = entity.toBO(true);
 		} catch (RuntimeException re) {
 			session.getTransaction().rollback();
 		} finally {
 			session.close();
 		}
 		
-		return entity.toBO(true);
+		return toReturn;
 	}
 
 	public List<PedidoCliente> getAllPedidos() {
@@ -57,6 +61,7 @@ public class PedidoClienteDAO extends HibernateDAO {
 		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
 			pedidos.add(pedidoEntity.toBO(true));
 		}
+		session.close();//SESSIONCLOSE
 		return pedidos;
 	}
 
@@ -69,6 +74,7 @@ public class PedidoClienteDAO extends HibernateDAO {
 		for (PedidoClienteEntity pedidoEntity : pedidosEntity) {
 			pedidos.add(pedidoEntity.toBO(true));
 		}
+		session.close();//SESSIONCLOSE
 		return pedidos;
 	}
 

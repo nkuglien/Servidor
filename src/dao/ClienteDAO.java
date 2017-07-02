@@ -26,6 +26,7 @@ public class ClienteDAO extends HibernateDAO {
 
 	public Cliente save(Cliente cliente) {
 		ClienteEntity entity = null;
+		Cliente clienteToReturn = null;
 		Session session = null;
 		try {
 			session = this.openSession();
@@ -36,13 +37,14 @@ public class ClienteDAO extends HibernateDAO {
 		
 			session.flush();
 			session.getTransaction().commit();
+			clienteToReturn = entity.toBO();
 		} catch (RuntimeException re) {
 			session.getTransaction().rollback();
 		} finally {
 			session.close();
 		}
 		
-		return entity.toBO();
+		return clienteToReturn;
 	}
 
 	public List<Cliente> getAllClientes() {
@@ -53,6 +55,7 @@ public class ClienteDAO extends HibernateDAO {
 		for (ClienteEntity clienteEntity : clientesEntity) {
 			clientes.add(clienteEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return clientes;
 	}
 
@@ -61,7 +64,9 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ClienteEntity where nroCliente = :nroCliente");
 		query.setParameter("nroCliente", nroCliente);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
-		return clienteEntity != null ? clienteEntity.toBO() : null;
+		Cliente clienteToReturn = clienteEntity != null ? clienteEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return clienteToReturn;
 	}
 
 	public Cliente findClienteByCuit(String cuit) {
@@ -69,7 +74,9 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ClienteEntity where cuit = :cuit");
 		query.setParameter("cuit", cuit);
 		ClienteEntity clienteEntity = (ClienteEntity) query.uniqueResult();
-		return clienteEntity != null ? clienteEntity.toBO() : null;
+		Cliente clienteToReturn = clienteEntity != null ? clienteEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return clienteToReturn;
 	}
 
 	public CuentaCorriente save(CuentaCorriente cuentaCorriente) {
@@ -81,8 +88,10 @@ public class ClienteDAO extends HibernateDAO {
 
 		session.flush();
 		session.getTransaction().commit();
+		
+		CuentaCorriente ccToReturn = entity.toBO();
 		session.close();
-		return entity.toBO();
+		return ccToReturn;
 	}
 
 	public Cliente update(Cliente cliente) {
@@ -105,7 +114,9 @@ public class ClienteDAO extends HibernateDAO {
 		Query query = session.createQuery("from ValorConsignacionEntity where id = :idValorConsignado");
 		query.setParameter("id", idValorConsignado);
 		ValorConsignacionEntity valorConsignacionEntity = (ValorConsignacionEntity) query.uniqueResult();
-		return valorConsignacionEntity != null ? valorConsignacionEntity.toBO() : null;
+		ValorConsignacion vaToReturn = valorConsignacionEntity != null ? valorConsignacionEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return vaToReturn;
 	}
 
 }

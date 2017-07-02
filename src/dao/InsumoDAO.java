@@ -27,8 +27,9 @@ public class InsumoDAO extends HibernateDAO {
 		session.saveOrUpdate(i);		
 		session.flush();
 		session.getTransaction().commit();
+		Insumo toReturn = i.toBO();
 		session.close();
-		return i.toBO();
+		return toReturn;
 	}
 	
 	public Insumo findByCodigo(long codigo) {
@@ -36,7 +37,9 @@ public class InsumoDAO extends HibernateDAO {
 		Query query = session.createQuery("from InsumoEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);
 		InsumoEntity insumo = (InsumoEntity) query.uniqueResult();
-		return insumo != null? insumo.toBO() : null;
+		Insumo toReturn = insumo != null? insumo.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return toReturn;
 	}
 	
 	public List<Insumo> getAllInsumos() {
@@ -47,6 +50,7 @@ public class InsumoDAO extends HibernateDAO {
 		for (InsumoEntity insumoEntity : insumosEntity) {
 			insumos.add(insumoEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return insumos;
 	}
 

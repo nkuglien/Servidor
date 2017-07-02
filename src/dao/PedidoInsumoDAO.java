@@ -30,8 +30,9 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		session.saveOrUpdate(pedidoInsumoEntity);		
 		session.flush();
 		session.getTransaction().commit();
+		PedidoInsumo pedidoToReturn = pedidoInsumoEntity.toBO();
 		session.close();
-		return pedidoInsumoEntity.toBO();
+		return pedidoToReturn;
 	}
 	
 	//public Insumo findByCodigo(long codigo) {
@@ -50,6 +51,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		for (PedidoInsumoEntity Ped : pedidoInsumoEntity) {
 			insumos.add(Ped.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return insumos;
 	}
 	
@@ -58,8 +60,9 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		Query query = session.createQuery("from PedidoInsumoEntity where id = :idPedido");
 		query.setParameter("idPedido", id);
 		PedidoInsumoEntity pedidoInsumoEntity = (PedidoInsumoEntity) query.uniqueResult();
-		
-		return pedidoInsumoEntity.toBO();
+		PedidoInsumo pedidoInsumoToReturn = pedidoInsumoEntity.toBO();
+		session.close();//SESSIONCLOSE
+		return pedidoInsumoToReturn;
 	}
 	
 
@@ -76,6 +79,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		for(PedidoInsumoEntity pe : ped){
 			retorno.add(pe.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return retorno;
 	}
 
@@ -86,6 +90,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		query.setParameter("idInsumo", insumo.getId());
 		query.setParameter("idOrden", ordenProduccion.getId());
 		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();	
+		session.close();//SESSIONCLOSE
 		return !ped.isEmpty();
 	}
 

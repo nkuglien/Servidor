@@ -29,9 +29,11 @@ public class ProveedorDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		
+		Proveedor toReturn = entity.toBO();
 		session.close();
 		
-		return entity.toBO();
+		return toReturn;
 	}
 	
 	public List<Proveedor> getAllProveedores() {
@@ -42,6 +44,7 @@ public class ProveedorDAO extends HibernateDAO {
 		for (ProveedorEntity proveedorEntity : proveedoresEntity) {
 			proveedores.add(proveedorEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return proveedores;
 	}
 	
@@ -50,7 +53,9 @@ public class ProveedorDAO extends HibernateDAO {
 		Query query = session.createQuery("from ProveedorEntity where id = :id");
 		query.setParameter("id", id);
 		ProveedorEntity proveedorEntity = (ProveedorEntity) query.uniqueResult();
-		return proveedorEntity != null? proveedorEntity.toBO() : null;
+		Proveedor toReturn = proveedorEntity != null? proveedorEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return toReturn;
 	}
 
 }

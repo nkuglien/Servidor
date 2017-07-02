@@ -12,6 +12,7 @@ public abstract class HibernateDAO {
 
 	protected Session openSession() {
 		return sf.openSession();
+//		return sf.getCurrentSession();
 	}
 	
 }

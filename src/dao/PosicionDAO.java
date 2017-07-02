@@ -1,18 +1,10 @@
 package dao;
 
-import model.Posicion;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.InsumoEntity;
-import entities.PedidoInsumoEntity;
 import entities.PosicionEntity;
-import entities.ProveedorEntity;
-import model.Insumo;
-import model.PedidoInsumo;
+import model.Posicion;
 public class PosicionDAO extends HibernateDAO {
 
 
@@ -34,9 +26,10 @@ public class PosicionDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		Posicion toReturn = entity.toBO();;
 		session.close();
 		
-		return entity.toBO();
+		return toReturn;
 	}
 	
 	//public List<Proveedor> getAllProveedores() {
@@ -54,8 +47,9 @@ public class PosicionDAO extends HibernateDAO {
 		Session session = this.openSession();
 		Query query = session.createQuery("from PosicionEntity where libre = true");
 		PosicionEntity entity = (PosicionEntity) query.uniqueResult();
-		return entity != null? entity.toBO() : null;
-		
+		Posicion toReturn = entity != null? entity.toBO() : null;
+		session.close();
+		return toReturn;
 	}
 	
 	
@@ -64,7 +58,9 @@ public class PosicionDAO extends HibernateDAO {
 		Query query = session.createQuery("from PosicionEntity where codigo = :codigo");
 		query.setParameter("codigo", codigo);
 		PosicionEntity entity = (PosicionEntity) query.uniqueResult();
-		return entity != null? entity.toBO() : null;
+		Posicion toReturn = entity != null? entity.toBO() : null;
+		session.close();
+		return toReturn;
 	}
 
 }

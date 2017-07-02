@@ -29,9 +29,10 @@ public class AreaProduccionDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		AreaProduccion areaToReturn = entity.toBO();
 		session.close();
 		
-		return entity.toBO();
+		return areaToReturn;
 	}
 
 	public List<AreaProduccion> getAllAreasProduccion() {
@@ -42,6 +43,7 @@ public class AreaProduccionDAO extends HibernateDAO {
 		for (AreaProduccionEntity areaEntity : areasEntity) {
 			areas.add(areaEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return areas;
 	}
 	
@@ -50,7 +52,9 @@ public class AreaProduccionDAO extends HibernateDAO {
 		Query query = session.createQuery("from AreaProduccionEntity where codigo = :codigo ");
 		query.setParameter("codigo", codigo);
 		AreaProduccionEntity areaEntity = (AreaProduccionEntity) query.uniqueResult();
-		return areaEntity != null? areaEntity.toBO() : null;
+		AreaProduccion areaToReturn = areaEntity != null? areaEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return areaToReturn;
 	}
 	
 }

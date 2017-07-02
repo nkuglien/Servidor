@@ -9,12 +9,10 @@ import org.hibernate.Session;
 import entities.LoteEntity;
 import entities.LoteInsumoEntity;
 import entities.LoteVariedadPrendaEntity;
-import entities.PedidoInsumoEntity;
 import model.Insumo;
 import model.Lote;
 import model.LoteInsumo;
 import model.LoteVariedadPrenda;
-import model.PedidoInsumo;
 import model.VariedadPrenda;
 
 public class LoteDAO extends HibernateDAO {
@@ -43,20 +41,22 @@ public class LoteDAO extends HibernateDAO {
 			
 		session.flush();
 		session.getTransaction().commit();
+		Lote toReturn = le.toBO();
 		session.close();
-		return le.toBO();
+		return toReturn;
 	}
 
 	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {
 		Session session = this.openSession();
-			Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo i where i.id = :idInsumo ");
-			query.setParameter("idInsumo", insumo.getId());
-			List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
-			List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
-			for(LoteInsumoEntity lo : lotes){
-				retorno.add(lo.toBO());
-			}
-			return retorno;
+		Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo i where i.id = :idInsumo ");
+		query.setParameter("idInsumo", insumo.getId());
+		List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
+		List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
+		for(LoteInsumoEntity lo : lotes){
+			retorno.add(lo.toBO());
+		}
+		session.close();
+		return retorno;
 	}
 	
 	public List<LoteVariedadPrenda> getLotesConDisponibles(VariedadPrenda vp) {
@@ -75,14 +75,15 @@ public class LoteDAO extends HibernateDAO {
 	
 	public int getStock(VariedadPrenda variedad) {
 		Session session = this.openSession();
-			Query query = session.createQuery("select lvp from LoteVariedadPrendaEntity lvp join lvp.variedadPrenda vpe where lvp.cantDisponible > 0 and vpe.id= :idVariedad");
-			query.setParameter("idVariedad", variedad.getId());
-			List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
-			int cantidad =0;
-			for(LoteVariedadPrendaEntity lo : lotes){
-				cantidad=cantidad + lo.getCantDisponible();
-			}
-			return cantidad;
+		Query query = session.createQuery("select lvp from LoteVariedadPrendaEntity lvp join lvp.variedadPrenda vpe where lvp.cantDisponible > 0 and vpe.id= :idVariedad");
+		query.setParameter("idVariedad", variedad.getId());
+		List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
+		int cantidad =0;
+		for(LoteVariedadPrendaEntity lo : lotes){
+			cantidad=cantidad + lo.getCantDisponible();
+		}
+		session.close();
+		return cantidad;
 	}
 
 	public Integer getStock(Insumo insumo) {
@@ -94,6 +95,7 @@ public class LoteDAO extends HibernateDAO {
 		for(LoteInsumoEntity lo : lotes){
 			cantidad=cantidad + lo.getCantDisponible();
 		}
+		session.close();
 		return cantidad;
 	}
 	

@@ -31,9 +31,11 @@ public class PrendaDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		
+		Prenda prendaToReturn = entity.toBO();
 		session.close();
 		
-		return entity.toBO();
+		return prendaToReturn;
 	}
 
 	public List<Prenda> getAllPrendas() {
@@ -44,6 +46,7 @@ public class PrendaDAO extends HibernateDAO {
 		for (PrendaEntity prendaEntity : prendasEntity) {
 			prendas.add(prendaEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return prendas;
 	}
 	
@@ -57,6 +60,7 @@ public class PrendaDAO extends HibernateDAO {
 		for (VariedadPrendaEntity vp : entity) {
 			variedades.add(vp.toBO(true));
 		}
+		session.close();//SESSIONCLOSE
 		return variedades;
 	}
 
@@ -69,9 +73,11 @@ public class PrendaDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		
+		VariedadPrenda variedadToReturn = entity.toBO(true);
 		session.close();
 		
-		return entity.toBO(true);
+		return variedadToReturn;
 	}
 	
 	public Prenda getPrendaByCodigo(long codigo) {
@@ -79,7 +85,11 @@ public class PrendaDAO extends HibernateDAO {
 		Query query = session.createQuery("from PrendaEntity where codigo = :codigo");
 		query.setParameter("codigo", codigo);
 		PrendaEntity prendaEntity = (PrendaEntity) query.uniqueResult();
-		return prendaEntity != null? prendaEntity.toBO() : null;
+		
+		Prenda prendaToReturn = prendaEntity != null? prendaEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		
+		return prendaToReturn;
 	}
 
 	public void baja(Prenda prenda) {
@@ -98,7 +108,11 @@ public class PrendaDAO extends HibernateDAO {
 		Query query = session.createQuery("from VariedadPrendaEntity where id = :id");
 		query.setParameter("id", id);
 		VariedadPrendaEntity variedadPrendaEntity = (VariedadPrendaEntity) query.uniqueResult();
-		return variedadPrendaEntity != null? variedadPrendaEntity.toBO(true) : null;
+		
+		VariedadPrenda variedadToReturn = variedadPrendaEntity != null? variedadPrendaEntity.toBO(true) : null;
+		session.close();//SESSIONCLOSE
+		
+		return variedadToReturn;
 	}
 
 	public void baja(VariedadPrenda variedadPrenda) {

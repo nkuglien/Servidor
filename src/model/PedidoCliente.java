@@ -217,7 +217,7 @@ public class PedidoCliente {
 				// recorro los lotes y genero reservas
 				generarReservas(lotes, cantidadAReservar);
 
-			} else {
+			} else {	
 				agruparVariedadPrendaAPedirPorPrenda(variedadesPorPrendaAPedir, item);	
 			}
 		}

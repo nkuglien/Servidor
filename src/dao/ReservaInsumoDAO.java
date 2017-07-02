@@ -19,11 +19,13 @@ public class ReservaInsumoDAO  extends HibernateDAO {
 	public ReservaInsumo save(ReservaInsumo reserva) {
 		Session session = this.openSession();
 		session.beginTransaction();		
-		session.saveOrUpdate(new ReservaInsumoEntity(reserva));		
+		ReservaInsumoEntity entity = new ReservaInsumoEntity(reserva);
+		session.saveOrUpdate(entity);		
 		session.flush();
 		session.getTransaction().commit();
+		ReservaInsumo toReturn = entity.toBO();
 		session.close();
-		return reserva;
+		return toReturn;
 	}
 	
 

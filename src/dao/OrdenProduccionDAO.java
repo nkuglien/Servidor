@@ -6,12 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import DTO.OrdenProduccionDTO;
 import entities.OrdenProduccionEntity;
-import entities.PedidoInsumoEntity;
-import model.Insumo;
 import model.OrdenProduccion;
-import model.PedidoInsumo;
 
 public class OrdenProduccionDAO extends HibernateDAO {
 	
@@ -31,8 +27,9 @@ public class OrdenProduccionDAO extends HibernateDAO {
 		session.saveOrUpdate(ope);		
 		session.flush();
 		session.getTransaction().commit();
+		OrdenProduccion toReturn = ope.toBO();
 		session.close();
-		return ope.toBO();
+		return toReturn;
 	}
 	
 	//public Insumo findByCodigo(long codigo) {
@@ -51,18 +48,19 @@ public class OrdenProduccionDAO extends HibernateDAO {
 		for (OrdenProduccionEntity or : entity) {
 			retorno.add(or.toBO());
 		}
+		session.close();
 		return retorno;
 	}
 
 	public OrdenProduccion getByID(Long id) {
-			Session session = this.openSession();
-			Query query = session.createQuery("from OrdenProduccionEntity where id = :idOrden ");
-			query.setParameter("idOrden", id);
-			OrdenProduccionEntity orden = (OrdenProduccionEntity) query.uniqueResult();
-			return orden != null? orden.toBO() : null;
+		Session session = this.openSession();
+		Query query = session.createQuery("from OrdenProduccionEntity where id = :idOrden ");
+		query.setParameter("idOrden", id);
+		OrdenProduccionEntity orden = (OrdenProduccionEntity) query.uniqueResult();
+		OrdenProduccion toReturn = orden != null? orden.toBO() : null;
+		session.close();
+		return toReturn;
 	}
-
-	
 
 
 }

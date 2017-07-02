@@ -29,9 +29,11 @@ public class SucursalDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
+		
+		Sucursal toReturn = entity.toBO();
 		session.close();
 		
-		return entity.toBO();
+		return toReturn;
 	}
 
 	public List<Sucursal> getAllSucursales() {
@@ -42,6 +44,7 @@ public class SucursalDAO extends HibernateDAO {
 		for (SucursalEntity sucursalEntity : sucursalesEntity) {
 			sucursales.add(sucursalEntity.toBO());
 		}
+		session.close();//SESSIONCLOSE
 		return sucursales;
 	}
 	
@@ -50,7 +53,9 @@ public class SucursalDAO extends HibernateDAO {
 		Query query = session.createQuery("from SucursalEntity where numero = :numero");
 		query.setParameter("numero", numero);
 		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
-		return sucursalEntity != null? sucursalEntity.toBO() : null;
+		Sucursal toReturn = sucursalEntity != null? sucursalEntity.toBO() : null;
+		session.close();//SESSIONCLOSE
+		return toReturn;
 	}
 
 	
@@ -70,6 +75,7 @@ public class SucursalDAO extends HibernateDAO {
 		Query query = session.createQuery("from SucursalEntity where numero = :numero");
 		query.setParameter("numero", numero);
 		SucursalEntity sucursalEntity = (SucursalEntity) query.uniqueResult();
+		session.close();//SESSIONCLOSE
 		return sucursalEntity !=null;
 	}
 }
