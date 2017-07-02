@@ -54,7 +54,7 @@ public class PrendaDAO extends HibernateDAO {
 	public List<VariedadPrenda> getAllVariedadesPrenda(Prenda prenda) {
 		List<VariedadPrenda> variedades = new ArrayList<VariedadPrenda>();
 		Session session = this.openSession();
-		Query query = session.createQuery("from VariedadPrendaEntity vp join PrendaEntity p where p.codigo= :codigo");
+		Query query = session.createQuery("select vp from VariedadPrendaEntity vp join vp.prenda p where p.codigo = :codigo");
 		query.setParameter("codigo", prenda.getCodigo());
 		List<VariedadPrendaEntity> entity = query.list();
 		for (VariedadPrendaEntity vp : entity) {

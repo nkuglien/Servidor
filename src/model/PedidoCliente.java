@@ -203,27 +203,28 @@ public class PedidoCliente {
 		// mapa con clave idPrenda y valor lista de VariedadPrenda a mandar a producir
 		HashMap<Long, List<VariedadPrenda>> variedadesPorPrendaAPedir = new HashMap<Long, List<VariedadPrenda>>();
 		
+		Boolean hayStockDeTodo = true;
+		
 		// recorrer los items del pedido
 		for(ItemPedidoCliente item : items) {
-			
-			List<ReservaVariedadPrenda> reservas = new ArrayList<ReservaVariedadPrenda>();
-			
-			// checkeo que haya el stock de la variedad prenda que necesito
-			if(item.getItem().getStock() >= item.getCantidad()) {
-				
-				// me traigo los lotes de esa variedad prenda
-				List<LoteVariedadPrenda> lotes = LoteDAO.getInstance().getLotesConDisponibles(item.getItem());
-				Integer cantidadAReservar = item.getCantidad();
-				
-				// recorro los lotes y genero reservas
-				generarReservas(lotes, cantidadAReservar);
 
-			} else {	
+			// agrupo las que no tienen stock (para hacer ordenes produccion luego)
+			if(item.getItem().getStock() < item.getCantidad()) {
 				agruparVariedadPrendaAPedirPorPrenda(variedadesPorPrendaAPedir, item);	
+				hayStockDeTodo = false;
 			}
 		}
 		
-		generarPedidos(variedadesPorPrendaAPedir);
+		// si tengo stock de todas las variedades, recorro los lotes y genero reservas
+		if(hayStockDeTodo) {
+			for(ItemPedidoCliente item : items) {
+				List<LoteVariedadPrenda> lotes = LoteDAO.getInstance().getLotesConDisponibles(item.getItem());
+				Integer cantidadAReservar = item.getCantidad();
+				generarReservas(lotes, cantidadAReservar);
+			}
+		} else { // sino, genero los pedidos necesarios
+			generarPedidos(variedadesPorPrendaAPedir);
+		}
 
 	}
 
@@ -234,7 +235,7 @@ public class PedidoCliente {
 		OrdenProduccionController ordenController = OrdenProduccionController.getInstance();
 	    while (it.hasNext()) {
 	        Map.Entry<Long, List<VariedadPrenda>> pair = (Map.Entry<Long, List<VariedadPrenda>>)it.next();
-	        if(pair.getValue().size() > 3) {
+	        if(pair.getValue().size() >= 3) {
 	        	Prenda p = PrendaDAO.getInstance().getPrendaByCodigo(pair.getKey());
 	        	ordenController.generarOrdenCompleta(p, this);
 	        } else {
