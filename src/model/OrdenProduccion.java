@@ -97,7 +97,7 @@ public class OrdenProduccion {
 
 	public void ponerAproducir() {
 		// si el pedido esta completo lo pone en estado PRODUCCION
-		if (this.getEstado() == "COMPLETO") {
+		if (this.getEstado().equals("COMPLETO")) {
 			this.setEstado("PRODUCCION");
 			this.save();
 		}
@@ -109,8 +109,10 @@ public class OrdenProduccion {
 		for (VariedadPrenda vp : this.getVariedades()) {
 			vp.recalcularPrecio();
 			vp.save();
-			LoteVariedadPrenda lote = new LoteVariedadPrenda(vp, this);
-			lote.save();
+			LoteVariedadPrenda lote = new LoteVariedadPrenda(vp, this);	
+			Posicion pos = PosicionDAO.getInstance().getPosicionVacia();
+			pos.setLote(lote.save());
+			pos.save();
 		}
 		this.setEstado("TERMINADO");
 		this.save();
