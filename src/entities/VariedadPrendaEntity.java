@@ -58,7 +58,7 @@ public class VariedadPrendaEntity {
 
 	public VariedadPrendaEntity(VariedadPrenda variedad, boolean copyInverseReferences) {
 		this.setId(variedad.getId());
-		if (copyInverseReferences) {
+		if (copyInverseReferences && variedad.getPrenda() != null) {
 			this.setPrenda(new PrendaEntity(variedad.getPrenda(), false));
 		}
 		this.setTalle(variedad.getTalle());
@@ -83,11 +83,11 @@ public class VariedadPrendaEntity {
 		variedad.setId(this.getId());
 		if (copyInverseReferences) {
 			variedad.setPrenda(this.getPrenda().toBO());
+			variedad.setInsumos(toInsumosBO(this.getInsumos()));
 		}
 		variedad.setTalle(this.getTalle());
 		variedad.setColor(this.getColor());
 		variedad.setEnProduccion(this.getEnProduccion());
-		variedad.setInsumos(toInsumosBO(this.getInsumos()));
 		variedad.setCantidadProduccionFija(this.getCantidadProduccionFija());
 		variedad.setCostoProduccionActual(this.getCostoProduccionActual());
 		variedad.setPrecioVentaActual(this.getPrecioVentaActual());

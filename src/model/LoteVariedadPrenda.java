@@ -82,9 +82,9 @@ public class LoteVariedadPrenda extends Lote {
 		this.costoProduccion = costoProduccion;
 	}
 
-	public void save() {
+	public LoteVariedadPrenda save() {
 		LoteDAO lote = LoteDAO.getInstance();
-		lote.save(this);
+		return (LoteVariedadPrenda) lote.save(this);
 		// TODO Auto-generated method stub
 		
 	}

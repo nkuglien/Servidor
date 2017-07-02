@@ -27,10 +27,14 @@ public class PosicionEntity {
 			if(posicion.getLote() instanceof LoteInsumo)
 			setLote(new LoteInsumoEntity((LoteInsumo)posicion.getLote()));
 			if(posicion.getLote() instanceof LoteVariedadPrenda)
-				setLote(new LoteVariedadPrendaEntity((LoteVariedadPrenda)posicion.getLote()));			
+				setLote(new LoteVariedadPrendaEntity((LoteVariedadPrenda)posicion.getLote(), false));			
 		}
 		setCodigo(posicion.getCodigo());
 		setLibre(posicion.getLibre());
+	}
+	
+	public PosicionEntity() {
+
 	}
 
 	public String getCodigo() {
@@ -64,8 +68,8 @@ public class PosicionEntity {
 	
 public Posicion toBO(Boolean IncluyeLote) {
 		
-		if(IncluyeLote){
-			Lote loteBO =getLote().toBO();
+		if(IncluyeLote && getLote()!=null){
+			Lote loteBO = getLote().toBO();
 			return new Posicion(codigo,libre,loteBO);
 		}
 		else

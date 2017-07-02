@@ -22,6 +22,7 @@ import model.Cliente;
 import model.CuentaCorriente;
 import model.ItemPedidoCliente;
 import model.PedidoCliente;
+import model.ReservaVariedadPrenda;
 import model.ValorConsignacion;
 
 @Entity
@@ -65,7 +66,7 @@ public class PedidoClienteEntity {
 	@Column(name = "nota")
 	private String nota;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="idPedidoCliente")
 	private List<ReservaVariedadPrendaEntity> reservas;
 	
@@ -73,21 +74,31 @@ public class PedidoClienteEntity {
 	
 	
 	public PedidoClienteEntity() {
+		reservas = new ArrayList<>();
 	}
 	
-	public PedidoClienteEntity(PedidoCliente pedido) {
+	public PedidoClienteEntity(PedidoCliente pedido, boolean copyInverseReferences) {
 		this.setNroPedido(pedido.getNroPedido());
 		this.setFechaGeneracion(pedido.getFechaGeneracion());
 		this.setFechaDespacho(pedido.getFechaDespacho());
 		this.setFechaProbableDespacho(pedido.getFechaProbableDespacho());
 		
-		Cliente cliente = pedido.getCliente();
-		if(cliente!=null){
-			cliente.setCc(new CuentaCorriente());
-			cliente.setValores(new ArrayList<ValorConsignacion>());
-			cliente.setPedidos(new ArrayList<PedidoCliente>());
-			this.setCliente(new ClienteEntity(cliente));
+		if(copyInverseReferences) {
+			Cliente cliente = pedido.getCliente();
+			if(cliente!=null){
+				cliente.setCc(new CuentaCorriente());
+				cliente.setValores(new ArrayList<ValorConsignacion>());
+				cliente.setPedidos(new ArrayList<PedidoCliente>());
+				this.setCliente(new ClienteEntity(cliente));
+			}
+			
+			List<ReservaVariedadPrendaEntity> reservasE = new ArrayList<ReservaVariedadPrendaEntity>();
+			for(ReservaVariedadPrenda r : pedido.getReservas()) {
+				reservasE.add(new ReservaVariedadPrendaEntity(r));
+			}
+			this.setReservas(reservasE);
 		}
+
 		
 		if(pedido.getItems()!=null) this.setItemsEntity(pedido.getItems());
 		this.setSubtotal(pedido.getSubtotal());
@@ -107,11 +118,19 @@ public class PedidoClienteEntity {
 		if(copyInverseReferences && this.getCliente()!=null) {
 			pedidoCliente.setCliente(this.getCliente().toBO());
 		}
+		if(copyInverseReferences) {
+			List<ReservaVariedadPrenda> reservas = new ArrayList<ReservaVariedadPrenda>();
+			for(ReservaVariedadPrendaEntity r : this.getReservas()) {
+				reservas.add(r.toBO());
+			}
+			pedidoCliente.setReservas(reservas);
+		}
 		pedidoCliente.setSubtotal(this.getSubtotal());
 		pedidoCliente.setImpuestos(this.getImpuestos());
 		pedidoCliente.setTotal(this.getTotal());
 		pedidoCliente.setEstado(this.getEstado());
 		pedidoCliente.setNota(this.getNota());
+
 		return pedidoCliente;
 	}
 	

@@ -38,7 +38,7 @@ public class PedidoClienteDAO extends HibernateDAO {
 			session = this.openSession();
 			session.beginTransaction();
 		
-			entity = new PedidoClienteEntity(pedidoCliente);
+			entity = new PedidoClienteEntity(pedidoCliente, true);
 			session.saveOrUpdate(entity);
 		
 			session.flush();

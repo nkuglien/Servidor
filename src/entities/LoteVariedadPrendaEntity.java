@@ -18,6 +18,7 @@ import model.LoteInsumo;
 import model.LoteVariedadPrenda;
 import model.OrdenProduccion;
 import model.PedidoInsumo;
+import model.Posicion;
 import model.ReservaInsumo;
 @Entity
 @Table(name="LoteVariedad")
@@ -35,7 +36,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	
 	public LoteVariedadPrendaEntity(){};
 	
-	public LoteVariedadPrendaEntity(LoteVariedadPrenda lote) {
+	public LoteVariedadPrendaEntity(LoteVariedadPrenda lote, boolean copyInverseReferences) {
 		if(lote.getVariedadPrenda()!=null)
 			setVariedadPrenda(new VariedadPrendaEntity(lote.getVariedadPrenda(),true));
 		if(lote.getOrdenProduccion()!=null)
@@ -44,7 +45,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 		setCostoProduccion(lote.getCostoProduccion());
 		setCantDisponible(lote.getCantDisponible());
 		setId(lote.getId());
-		if(lote.getPosicion()!=null)
+		if(lote.getPosicion()!=null && copyInverseReferences)
 			setPosicion(new PosicionEntity(lote.getPosicion()));
 		setCantidad(lote.getCantidad());
 	}
@@ -88,7 +89,9 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 	public Lote toBO(Boolean IncluyeReserva){
 		OrdenProduccion op = null;
 		if(ordenProduccion!=null) op=ordenProduccion.toBO();
-		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),getPosicion().toBO(false),variedadPrenda.toBO(false),op,fechaProduccion,costoProduccion);
+		Posicion p = null;
+		if(getPosicion()!=null) p =getPosicion().toBO(false);
+		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),p,variedadPrenda.toBO(true),op,fechaProduccion,costoProduccion);
 		return lote;
 	}
 	
