@@ -30,8 +30,7 @@ public class LoteInsumo extends Lote {
 		this.setInsumo(pedidoInsumo2.getInsumo());
 		this.setCantidad(pedidoInsumo2.getCantidad());
 		this.setCantDisponible(pedidoInsumo2.getCantidad());
-		this.setPrecioCompra(pedidoInsumo2.getPrecioUnidad());
-		this.setPosicion(Posicion.getPosicionLibre());
+		this.setPrecioCompra(pedidoInsumo2.getPrecioUnidad());		
 	}
 
 	public LoteInsumo() {
