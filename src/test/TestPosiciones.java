@@ -5,7 +5,7 @@ import model.Posicion;
 public class TestPosiciones {
 	
 	public static void main(String[] args) {
-		for(char calle = 'A'; calle <= 'A';calle++) {
+		for(char calle = 'A'; calle <= 'P';calle++) {
 			for (int bloque=1; bloque < 6 ; bloque++) {
 				for (int estante=1; estante < 7 ; estante++) {
 					for (int pos=1; pos < 22 ; pos++) {
