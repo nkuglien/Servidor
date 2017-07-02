@@ -49,7 +49,7 @@ public class TestPrenda {
 		insumos1.add(new ItemInsumo(insumoColorante, 1, 3));
 		VariedadPrenda rojaXL = crearVariedad(remera, "XL", "Roja", true, 50, 100, 200, insumos1);
 		rojaXL = rojaXL.save();
-		Posicion p = PosicionDAO.getInstance().getByCodigo("A010320");
+		Posicion p = PosicionDAO.getInstance().getPosicionPrendaVacia();
 		LoteVariedadPrenda lote = new LoteVariedadPrenda(null, 5, 5, p, rojaXL, null, new Date(), Float.parseFloat("100"));
 		lote = lote.save();
 		p.setLote(lote);
@@ -64,7 +64,7 @@ public class TestPrenda {
 		insumos2.add(new ItemInsumo(insumoColorante2, 1, 3));
 		VariedadPrenda rojaL = crearVariedad(remera, "L", "Roja", true, 50, 100, 200, insumos2);
 		rojaL = rojaL.save();
-		Posicion p1 = PosicionDAO.getInstance().getByCodigo("A010321");
+		Posicion p1 = PosicionDAO.getInstance().getPosicionPrendaVacia();
 		LoteVariedadPrenda lote1 = new LoteVariedadPrenda(null, 2, 2, p, rojaL, null, new Date(), Float.parseFloat("100"));
 		lote1 = lote1.save();
 		p1.setLote(lote1);
@@ -79,7 +79,7 @@ public class TestPrenda {
 		insumos3.add(new ItemInsumo(insumoColorante3, 1, 1));
 		VariedadPrenda azulRemeraL = crearVariedad(remera, "L", "Azul", true, 50, 100, 200, insumos3);
 		azulRemeraL = azulRemeraL.save();
-		Posicion p2 = PosicionDAO.getInstance().getByCodigo("A020301");
+		Posicion p2 = PosicionDAO.getInstance().getPosicionPrendaVacia();
 		LoteVariedadPrenda lote2 = new LoteVariedadPrenda(null, 10, 10, p, azulRemeraL, null, new Date(), Float.parseFloat("100"));
 		lote2 = lote2.save();
 		p2.setLote(lote2);
@@ -94,7 +94,7 @@ public class TestPrenda {
 		insumos4.add(new ItemInsumo(insumoColorante4, 1, 1));
 		VariedadPrenda azulL = crearVariedad (campera, "L", "Azul", true, 50, 100, 200, insumos4);
 		azulL = azulL.save();
-		Posicion p3 = PosicionDAO.getInstance().getByCodigo("A020302");
+		Posicion p3 = PosicionDAO.getInstance().getPosicionPrendaVacia();
 		LoteVariedadPrenda lote3 = new LoteVariedadPrenda(null, 10, 10, p, azulL, null, new Date(), Float.parseFloat("100"));
 		lote3 = lote3.save();
 		p3.setLote(lote3);
@@ -131,7 +131,7 @@ public class TestPrenda {
 		insumos7.add(new ItemInsumo(insumoColorante7, 1, 4));
 		VariedadPrenda verdeM = crearVariedad (jean, "M", "Verde", true, 50, 100, 200, insumos7);
 		verdeM = verdeM.save();
-		Posicion p4 = PosicionDAO.getInstance().getByCodigo("A020303");
+		Posicion p4 = PosicionDAO.getInstance().getPosicionPrendaVacia();
 		LoteVariedadPrenda lote4 = new LoteVariedadPrenda(null, 7, 7, p, verdeM, null, new Date(), Float.parseFloat("100"));
 		lote4 = lote4.save();
 		p4.setLote(lote4);
