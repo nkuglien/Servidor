@@ -52,7 +52,7 @@ public class MovimientoCC {
 		dto.setFecha(fecha);
 		dto.setId(id);
 		dto.setImporte(importe);
-		return null;
+		return dto;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.AreaProduccionDAO;
 import dao.InsumoDAO;
+import dao.PosicionDAO;
 import dao.PrendaDAO;
 import model.AreaProduccion;
 import model.Insumo;
@@ -48,10 +49,11 @@ public class TestPrenda {
 		insumos1.add(new ItemInsumo(insumoColorante, 1, 3));
 		VariedadPrenda rojaXL = crearVariedad(remera, "XL", "Roja", true, 50, 100, 200, insumos1);
 		rojaXL = rojaXL.save();
-		LoteVariedadPrenda lote = new LoteVariedadPrenda();
-		Posicion p = new Posicion("A010320", false, lote);
-		lote = new LoteVariedadPrenda(null, 5, 5, p, rojaXL, null, new Date(), Float.parseFloat("100"));
-		lote.save();
+		Posicion p = PosicionDAO.getInstance().getByCodigo("A010320");
+		LoteVariedadPrenda lote = new LoteVariedadPrenda(null, 5, 5, p, rojaXL, null, new Date(), Float.parseFloat("100"));
+		lote = lote.save();
+		p.setLote(lote);
+		p.save();
 		
 		List<ItemInsumo> insumos2 = new ArrayList<ItemInsumo>();
 		Insumo insumoTela2 = InsumoDAO.getInstance().findByCodigo(1000);
@@ -62,10 +64,11 @@ public class TestPrenda {
 		insumos2.add(new ItemInsumo(insumoColorante2, 1, 3));
 		VariedadPrenda rojaL = crearVariedad(remera, "L", "Roja", true, 50, 100, 200, insumos2);
 		rojaL = rojaL.save();
-		LoteVariedadPrenda lote1 = new LoteVariedadPrenda();
-		Posicion p1 = new Posicion("A010321", false, lote1);
-		lote1 = new LoteVariedadPrenda(null, 2, 2, p1, rojaL, null, new Date(), Float.parseFloat("150"));
-		lote1.save();
+		Posicion p1 = PosicionDAO.getInstance().getByCodigo("A010321");
+		LoteVariedadPrenda lote1 = new LoteVariedadPrenda(null, 2, 2, p, rojaL, null, new Date(), Float.parseFloat("100"));
+		lote1 = lote1.save();
+		p1.setLote(lote1);
+		p1.save();
 		
 		List<ItemInsumo> insumos3 = new ArrayList<ItemInsumo>();
 		Insumo insumoTela3 = InsumoDAO.getInstance().findByCodigo(1000);
@@ -76,10 +79,11 @@ public class TestPrenda {
 		insumos3.add(new ItemInsumo(insumoColorante3, 1, 1));
 		VariedadPrenda azulRemeraL = crearVariedad(remera, "L", "Azul", true, 50, 100, 200, insumos3);
 		azulRemeraL = azulRemeraL.save();
-		LoteVariedadPrenda lote2 = new LoteVariedadPrenda();
-		Posicion p2 = new Posicion("A010322", false, lote2);
-		lote2 = new LoteVariedadPrenda(null, 10, 10, p2, azulRemeraL, null, new Date(), Float.parseFloat("200"));
-		lote2.save();
+		Posicion p2 = PosicionDAO.getInstance().getByCodigo("A020301");
+		LoteVariedadPrenda lote2 = new LoteVariedadPrenda(null, 10, 10, p, azulRemeraL, null, new Date(), Float.parseFloat("100"));
+		lote2 = lote2.save();
+		p2.setLote(lote2);
+		p2.save();
 		
 		List<ItemInsumo> insumos4 = new ArrayList<ItemInsumo>();
 		Insumo insumoTela4 = InsumoDAO.getInstance().findByCodigo(1000);
@@ -90,10 +94,11 @@ public class TestPrenda {
 		insumos4.add(new ItemInsumo(insumoColorante4, 1, 1));
 		VariedadPrenda azulL = crearVariedad (campera, "L", "Azul", true, 50, 100, 200, insumos4);
 		azulL = azulL.save();
-		LoteVariedadPrenda lote3 = new LoteVariedadPrenda();
-		Posicion p3 = new Posicion("A010323", false, lote3);
-		lote3 = new LoteVariedadPrenda(null, 10, 10, p3, azulL, null, new Date(), Float.parseFloat("100"));
-		lote3.save();
+		Posicion p3 = PosicionDAO.getInstance().getByCodigo("A020302");
+		LoteVariedadPrenda lote3 = new LoteVariedadPrenda(null, 10, 10, p, azulL, null, new Date(), Float.parseFloat("100"));
+		lote3 = lote3.save();
+		p3.setLote(lote3);
+		p3.save();
 		
 		List<ItemInsumo> insumos5 = new ArrayList<ItemInsumo>();
 		Insumo insumoTela5 = InsumoDAO.getInstance().findByCodigo(1000);
@@ -126,10 +131,11 @@ public class TestPrenda {
 		insumos7.add(new ItemInsumo(insumoColorante7, 1, 4));
 		VariedadPrenda verdeM = crearVariedad (jean, "M", "Verde", true, 50, 100, 200, insumos7);
 		verdeM = verdeM.save();
-		LoteVariedadPrenda lote4 = new LoteVariedadPrenda();
-		Posicion p4 = new Posicion("A010324", false, lote);
-		lote4 = new LoteVariedadPrenda(null, 7, 7, p4, verdeM, null, new Date(), Float.parseFloat("150"));
-		lote4.save();
+		Posicion p4 = PosicionDAO.getInstance().getByCodigo("A020303");
+		LoteVariedadPrenda lote4 = new LoteVariedadPrenda(null, 7, 7, p, verdeM, null, new Date(), Float.parseFloat("100"));
+		lote4 = lote4.save();
+		p4.setLote(lote4);
+		p4.save();
 		
 		List<ItemInsumo> insumos8 = new ArrayList<ItemInsumo>();
 		Insumo insumoTela8 = InsumoDAO.getInstance().findByCodigo(1000);

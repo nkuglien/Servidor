@@ -35,7 +35,7 @@ public class LoteDAO extends HibernateDAO {
 			session.saveOrUpdate(le);		
 		}
 		if(lote instanceof LoteVariedadPrenda)  {
-			le = new LoteVariedadPrendaEntity((LoteVariedadPrenda)lote);
+			le = new LoteVariedadPrendaEntity((LoteVariedadPrenda)lote, true);
 			session.saveOrUpdate(le);	
 		}
 			
@@ -60,16 +60,16 @@ public class LoteDAO extends HibernateDAO {
 	}
 	
 	public List<LoteVariedadPrenda> getLotesConDisponibles(VariedadPrenda vp) {
-//		Session session = this.openSession();
-//		Query query = session.createQuery("select li from VariedadPrendaEntity li join li.insumo i where i.id = :idInsumo ");
-//		query.setParameter("idInsumo", insumo.getId());
-//		List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
-//		List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
-//		for(LoteInsumoEntity lo : lotes){
-//			retorno.add(lo.toBO());
-//		}
-//		return retorno;
-		return null;
+		Session session = this.openSession();
+		Query query = session.createQuery("select lvp from LoteVariedadPrendaEntity lvp join lvp.variedadPrenda vpe where lvp.cantDisponible > 0 and vpe.id= :idVariedad");
+		query.setParameter("idVariedad", vp.getId());
+		List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
+		List<LoteVariedadPrenda> lotesBO = new ArrayList<LoteVariedadPrenda>();	
+		for(LoteVariedadPrendaEntity lo : lotes){
+			lotesBO.add((LoteVariedadPrenda) lo.toBO());
+		}
+		session.close();
+		return lotesBO;
 	}
 	
 	

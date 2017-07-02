@@ -28,7 +28,7 @@ public class PosicionDAO extends HibernateDAO {
 		
 		session.flush();
 		session.getTransaction().commit();
-		Posicion toReturn = entity.toBO();;
+		Posicion toReturn = entity.toBO();
 		session.close();
 		
 		return toReturn;

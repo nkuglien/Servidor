@@ -35,6 +35,7 @@ public class PedidoCliente {
 	private List<ReservaVariedadPrenda> reservas;
 	
 	public PedidoCliente() {
+		reservas = new ArrayList<ReservaVariedadPrenda>();
 	}
 	
 	public PedidoCliente(PedidoClienteDTO dto) {
@@ -280,6 +281,8 @@ public class PedidoCliente {
 	}
 
 	private void agregarReserva(ReservaVariedadPrenda reserva) {
+		Integer cantDisp = reserva.getLote().getCantDisponible();
+		reserva.getLote().setCantDisponible(cantDisp-reserva.getCantidad());
 		this.reservas.add(reserva);
 	}
 

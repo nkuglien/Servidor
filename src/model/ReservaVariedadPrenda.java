@@ -5,7 +5,7 @@ import dao.LoteDAO;
 
 public class ReservaVariedadPrenda {
 	
-	private int id;
+	private Integer id;
 	private PedidoCliente pedido;
 	private LoteVariedadPrenda lote;
 	private int cantidad;
@@ -24,10 +24,10 @@ public class ReservaVariedadPrenda {
 		this.cantidad = cantidad;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public PedidoCliente getPedido() {
