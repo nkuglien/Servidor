@@ -34,8 +34,7 @@ public class PedidoRemoto extends UnicastRemoteObject implements TDAPedido {
 
 	@Override
 	public void cambiarEstadoPedido(Long nroPedido, EstadoPedidoCliente estado) throws RemoteException {
-		boolean isAceptado = estado.equals(EstadoPedidoCliente.ACEPTADO) ? true : false;
-		PedidoController.getInstance().aceptarPedidoCliente(nroPedido, isAceptado);
+		PedidoController.getInstance().cambiarEstadoPedidoCliente(nroPedido, estado);
 	}
 
 }

@@ -1,6 +1,6 @@
 package test;
 
-import DTO.PedidoClienteDTO;
+import DTO.EstadoPedidoCliente;
 import controllers.PedidoController;
 import model.PedidoCliente;
 
@@ -13,7 +13,7 @@ public class TestCrearPedidoConLogicaNegocio {
 		
 		PedidoController controller = PedidoController.getInstance();
 		PedidoCliente pc = controller.getPedidoCliente(Long.parseLong("12"));
-		pc = PedidoController.getInstance().aceptarPedidoCliente(pc.getNroPedido(), true);
+		pc = PedidoController.getInstance().cambiarEstadoPedidoCliente(pc.getNroPedido(), EstadoPedidoCliente.ACEPTADO);
 		System.out.println(pc);
 	}
 }
