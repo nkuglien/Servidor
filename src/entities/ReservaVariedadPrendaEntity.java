@@ -64,7 +64,9 @@ public class ReservaVariedadPrendaEntity {
 		this.cantidad = cantidad;
 	}
 	public ReservaVariedadPrenda toBO() {
-		ReservaVariedadPrenda r = new ReservaVariedadPrenda(pedido.toBO(false), (LoteVariedadPrenda)lote.toBO(), cantidad);
+		LoteVariedadPrenda l = null;
+		if(lote!=null) l  = (LoteVariedadPrenda)lote.toBO();
+		ReservaVariedadPrenda r = new ReservaVariedadPrenda(pedido.toBO(false), l, cantidad);
 		r.setId(id);
 		return r;
 	}

@@ -91,12 +91,14 @@ public class PedidoClienteEntity {
 				cliente.setPedidos(new ArrayList<PedidoCliente>());
 				this.setCliente(new ClienteEntity(cliente));
 			}
-			
-			List<ReservaVariedadPrendaEntity> reservasE = new ArrayList<ReservaVariedadPrendaEntity>();
-			for(ReservaVariedadPrenda r : pedido.getReservas()) {
-				reservasE.add(new ReservaVariedadPrendaEntity(r));
+			if(pedido!=null && pedido.getReservas()!=null){
+				List<ReservaVariedadPrendaEntity> reservasE = new ArrayList<ReservaVariedadPrendaEntity>();
+				for(ReservaVariedadPrenda r : pedido.getReservas()) {
+					reservasE.add(new ReservaVariedadPrendaEntity(r));
+				}
+				this.setReservas(reservasE);
 			}
-			this.setReservas(reservasE);
+			
 		}
 
 		
@@ -118,7 +120,7 @@ public class PedidoClienteEntity {
 		if(copyInverseReferences && this.getCliente()!=null) {
 			pedidoCliente.setCliente(this.getCliente().toBO());
 		}
-		if(copyInverseReferences) {
+		if(copyInverseReferences &&  this.getReservas()!=null) {
 			List<ReservaVariedadPrenda> reservas = new ArrayList<ReservaVariedadPrenda>();
 			for(ReservaVariedadPrendaEntity r : this.getReservas()) {
 				reservas.add(r.toBO());

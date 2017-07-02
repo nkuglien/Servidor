@@ -5,11 +5,11 @@ import model.Cliente;
 public class TestCrearCliente {
 
 	public static void main(String[] args) {
-		Cliente cliente = crearCliente(1, "Ezequiel", "French 2574", "1136214694", "20347444376", 1);
-		Cliente cliente2 = crearCliente(2, "Roberto", "Gorriti 2574", "1136564694", "20346844376", 2);
-		Cliente cliente3 = crearCliente(3, "Pedro", "Alberdi 3378", "1124214694", "20347449676", 3);
-		Cliente cliente4 = crearCliente(4, "Juan", "Medrano 1723", "1136214214", "20340544376", 4);
-		Cliente cliente5 = crearCliente(5, "Rigoberto", "Bulnes 2312", "1136207694", "20347944376", 5);
+		Cliente cliente = crearCliente(1, "Ezequiel", "French 2574", "1136214694", "20362134596", 1);
+		Cliente cliente2 = crearCliente(2, "Roberto", "Gorriti 2574", "1136564694", "30711213054", 2);
+		Cliente cliente3 = crearCliente(3, "Pedro", "Alberdi 3378", "1124214694", "20349296722", 3);
+		Cliente cliente4 = crearCliente(4, "Juan", "Medrano 1723", "1136214214", "23330162449", 4);
+		Cliente cliente5 = crearCliente(5, "Rigoberto", "Bulnes 2312", "1136207694", "23142765799", 5);
 		
 		cliente.habilitarCuentaCorriente(0, -5000);
 		
