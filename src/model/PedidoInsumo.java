@@ -76,10 +76,13 @@ public class PedidoInsumo {
 		this.getInsumo().setPrecio(this.getPrecioUnidad());
 		this.getInsumo().save();
 		try{
-		LoteInsumo lote = new LoteInsumo(this);		
-		this.setLote(lote);
-		this.save();
+		LoteInsumo lote = new LoteInsumo(this);
 		
+		this.setLote(lote);
+		PedidoInsumo ped =this.save();
+		Posicion pos = Posicion.getPosicionLibre();
+		pos.setLote(ped.getLote());
+		pos.save();
 		
 		}
 		catch(Exception e){
@@ -88,8 +91,8 @@ public class PedidoInsumo {
 	}
 	
 	
-	private void save() {
-		PedidoInsumoDAO.getInstance().save(this);
+	private PedidoInsumo save() {
+		return PedidoInsumoDAO.getInstance().save(this);
 	}
 
 
