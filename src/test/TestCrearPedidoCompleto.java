@@ -70,8 +70,10 @@ public class TestCrearPedidoCompleto {
 	}
 
 	/**
-	 * 3 Jean XL Azul
-	 *
+	 * 20 Remera XL Rojo
+	 * 20 Remera L Rojo
+	 * 20 Remera L Azul
+	 * 
 	 * Generar orden de produccion completa Jean XL Azul
 	 *
 	 * @throws RemoteException
