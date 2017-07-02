@@ -8,6 +8,7 @@ import java.util.List;
 
 import DTO.PedidoInsumoDTO;
 import dao.PedidoInsumoDAO;
+import dao.PosicionDAO;
 
 public class PedidoInsumo {
 
@@ -80,7 +81,7 @@ public class PedidoInsumo {
 		
 		this.setLote(lote);
 		PedidoInsumo ped =this.save();
-		Posicion pos = Posicion.getPosicionLibre();
+		Posicion pos = PosicionDAO.getInstance().getPosicionInsumoVacia();
 		pos.setLote(ped.getLote());
 		pos.save();
 		

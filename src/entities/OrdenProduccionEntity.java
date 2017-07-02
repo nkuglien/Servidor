@@ -29,6 +29,7 @@ public class OrdenProduccionEntity {
 
 	private Date fecha;
 	private String estado;
+	private String tipo;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<PedidoClienteEntity> pedidoCliente;
 	@ManyToMany
@@ -42,6 +43,7 @@ public class OrdenProduccionEntity {
 	
 	public OrdenProduccionEntity(OrdenProduccion o) {
 		setId(o.getId());
+		setTipo(o.getTipo());
 		setFecha(o.getFecha());
 		setEstado(o.getEstado());
 		if (o.getPedidoCliente() != null) {
@@ -140,8 +142,16 @@ public class OrdenProduccionEntity {
 				}
 			}
 		}
-		OrdenProduccion orden = new OrdenProduccion(id, fecha, estado, pedidosC, variedadesPrenda, insumos2);
+		OrdenProduccion orden = new OrdenProduccion(id, fecha, estado, pedidosC, variedadesPrenda, insumos2,getTipo());
 		return orden;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

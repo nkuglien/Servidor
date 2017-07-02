@@ -19,32 +19,37 @@ public class OrdenProduccion {
 	private Long id;
 	private Date fecha;
 	private String estado;
+	private String tipo;
 	private List<PedidoCliente> pedidoCliente;
 	private List<VariedadPrenda> variedades;
 	private List<ReservaInsumo> insumos;
 
 	public OrdenProduccion(Long id2, Date fecha2, String estado2, List<PedidoCliente> pedidosC,
-			List<VariedadPrenda> variedadesPrenda, List<ReservaInsumo> insumos2) {
+			List<VariedadPrenda> variedadesPrenda, List<ReservaInsumo> insumos2, String tipo2) {
 		id = id2;
 		fecha = fecha2;
 		estado = estado2;
 		pedidoCliente = pedidosC;
 		variedades = variedadesPrenda;
 		insumos = insumos2;
+		tipo=tipo2;
 	}
 
-	public OrdenProduccion(List<VariedadPrenda> variedadesPrenda, PedidoCliente pedido) {
+	public OrdenProduccion(List<VariedadPrenda> variedadesPrenda, PedidoCliente pedido, String tipo2) {
 		fecha = new Date();
 		estado = "INICIAL";
 		pedidoCliente = new ArrayList<PedidoCliente>();
 		pedidoCliente.add(pedido);
 		variedades = variedadesPrenda;
+		tipo=tipo2;
+		
 	}
 	
 	public OrdenProduccion(OrdenProduccionDTO dto) {
 		id = dto.getId();
 		fecha = dto.getFecha();
 		estado = dto.getEstado();
+		tipo = dto.getTipo();
 	}
 
 	public void intentarCompletar() {
@@ -97,7 +102,7 @@ public class OrdenProduccion {
 
 	public void ponerAproducir() {
 		// si el pedido esta completo lo pone en estado PRODUCCION
-		if (this.getEstado() == "COMPLETO") {
+		if (this.getEstado().equals("COMPLETO")) {
 			this.setEstado("PRODUCCION");
 			this.save();
 		}
@@ -109,8 +114,10 @@ public class OrdenProduccion {
 		for (VariedadPrenda vp : this.getVariedades()) {
 			vp.recalcularPrecio();
 			vp.save();
-			LoteVariedadPrenda lote = new LoteVariedadPrenda(vp, this);
-			lote.save();
+			LoteVariedadPrenda lote = new LoteVariedadPrenda(vp, this);	
+			Posicion pos = PosicionDAO.getInstance().getPosicionPrendaVacia();
+			pos.setLote(lote.save());
+			pos.save();
 		}
 		this.setEstado("TERMINADO");
 		this.save();
@@ -225,8 +232,16 @@ public class OrdenProduccion {
 			else esPrimero = false;
 			prendaString=prendaString + "Color: "+var.getColor()+"  Talle: "+ var.getTalle();
 		}
-		OrdenProduccionDTO dto = new OrdenProduccionDTO(id, fecha, estado,prendaString,variedades.get(0).getPrenda().getDescripcion(), dtoPrenda);
+		OrdenProduccionDTO dto = new OrdenProduccionDTO(id, fecha, estado,prendaString,variedades.get(0).getPrenda().getDescripcion(), dtoPrenda,getTipo());
 		return dto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

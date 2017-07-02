@@ -58,20 +58,23 @@ public class OrdenProduccionController {
 	public OrdenProduccion generarOrdenCompleta(Prenda prenda, PedidoCliente pedido) {
 		PrendaDAO dao = PrendaDAO.getInstance();
 		List<VariedadPrenda> variedades = dao.getAllVariedadesPrenda(prenda);
-		return generarOrdenParcial(variedades, pedido);
+		return generarOrden(variedades, pedido,"COMPLETA");
 	}
 
 	public OrdenProduccion generarOrdenParcial(List<VariedadPrenda> variedades, PedidoCliente pedido) {
 		// Se fija si ya no hay ordenes de produccion que puedan satisfacer el pedido
+		return generarOrden(variedades, pedido,"PARCIAL");
+		
+	}
 
+	private OrdenProduccion generarOrden(List<VariedadPrenda> variedades, PedidoCliente pedido, String tipo){
 		OrdenProduccionDAO dao = OrdenProduccionDAO.getInstance();
-		OrdenProduccion orden = new OrdenProduccion(variedades, pedido);
+		OrdenProduccion orden = new OrdenProduccion(variedades, pedido,tipo);
 
 		// Se guarda en la base de datos en estado de espera
 		orden.intentarCompletar();
 		return orden;
 	}
-
 	
 
 }

@@ -45,16 +45,7 @@ public class PosicionDAO extends HibernateDAO {
 	//	return proveedores;
 	//}
 	
-	public Posicion getPosicionVacia(){
-		Session session = this.openSession();
-		Query query = session.createQuery("from PosicionEntity where libre = true");
-		List<PosicionEntity> entity = (List<PosicionEntity>) query.list();
-		Posicion toReturn = entity != null? entity.get(0).toBO() : null;
-		session.close();
-		return toReturn;
-	}
-	
-	
+		
 	public Posicion getByCodigo(String codigo) {
 		Session session = this.openSession();
 		Query query = session.createQuery("from PosicionEntity where codigo = :codigo");

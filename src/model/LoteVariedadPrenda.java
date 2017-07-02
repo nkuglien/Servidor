@@ -33,7 +33,7 @@ public class LoteVariedadPrenda extends Lote {
 		costoProduccion = vp.getCostoProduccionActual();
 		setCantidad(vp.getCantidadProduccionFija());
 		setCantDisponible(vp.getCantidadProduccionFija());
-		setPosicion(Posicion.getPosicionLibre());
+		
 		
 	}
 

@@ -43,11 +43,7 @@ public class Posicion {
 		this.lote = lote;
 	}
 
-	public static Posicion getPosicionLibre() {
-		PosicionDAO DAO = PosicionDAO.getInstance();
-		Posicion pos = DAO.getPosicionVacia();
-		return pos;
-	}
+	
 	
 	public Posicion save() {
 		return PosicionDAO.getInstance().save(this);
