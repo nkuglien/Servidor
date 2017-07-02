@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class ReservaInsumoEntity {
 	@ManyToOne
 	@JoinColumn(name="idOrdenProduccion")
 	private OrdenProduccionEntity orden;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.ALL})
 	@JoinColumn(name="idLote")
 	private LoteInsumoEntity loteInsumo;
 	

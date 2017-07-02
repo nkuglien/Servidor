@@ -27,7 +27,7 @@ public class PosicionEntity {
 	public PosicionEntity(Posicion posicion) {
 		if(posicion.getLote()!=null){
 			if(posicion.getLote() instanceof LoteInsumo)
-			setLote(new LoteInsumoEntity((LoteInsumo)posicion.getLote(),true));
+			setLote(new LoteInsumoEntity((LoteInsumo)posicion.getLote(),true,false));
 			if(posicion.getLote() instanceof LoteVariedadPrenda)
 				setLote(new LoteVariedadPrendaEntity((LoteVariedadPrenda)posicion.getLote(), false));			
 		}

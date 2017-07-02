@@ -70,8 +70,8 @@ public class LoteInsumo extends Lote {
 		this.reservas = reservas;
 	}
 	
-	public void save(){
+	public LoteInsumo save(){
 	 LoteDAO dao = LoteDAO.getInstance();
-	 dao.save(this);
+	 return (LoteInsumo) dao.save(this);
 	}
 }

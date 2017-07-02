@@ -30,13 +30,17 @@ public class LoteInsumoEntity extends LoteEntity{
 	private List<ReservaInsumoEntity> reservas;
 	
 	public LoteInsumoEntity(LoteInsumo loteInsumo, boolean setPedido) {
+		this(loteInsumo, setPedido, true);
+	}
+	
+	public LoteInsumoEntity(LoteInsumo loteInsumo, boolean setPedido, boolean setPosicion) {
 		
 		if(loteInsumo.getInsumo()!=null)
 			setInsumo(new InsumoEntity(loteInsumo.getInsumo()));
 		setPrecioCompra(loteInsumo.getPrecioCompra());
 		setId(loteInsumo.getId());
-		if(loteInsumo.getPosicion()!=null)
-		setPosicion(new PosicionEntity(loteInsumo.getPosicion()));
+		if(loteInsumo.getPosicion()!=null && setPosicion)
+			setPosicion(new PosicionEntity(loteInsumo.getPosicion()));
 		if(loteInsumo.getReservas()!=null){
 			List<ReservaInsumoEntity> re = new ArrayList<ReservaInsumoEntity>();
 			for(ReservaInsumo ri : loteInsumo.getReservas()){
