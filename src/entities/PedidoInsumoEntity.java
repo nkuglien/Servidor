@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ValueGenerationType;
 
 import model.Insumo;
+import model.LoteInsumo;
 import model.OrdenProduccion;
 import model.PedidoInsumo;
 import model.Proveedor;
@@ -38,11 +41,15 @@ public class PedidoInsumoEntity {
 	private Float precioUnidad;
 	@OneToMany
 	private List<OrdenProduccionEntity> ordenesProduccion;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	private LoteInsumoEntity lote;
 
 	public PedidoInsumoEntity() {
 	}
 
-	public PedidoInsumoEntity(PedidoInsumo pedido) {
+	public PedidoInsumoEntity(PedidoInsumo pedido, boolean setLote) {
+		
 		setCantidad(pedido.getCantidad());
 		setEstado(pedido.getEstado());
 		setFechaDespacho(pedido.getFechaDespacho());
@@ -61,6 +68,16 @@ public class PedidoInsumoEntity {
 		if (pedido.getProveedor() != null) {
 			setProveedor(new ProveedorEntity(pedido.getProveedor()));
 		}
+		if(setLote && pedido.getLote()!=null)
+			setLote(new LoteInsumoEntity(pedido.getLote(),false));
+	}
+
+	public LoteInsumoEntity getLote() {
+		return lote;
+	}
+
+	public void setLote(LoteInsumoEntity lote) {
+		this.lote = lote;
 	}
 
 	public InsumoEntity getInsumo() {
@@ -143,7 +160,7 @@ public class PedidoInsumoEntity {
 		this.ordenesProduccion = ordenesProduccion;
 	}
 
-	public PedidoInsumo toBO() {
+	public PedidoInsumo toBO(boolean setLote) {
 		List<OrdenProduccion> ordenes = new ArrayList<OrdenProduccion>();
 		if (this.getOrdenesProduccion() != null) {
 			for (OrdenProduccionEntity o : this.getOrdenesProduccion()) {
@@ -153,7 +170,14 @@ public class PedidoInsumoEntity {
 		Proveedor prov=null;
 		if(this.getProveedor()!=null)
 			prov=this.getProveedor().toBO();
-		PedidoInsumo pedido = new PedidoInsumo(this.getId(),this.getEstado(),this.getFechaGeneracion(),this.getFechaDespacho(),this.getFechaDespachoReal(),prov,this.getInsumo().toBO(),this.getPrecioUnidad(), this.getCantidad(),ordenes);
+		LoteInsumo lote =null;
+		if(setLote){
+			if(getLote()!=null){
+				lote= getLote().toBO();
+			}
+		}
+		
+		PedidoInsumo pedido = new PedidoInsumo(this.getId(),this.getEstado(),this.getFechaGeneracion(),this.getFechaDespacho(),this.getFechaDespachoReal(),prov,this.getInsumo().toBO(),this.getPrecioUnidad(), this.getCantidad(),ordenes,lote);
 	
 		return pedido;
 	}

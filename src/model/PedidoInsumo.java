@@ -1,6 +1,7 @@
 package model;
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +21,21 @@ public class PedidoInsumo {
 	private int cantidad;
 	private Float precioUnidad;	
 	private List<OrdenProduccion> ordenesProduccion;
+	private LoteInsumo lote;
 
 	
 	
 	
+	public LoteInsumo getLote() {
+		return lote;
+	}
+
+
+	public void setLote(LoteInsumo lote) {
+		this.lote = lote;
+	}
+
+
 	public static void generarPedidoInsumo(Insumo insumo,OrdenProduccion orden ){
 		PedidoInsumoDAO DAO = PedidoInsumoDAO.getInstance();
 		List<PedidoInsumo> pedidosPendientes= DAO.GetPedidosPendientesInsumo(insumo);
@@ -52,7 +64,7 @@ public class PedidoInsumo {
 		this.save();
 	}
 	
-	public void TerminarPedidoInsumo(Date FechaRealDespacho){
+	public void TerminarPedidoInsumo(Date FechaRealDespacho) throws RemoteException{
 		this.setFechaDespachoReal(FechaRealDespacho);
 		this.setEstado("TERMINADO");
 		if(this.getOrdenesProduccion()!=null){
@@ -63,8 +75,16 @@ public class PedidoInsumo {
 		this.save();
 		this.getInsumo().setPrecio(this.getPrecioUnidad());
 		this.getInsumo().save();
-		LoteInsumo lote = new LoteInsumo(this);
-		lote.save();
+		try{
+		LoteInsumo lote = new LoteInsumo(this);		
+		this.setLote(lote);
+		this.save();
+		
+		
+		}
+		catch(Exception e){
+			throw new RemoteException("No se pudo almacenar el lote");
+		}
 	}
 	
 	
@@ -94,7 +114,7 @@ public class PedidoInsumo {
 
 
 	public PedidoInsumo(Long id2, String estado2, Date fechaGeneracion2, Date fechaDespacho2, Date fechaDespachoReal2,
-			Proveedor proveedor2, Insumo insumo2, Float precioUnidad2, int cantidad2, List<OrdenProduccion> ordenes2) {
+			Proveedor proveedor2, Insumo insumo2, Float precioUnidad2, int cantidad2, List<OrdenProduccion> ordenes2,LoteInsumo  lote2) {
 		id=id2;
 		estado=estado2;
 		fechaGeneracion=fechaGeneracion2;
@@ -105,6 +125,7 @@ public class PedidoInsumo {
 		cantidad=cantidad2;
 		ordenesProduccion=ordenes2;	
 		precioUnidad=precioUnidad2;
+		lote=lote2;
 		
 	}
 
@@ -198,7 +219,19 @@ public class PedidoInsumo {
 	public PedidoInsumoDTO toDTO() {
 		String provnombre="";
 		if(proveedor!=null) provnombre=proveedor.getNombre();
-		PedidoInsumoDTO dto = new PedidoInsumoDTO(id,provnombre,fechaGeneracion, fechaDespacho, fechaDespachoReal,estado,insumo.getDescripcion(),cantidad,precioUnidad);
+		String lote="";
+		String posicion="";
+		String disponible="";
+		if(getLote()!=null){
+			lote = getLote().getId().toString();
+			disponible= getLote().getCantDisponible().toString();
+			if(getLote().getPosicion()!=null){
+				posicion= getLote().getPosicion().getCodigo();
+			}
+			
+		}
+		
+		PedidoInsumoDTO dto = new PedidoInsumoDTO(id,provnombre,fechaGeneracion, fechaDespacho, fechaDespachoReal,estado,insumo.getDescripcion(),cantidad,precioUnidad,lote,posicion,disponible);
 		return dto;
 	}
 

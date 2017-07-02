@@ -31,7 +31,7 @@ public class LoteDAO extends HibernateDAO {
 		session.beginTransaction();	
 		LoteEntity le = null;
 		if(lote instanceof LoteInsumo){
-			le = new LoteInsumoEntity((LoteInsumo)lote);
+			le = new LoteInsumoEntity((LoteInsumo)lote,true);
 			session.saveOrUpdate(le);		
 		}
 		if(lote instanceof LoteVariedadPrenda)  {

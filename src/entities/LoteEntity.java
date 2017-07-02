@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class LoteEntity {
 	private Long id;
 	private Integer cantidad;
 	private Integer cantDisponible;
-	@OneToOne(mappedBy="lote")
+	@OneToOne(mappedBy="lote", cascade= CascadeType.ALL)
 	private PosicionEntity posicion;
 
 	public Long getId() {

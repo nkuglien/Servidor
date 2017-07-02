@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import model.LoteInsumo;
 import model.PedidoInsumo;
+import model.Posicion;
 import model.ReservaInsumo;
 
 @Entity
@@ -21,16 +22,15 @@ public class LoteInsumoEntity extends LoteEntity{
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private InsumoEntity insumo;
-	@OneToOne
+	@OneToOne(mappedBy="lote", cascade= CascadeType.ALL)	
 	private PedidoInsumoEntity pedidoInsumo;	
 	private Float precioCompra;
 	@OneToMany
 	@JoinColumn(name="idLote")
 	private List<ReservaInsumoEntity> reservas;
 	
-	public LoteInsumoEntity(LoteInsumo loteInsumo) {
-		if(loteInsumo.getPedidoInsumo()!=null)
-			setPedidoInsumo(new PedidoInsumoEntity(loteInsumo.getPedidoInsumo()));
+	public LoteInsumoEntity(LoteInsumo loteInsumo, boolean setPedido) {
+		
 		if(loteInsumo.getInsumo()!=null)
 			setInsumo(new InsumoEntity(loteInsumo.getInsumo()));
 		setPrecioCompra(loteInsumo.getPrecioCompra());
@@ -46,6 +46,8 @@ public class LoteInsumoEntity extends LoteEntity{
 		}
 		setCantDisponible(loteInsumo.getCantDisponible());
 		setCantidad(loteInsumo.getCantidad());
+		if(setPedido && loteInsumo.getPedidoInsumo()!=null)
+		setPedidoInsumo(new PedidoInsumoEntity( loteInsumo.getPedidoInsumo(),false));
 	}
 
 	public LoteInsumoEntity() {}
@@ -97,8 +99,10 @@ public class LoteInsumoEntity extends LoteEntity{
 		 }
 		
 		PedidoInsumo pi = null;
-		if(pedidoInsumo!=null) pi=pedidoInsumo.toBO();
-		LoteInsumo lote = new LoteInsumo(getId(),getCantidad(), getCantDisponible(),getPosicion().toBO(false),insumo.toBO(),pi,precioCompra,reservasBO);
+		Posicion pos =null;
+		if(pedidoInsumo!=null) pi=pedidoInsumo.toBO(false);
+		if(getPosicion()!=null) pos= getPosicion().toBO(false);
+		LoteInsumo lote = new LoteInsumo(getId(),getCantidad(), getCantDisponible(),pos,insumo.toBO(),pi,precioCompra,reservasBO);
 		return lote;
 	}
 	

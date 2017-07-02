@@ -21,11 +21,12 @@ public class PosicionEntity {
 	@OneToOne	
 	@JoinColumn(name="lote")
 	private LoteEntity lote;
+	public PosicionEntity(){}
 	
 	public PosicionEntity(Posicion posicion) {
 		if(posicion.getLote()!=null){
 			if(posicion.getLote() instanceof LoteInsumo)
-			setLote(new LoteInsumoEntity((LoteInsumo)posicion.getLote()));
+			setLote(new LoteInsumoEntity((LoteInsumo)posicion.getLote(),true));
 			if(posicion.getLote() instanceof LoteVariedadPrenda)
 				setLote(new LoteVariedadPrendaEntity((LoteVariedadPrenda)posicion.getLote()));			
 		}
@@ -64,7 +65,7 @@ public class PosicionEntity {
 	
 public Posicion toBO(Boolean IncluyeLote) {
 		
-		if(IncluyeLote){
+		if(IncluyeLote && getLote()!=null){
 			Lote loteBO =getLote().toBO();
 			return new Posicion(codigo,libre,loteBO);
 		}

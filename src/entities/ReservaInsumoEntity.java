@@ -32,7 +32,7 @@ public class ReservaInsumoEntity {
 		if(p.getOrden()!=null)
 			setOrden(new OrdenProduccionEntity(p.getOrden()));
 		if(p.getLoteInsumo()!=null)
-			setLoteInsumo(new LoteInsumoEntity(p.getLoteInsumo()));
+			setLoteInsumo(new LoteInsumoEntity(p.getLoteInsumo(),true));
 		setCantidad(p.getCantidad());
 		setId(p.getId());
 	}

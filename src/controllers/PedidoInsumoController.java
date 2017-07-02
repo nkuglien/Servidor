@@ -39,7 +39,7 @@ public class PedidoInsumoController {
 		
 	}
 
-	public void terminarPedido(Long id, Date fechaDespachoReal) {
+	public void terminarPedido(Long id, Date fechaDespachoReal) throws RemoteException {
 		PedidoInsumo pedido = PedidoInsumoDAO.getInstance().getPedido(id);
 		pedido.TerminarPedidoInsumo(fechaDespachoReal);
 		

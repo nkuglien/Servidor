@@ -26,11 +26,11 @@ public class PedidoInsumoDAO extends HibernateDAO {
 	public PedidoInsumo save(PedidoInsumo insumo) {
 		Session session = this.openSession();
 		session.beginTransaction();		
-		PedidoInsumoEntity pedidoInsumoEntity = new PedidoInsumoEntity(insumo);
+		PedidoInsumoEntity pedidoInsumoEntity = new PedidoInsumoEntity(insumo,true);
 		session.saveOrUpdate(pedidoInsumoEntity);		
 		session.flush();
 		session.getTransaction().commit();
-		PedidoInsumo pedidoToReturn = pedidoInsumoEntity.toBO();
+		PedidoInsumo pedidoToReturn = pedidoInsumoEntity.toBO(true);
 		session.close();
 		return pedidoToReturn;
 	}
@@ -42,14 +42,14 @@ public class PedidoInsumoDAO extends HibernateDAO {
 	//	InsumoEntity insumo = (InsumoEntity) query.uniqueResult();
 	//	return insumo != null? insumo.toBO() : null;
 	//}
-	
+		
 	public List<PedidoInsumo> getAllInsumos() {
 		List<PedidoInsumo> insumos = new ArrayList<PedidoInsumo>();
 		Session session = this.openSession();
 		Query query = session.createQuery("from PedidoInsumoEntity");
 		List<PedidoInsumoEntity> pedidoInsumoEntity =  query.list();
 		for (PedidoInsumoEntity Ped : pedidoInsumoEntity) {
-			insumos.add(Ped.toBO());
+			insumos.add(Ped.toBO(true));
 		}
 		session.close();//SESSIONCLOSE
 		return insumos;
@@ -60,7 +60,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		Query query = session.createQuery("from PedidoInsumoEntity where id = :idPedido");
 		query.setParameter("idPedido", id);
 		PedidoInsumoEntity pedidoInsumoEntity = (PedidoInsumoEntity) query.uniqueResult();
-		PedidoInsumo pedidoInsumoToReturn = pedidoInsumoEntity.toBO();
+		PedidoInsumo pedidoInsumoToReturn = pedidoInsumoEntity.toBO(true);
 		session.close();//SESSIONCLOSE
 		return pedidoInsumoToReturn;
 	}
@@ -77,7 +77,7 @@ public class PedidoInsumoDAO extends HibernateDAO {
 		query.setParameter("idInsumo", insumo.getId());
 		List<PedidoInsumoEntity> ped = (List<PedidoInsumoEntity>) query.list();
 		for(PedidoInsumoEntity pe : ped){
-			retorno.add(pe.toBO());
+			retorno.add(pe.toBO(true));
 		}
 		session.close();//SESSIONCLOSE
 		return retorno;

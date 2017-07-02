@@ -40,6 +40,7 @@ public class OrdenProduccionDAO extends HibernateDAO {
 	//	return insumo != null? insumo.toBO() : null;
 	//}
 	
+	@SuppressWarnings("unchecked")
 	public List<OrdenProduccion> getAll() {
 		List<OrdenProduccion> retorno = new ArrayList<OrdenProduccion>();
 		Session session = this.openSession();

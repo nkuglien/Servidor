@@ -37,6 +37,9 @@ public class OrdenProduccionEntity {
 	@JoinColumn(name = "idOrdenProduccion")
 	private List<ReservaInsumoEntity> insumos;
 
+	
+	public OrdenProduccionEntity() {}
+	
 	public OrdenProduccionEntity(OrdenProduccion o) {
 		setId(o.getId());
 		setFecha(o.getFecha());

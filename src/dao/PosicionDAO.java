@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -46,8 +48,8 @@ public class PosicionDAO extends HibernateDAO {
 	public Posicion getPosicionVacia(){
 		Session session = this.openSession();
 		Query query = session.createQuery("from PosicionEntity where libre = true");
-		PosicionEntity entity = (PosicionEntity) query.uniqueResult();
-		Posicion toReturn = entity != null? entity.toBO() : null;
+		List<PosicionEntity> entity = (List<PosicionEntity>) query.list();
+		Posicion toReturn = entity != null? entity.get(0).toBO() : null;
 		session.close();
 		return toReturn;
 	}

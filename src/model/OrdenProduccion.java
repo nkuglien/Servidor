@@ -217,7 +217,15 @@ public class OrdenProduccion {
 		for (VariedadPrenda v : variedades) {
 			dtoPrenda.add(v.toDTO());
 		}
-		OrdenProduccionDTO dto = new OrdenProduccionDTO(id, fecha, estado, dtoPrenda);
+		
+		String prendaString="";
+		boolean esPrimero=true;
+		for(VariedadPrenda var : variedades){
+			if(!esPrimero) prendaString=prendaString+"<br/>";
+			else esPrimero = false;
+			prendaString=prendaString + "Color: "+var.getColor()+"  Talle: "+ var.getTalle();
+		}
+		OrdenProduccionDTO dto = new OrdenProduccionDTO(id, fecha, estado,prendaString,variedades.get(0).getPrenda().getDescripcion(), dtoPrenda);
 		return dto;
 	}
 
