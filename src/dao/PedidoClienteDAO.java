@@ -45,6 +45,7 @@ public class PedidoClienteDAO extends HibernateDAO {
 			session.getTransaction().commit();
 			toReturn = entity.toBO(true);
 		} catch (RuntimeException re) {
+			re.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
 			session.close();

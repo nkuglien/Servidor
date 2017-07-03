@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -196,10 +199,21 @@ public class PedidoCliente {
 		// si tengo stock de todas las variedades, recorro los lotes y genero reservas
 		if(hayStockDeTodo) {
 			for(ItemPedidoCliente item : items) {
+				
 				List<LoteVariedadPrenda> lotes = LoteDAO.getInstance().getLotesConDisponibles(item.getItem());
+				Collections.sort(lotes, new Comparator<LoteVariedadPrenda>() {
+
+					@Override
+					public int compare(LoteVariedadPrenda o1, LoteVariedadPrenda o2) {
+						return o2.getCantDisponible().compareTo(o1.getCantDisponible());
+					}
+					
+				});
 				Integer cantidadAReservar = item.getCantidad();
 				generarReservas(lotes, cantidadAReservar);
 			}
+			this.setEstado(EstadoPedidoCliente.COMPLETO);
+			//this.save();
 		} else { // sino, genero los pedidos necesarios
 			generarPedidos(variedadesPorPrendaAPedir);
 		}
