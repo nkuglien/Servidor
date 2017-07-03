@@ -137,10 +137,11 @@ public class OrdenProduccion {
 					}
 				}
 			}
-			for (ItemInsumo item : necesarios) {
-				if (item.getCantidad() > 0)
-					retorno.add(item);
-			}
+			
+		}
+		for (ItemInsumo item : necesarios) {
+			if (item.getCantidad() > 0)
+				retorno.add(item);
 		}
 		return retorno;
 	}
@@ -149,6 +150,10 @@ public class OrdenProduccion {
 		List<ItemInsumo> InsumosQueNecesito = new ArrayList<ItemInsumo>();
 		List<ItemInsumo> InsumosNoRepetidos = new ArrayList<ItemInsumo>();
 		for (VariedadPrenda vp : this.getVariedades()) {
+			for(ItemInsumo i : vp.getInsumos()){
+				i.setCantidad(i.getCantidad()*vp.getCantidadProduccionFija());
+			}
+			
 			InsumosQueNecesito.addAll(vp.getInsumos());
 		}
 		for (ItemInsumo item : InsumosQueNecesito) {

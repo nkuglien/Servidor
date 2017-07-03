@@ -34,7 +34,9 @@ public class ReservaVariedadPrendaEntity {
 	
 	public ReservaVariedadPrendaEntity(ReservaVariedadPrenda r) {
 		id = r.getId();
+		if(r.getPedido()!=null)
 		pedido = new PedidoClienteEntity(r.getPedido(), false);
+		if(r.getLote()!=null)
 		lote = new LoteVariedadPrendaEntity(r.getLote(), false);
 
 		cantidad = r.getCantidad();

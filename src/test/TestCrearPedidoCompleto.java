@@ -18,17 +18,17 @@ public class TestCrearPedidoCompleto {
 
 	public static void main(String[] args) throws RemoteException {
 
-		crearPedidoConStockDeVariedades();
+		//crearPedidoConStockDeVariedades();
 
 		crearPedidoGenerandoOPP();
 
-		crearPedidoGenerandoOPC();
-
-		crearPedidoGenerandoOPPyOrdenInsumo();
-
-		crearPedidoGenerandoOPCyOrdenInsumo();
-
-		crearPedidoGenerandoOPPyOPCyOrdenInsumo();
+//		crearPedidoGenerandoOPC();
+//
+//		crearPedidoGenerandoOPPyOrdenInsumo();
+//
+//		crearPedidoGenerandoOPCyOrdenInsumo();
+//
+//		crearPedidoGenerandoOPPyOPCyOrdenInsumo();
 
 		System.out.println("fin tests pedidos");
 	}

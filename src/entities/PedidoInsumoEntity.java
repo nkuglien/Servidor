@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,7 +28,7 @@ import model.Proveedor;
 public class PedidoInsumoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@ManyToOne
 	private ProveedorEntity proveedor;
@@ -39,7 +40,7 @@ public class PedidoInsumoEntity {
 	private InsumoEntity insumo;
 	private int cantidad;
 	private Float precioUnidad;
-	@OneToMany
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<OrdenProduccionEntity> ordenesProduccion;
 	
 	@OneToOne(cascade=CascadeType.ALL)

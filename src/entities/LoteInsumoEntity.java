@@ -25,7 +25,7 @@ public class LoteInsumoEntity extends LoteEntity{
 	@OneToOne(mappedBy="lote", cascade= CascadeType.ALL)	
 	private PedidoInsumoEntity pedidoInsumo;	
 	private Float precioCompra;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idLote")
 	private List<ReservaInsumoEntity> reservas;
 	

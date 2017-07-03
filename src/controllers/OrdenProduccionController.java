@@ -72,6 +72,7 @@ public class OrdenProduccionController {
 		OrdenProduccion orden = new OrdenProduccion(variedades, pedido,tipo);
 
 		// Se guarda en la base de datos en estado de espera
+		orden = orden.save();
 		orden.intentarCompletar();
 		return orden;
 	}
