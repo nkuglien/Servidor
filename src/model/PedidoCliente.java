@@ -16,6 +16,7 @@ import DTO.PedidoClienteDTO;
 import DTO.ReservaVariedadPrendaDTO;
 import controllers.OrdenProduccionController;
 import dao.LoteDAO;
+import dao.OrdenProduccionDAO;
 import dao.PedidoClienteDAO;
 import dao.PrendaDAO;
 
@@ -225,15 +226,24 @@ public class PedidoCliente {
 	private void generarPedidos(HashMap<Long, List<VariedadPrenda>> variedadesPorPrendaAPedir) {
 		Iterator it = variedadesPorPrendaAPedir.entrySet().iterator();
 		OrdenProduccionController ordenController = OrdenProduccionController.getInstance();
-	    while (it.hasNext()) {
-	        Map.Entry<Long, List<VariedadPrenda>> pair = (Map.Entry<Long, List<VariedadPrenda>>)it.next();
-	        if(pair.getValue().size() >= 3) {
-	        	Prenda p = PrendaDAO.getInstance().getPrendaByCodigo(pair.getKey());
-	        	ordenController.generarOrdenCompleta(p, this);
-	        } else {
-	        	ordenController.generarOrdenParcial(pair.getValue(), this);
-	        }
-	    }
+		while (it.hasNext()) {
+			Map.Entry<Long, List<VariedadPrenda>> pair = (Map.Entry<Long, List<VariedadPrenda>>) it.next();
+			
+			//solo si no tengo una orden de produccion pendiente de esta misma prenda o variedad
+			List<VariedadPrenda> variedades = pair.getValue();
+			List<VariedadPrenda> variedadesAPedir = new ArrayList<>();
+			for(VariedadPrenda var : variedades) {
+				if(!OrdenProduccionDAO.getInstance().existenOrdenesPendiente(var, this))
+						variedadesAPedir.add(var);
+			}
+			
+			if (variedadesAPedir.size() >= 3) {
+				Prenda p = PrendaDAO.getInstance().getPrendaByCodigo(pair.getKey());
+				ordenController.generarOrdenCompleta(p, this);
+			} else if (variedadesAPedir.size()>0){
+				ordenController.generarOrdenParcial(variedadesAPedir, this);
+			}
+		}
 	}
 
 	// agrupa las variedadPrenda por codigo de Prenda

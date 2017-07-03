@@ -7,7 +7,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import entities.OrdenProduccionEntity;
+import entities.PedidoClienteEntity;
+import entities.VariedadPrendaEntity;
 import model.OrdenProduccion;
+import model.PedidoCliente;
+import model.VariedadPrenda;
 
 public class OrdenProduccionDAO extends HibernateDAO {
 	
@@ -61,6 +65,23 @@ public class OrdenProduccionDAO extends HibernateDAO {
 		OrdenProduccion toReturn = orden != null? orden.toBO() : null;
 		session.close();
 		return toReturn;
+	}
+
+	public boolean existenOrdenesPendiente(VariedadPrenda var, PedidoCliente pedidoCliente) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from OrdenProduccionEntity");
+		List<OrdenProduccionEntity> entity =  query.list();
+		boolean retorno = false;
+		for (OrdenProduccionEntity or : entity) {
+			for(VariedadPrendaEntity variedad : or.getVariedades()) {
+				for(PedidoClienteEntity pedido : or.getPedidoCliente()) {
+					if(variedad.getId()==var.getId() && pedido.getNroPedido()==pedidoCliente.getNroPedido())
+						retorno = true;
+				}
+			}
+		}
+		session.close();
+		return retorno;
 	}
 
 
