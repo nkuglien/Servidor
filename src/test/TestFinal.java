@@ -22,7 +22,6 @@ public class TestFinal {
 		TestPosiciones.main(null);
 		TestAreaProduccion.main(args);
 		TestCrearCliente.main(args);
-//		TestCrearPedido.main(args);
 		TestInsumo.main(args);
 		try {
 			TestPedidoInsumoOrdenProduccion.main(args);
@@ -32,9 +31,11 @@ public class TestFinal {
 		}
 		TestPrenda.main(args);
 		TestProveedor.main(args);
-//		TestSucursal.main(args);
+		TestSucursal.main(args);
 		
 		System.out.println("listo test final");
+		
+		System.exit(0);
 		
 	}
 	
