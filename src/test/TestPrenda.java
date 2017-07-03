@@ -160,7 +160,7 @@ public class TestPrenda {
 		Prenda remeraReload = PrendaDAO.getInstance().getPrendaByCodigo(1000);
 		System.out.println(remeraReload);
 		
-		remeraReload.baja();
+		//remeraReload.baja();
 	}
 
 	private static Prenda crearPrenda(long codigo, String descripcion, boolean enProduccion) {

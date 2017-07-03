@@ -126,4 +126,16 @@ public class PrendaDAO extends HibernateDAO {
 		session.close();	
 	}
 
+	public List<Prenda> getPrendasVigentes() {
+		List<Prenda> prendas = new ArrayList<Prenda>();
+		Session session = this.openSession();
+		Query query = session.createQuery("from PrendaEntity p where p.enProduccion = true");
+		List<PrendaEntity> prendasEntity = query.list();
+		for (PrendaEntity prendaEntity : prendasEntity) {
+			prendas.add(prendaEntity.toBO());
+		}
+		session.close();//SESSIONCLOSE
+		return prendas;
+	}
+
 }
