@@ -72,6 +72,7 @@ public class PedidoController {
 	// el cliente acepta o cancela el pedido validado por la sucursal
 	public PedidoCliente cambiarEstadoPedidoCliente(Long nroPedido, EstadoPedidoCliente estado) {
 		PedidoCliente pedido = getPedidoCliente(nroPedido);
+		pedido.setEstado(estado);
 		if(EstadoPedidoCliente.VALIDADO.equals(estado)) {
 			pedido.setFechaProbableDespacho(obtenerFechaProbableDespacho());
 		} else if(EstadoPedidoCliente.RECHAZADO.equals(estado)) {
@@ -86,7 +87,7 @@ public class PedidoController {
 			pedido.setFechaDespacho(new Date());
 			this.generarFactura(pedido);
 		}
-		pedido.setEstado(estado);
+		
 		pedido.save();
 		return pedido;
 	}
