@@ -55,4 +55,15 @@ public class PrendaController {
 		return variedad != null? variedad.toDTO() : null;
 	}
 
+	public Object getPrendasVigentes() {
+		List<PrendaDTO> prendasDTO = new ArrayList<PrendaDTO>();
+		List<Prenda> prendas = PrendaDAO.getInstance().getPrendasVigentes();
+
+		for (Prenda prenda : prendas) {
+			prendasDTO.add(prenda.toDTO());
+		}
+
+		return prendasDTO;
+	}
+
 }

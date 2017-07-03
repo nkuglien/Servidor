@@ -75,5 +75,10 @@ public class PrendaRemoto extends UnicastRemoteObject implements TDAPrenda {
 		return PrendaController.getInstance().buscarVariedad(id);
 	}
 
+	@Override
+	public Object getPrendasVigentes() throws RemoteException {
+		return PrendaController.getInstance().getPrendasVigentes();
+	}
+
 
 }
