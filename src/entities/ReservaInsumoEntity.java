@@ -63,7 +63,7 @@ public class ReservaInsumoEntity {
 	}
 	public ReservaInsumo toBO() {	
 		
-		ReservaInsumo re = new ReservaInsumo(id,orden.toBO(false), loteInsumo.toBO(false), cantidad);
+		ReservaInsumo re = new ReservaInsumo(id,orden!=null?orden.toBO(false):null, loteInsumo!=null ?loteInsumo.toBO(false):null, cantidad);
 		return re;
 	}
 	

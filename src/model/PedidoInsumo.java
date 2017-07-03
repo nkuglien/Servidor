@@ -42,15 +42,16 @@ public class PedidoInsumo {
 		List<PedidoInsumo> pedidosPendientes= DAO.GetPedidosPendientesInsumo(insumo);
 		Boolean flag =false;
 		for(PedidoInsumo p : pedidosPendientes){
-			if(p.ordenesProduccion.size()<=1){
-				p.ordenesProduccion.add(orden);
+			if(p.getOrdenesProduccion().size()<=1){
+				p.getOrdenesProduccion().add(orden);
 				flag=true;
 				p.save();
 				break;
 			}
 		}
 		if(!flag){
-			PedidoInsumo pedi = new PedidoInsumo(insumo,orden);
+			PedidoInsumo pedi = new PedidoInsumo(insumo);
+			pedi.getOrdenesProduccion().add(orden);
 			pedi.save();
 		}
 		

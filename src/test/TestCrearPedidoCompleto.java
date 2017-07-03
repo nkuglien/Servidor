@@ -18,11 +18,17 @@ public class TestCrearPedidoCompleto {
 
 	public static void main(String[] args) throws RemoteException {
 
-//		crearPedidoConStockDeVariedades();
+
+		//crearPedidoConStockDeVariedades();
+
+		crearPedidoGenerandoOPP();
+
+//		crearPedidoGenerandoOPC();
 
 //		crearPedidoGenerandoOPP();
 //
 //		crearPedidoGenerandoOPC(); 
+
 //
 //		crearPedidoGenerandoOPPyOrdenInsumo();
 //
