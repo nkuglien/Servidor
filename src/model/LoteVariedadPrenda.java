@@ -89,4 +89,12 @@ public class LoteVariedadPrenda extends Lote {
 		
 	}
 
+	public LoteVariedadPrendaDTO toDTO(){
+		String pos ="";
+		if(getPosicion()!= null) pos= getPosicion().getCodigo();
+		
+		
+		LoteVariedadPrendaDTO dto = new LoteVariedadPrendaDTO(getId(),pos,getCantidad(),getCantDisponible(),getVariedadPrenda().toDTO(), getOrdenProduccion().toDTO(),fechaProduccion, costoProduccion);
+		return dto;
+	}
 }

@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import DTO.ClienteDTO;
+import DTO.LoteVariedadPrendaDTO;
 import DTO.OrdenProduccionDTO;
 import RemoteObject.TDACliente;
 import RemoteObject.TDAOrdenProduccion;
@@ -32,6 +33,11 @@ public class OrdenProduccionRemoto extends UnicastRemoteObject implements TDAOrd
 	@Override
 	public OrdenProduccionDTO finProduccion(Long idOrdenProduccion) throws RemoteException {
 		return OrdenProduccionController.getInstance().finProduccion(idOrdenProduccion);
+	}
+
+	@Override
+	public List<LoteVariedadPrendaDTO> getLotes(Long idOrdenProduccion) throws RemoteException {
+		return OrdenProduccionController.getInstance().getLotes(idOrdenProduccion);
 	}
 
 	

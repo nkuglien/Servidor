@@ -98,6 +98,19 @@ public class LoteDAO extends HibernateDAO {
 		session.close();
 		return cantidad;
 	}
+
+	public List<LoteVariedadPrenda> getLotesFromOrden(Long idOrdenProduccion) {
+		Session session = this.openSession();
+		Query query = session.createQuery("from LoteVariedadPrendaEntity lvp  where lvp.ordenProduccion.id  :idOrden");
+		query.setParameter("idOrden", idOrdenProduccion);
+		List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
+		List<LoteVariedadPrenda> lotesBO = new ArrayList<LoteVariedadPrenda>();	
+		for(LoteVariedadPrendaEntity lo : lotes){
+			lotesBO.add((LoteVariedadPrenda) lo.toBO());
+		}
+		session.close();
+		return lotesBO;
+	}
 	
 	//public Insumo findByCodigo(long codigo) {
 	//	Session session = this.openSession();
