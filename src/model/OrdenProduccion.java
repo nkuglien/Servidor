@@ -67,22 +67,27 @@ public class OrdenProduccion {
 				List<LoteInsumo> lotesInsumo = loteDAO.getLotesConDisponibles(item.getInsumo());
 				for (LoteInsumo lote : lotesInsumo) {
 					if (lote.getCantDisponible() >= item.getCantidad()) {
-						ReservaInsumo reserva= new ReservaInsumo(this, lote, item.getCantidad());
-						reserva.save();
+
+						int cant = item.getCantidad();
 						
-						lote.setCantDisponible(lote.getCantDisponible() - item.getCantidad());
+						lote.setCantDisponible(lote.getCantDisponible() - cant);
 						item.setCantidad(0);
 						lote.save();
 						
+						ReservaInsumo reserva= new ReservaInsumo(this, lote, cant);
+						this.insumos.add(reserva.save());
+						
 						break;
 					} else {
-						ReservaInsumo reserva=new ReservaInsumo(this, lote, lote.getCantDisponible());
-						reserva.save();
 						
-						item.setCantidad(item.getCantidad() - lote.getCantDisponible());
+						int cant = lote.getCantDisponible();
+						
+						item.setCantidad(item.getCantidad() - cant);
 						lote.setCantDisponible(0);
 						lote.save();
 						
+						ReservaInsumo reserva=new ReservaInsumo(this, lote, cant);
+						this.insumos.add(reserva.save());
 					}
 				}
 				if (item.getCantidad() > 0) {

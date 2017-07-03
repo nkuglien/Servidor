@@ -46,9 +46,9 @@ public class ReservaInsumo {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void save() {
+	public ReservaInsumo save() {
 		ReservaInsumoDAO dao = ReservaInsumoDAO.getInstance();
-		dao.save(this);
+		return dao.save(this);
 		
 	}
 
