@@ -21,7 +21,7 @@ public class ReservaInsumoEntity {
 	@ManyToOne
 	@JoinColumn(name="idOrdenProduccion")
 	private OrdenProduccionEntity orden;
-	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="idLote")
 	private LoteInsumoEntity loteInsumo;
 	
