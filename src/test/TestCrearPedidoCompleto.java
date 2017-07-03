@@ -18,10 +18,9 @@ public class TestCrearPedidoCompleto {
 
 	public static void main(String[] args) throws RemoteException {
 
+//		crearPedidoConStockDeVariedades(); // ok
 
-		crearPedidoConStockDeVariedades(); // ok
-
-//		crearPedidoGenerandoOPP();
+		crearPedidoGenerandoOPP();
 //
 //		crearPedidoGenerandoOPC(); 
 
@@ -33,13 +32,15 @@ public class TestCrearPedidoCompleto {
 //		crearPedidoGenerandoOPPyOPCyOrdenInsumo();
 
 		System.out.println("fin tests pedidos");
+		System.exit(0);
 	}
 
 	/**
-	 * 1 Remeras Rojas XL 1 Jean Verde M
+	 * 1 Remeras Rojas XL 
+	 * 1 Jean Verde M
 	 *
-	 * Descontar stock, generar pedido, no generar orden de produccion ni orden de
-	 * compra de insumos
+	 * Generar pedido, cuando es ACPETADO: descuenta stock y marca pedido como COMPLETADO
+	 * (no generar orden de produccion ni orden de compra de insumos)
 	 *
 	 * @throws RemoteException
 	 */
@@ -54,9 +55,14 @@ public class TestCrearPedidoCompleto {
 	}
 
 	/**
-	 * 2 Jean XL Azul 1 Remera L Azul
+	 * 7 Jean XL Azul 
 	 *
-	 * Generar orden de produccion parcial Jean XL Azul
+	 * Generar pedido, cuando es ACPETADO: 
+	 * 			genera OPP de Jean XL Azul ya que no alcanza el stock,
+	 * 				hay stock de insumos, asiq marca la OPP como COMPLETO, desuenta stock de insumos
+	 * 				cuando se manda a PRUDCCION y luego se TERMINA la OPP
+	 * 						descuenta stock de prendas y marca pedido como COMPLETADO
+	 *
 	 *
 	 * @throws RemoteException
 	 */
@@ -72,9 +78,9 @@ public class TestCrearPedidoCompleto {
 	}
 
 	/**
-	 * 20 Remera XL Rojo
-	 * 20 Remera L Rojo
-	 * 20 Remera L Azul
+	 * 6 Remera XL Rojo
+	 * 8 Remera L Rojo
+	 * 11 Remera L Azul
 	 * 
 	 * Generar orden de produccion completa Jean XL Azul
 	 *
@@ -82,8 +88,8 @@ public class TestCrearPedidoCompleto {
 	 */
 	private static void crearPedidoGenerandoOPC() throws RemoteException {
 
-		long[] idVariedades = { 29, 34, 39 };
-		int[] cantidades = { 20, 20, 20 };
+		long[] idVariedades = { 25, 29, 33 };
+		int[] cantidades = { 6, 8, 11 };
 		PedidoClienteDTO pedido = crearPedido("20362134596", "test 3", idVariedades, cantidades);
 
 		pedido = PedidoController.getInstance().crearPedido(pedido).toDTO();
