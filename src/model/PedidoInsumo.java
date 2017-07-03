@@ -40,16 +40,26 @@ public class PedidoInsumo {
 	public static void generarPedidoInsumo(Insumo insumo,OrdenProduccion orden ){
 		PedidoInsumoDAO DAO = PedidoInsumoDAO.getInstance();
 		List<PedidoInsumo> pedidosPendientes= DAO.GetPedidosPendientesInsumo(insumo);
-		Boolean flag =false;
+		Boolean loAgregue =false;
+		Boolean yaEstaAnotadoEnUno =false;
 		for(PedidoInsumo p : pedidosPendientes){
+			if(p.getOrdenesProduccion().contains(orden)) yaEstaAnotadoEnUno=true;
+		}
+		if(!yaEstaAnotadoEnUno){
+		for(PedidoInsumo p : pedidosPendientes){
+						
 			if(p.getOrdenesProduccion().size()<=1){
 				p.getOrdenesProduccion().add(orden);
-				flag=true;
+				loAgregue=true;
 				p.save();
 				break;
 			}
+			
+				
+			
 		}
-		if(!flag){
+		}
+		if(!loAgregue){
 			PedidoInsumo pedi = new PedidoInsumo(insumo);
 			pedi.getOrdenesProduccion().add(orden);
 			pedi.save();
