@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.ClienteDTO;
+import DTO.LoteVariedadPrendaDTO;
 import DTO.OrdenProduccionDTO;
 import dao.ClienteDAO;
+import dao.LoteDAO;
 import dao.OrdenProduccionDAO;
 import dao.PrendaDAO;
 import model.Cliente;
+import model.LoteVariedadPrenda;
 import model.OrdenProduccion;
 import model.PedidoCliente;
 import model.Prenda;
@@ -75,6 +78,15 @@ public class OrdenProduccionController {
 		orden = orden.save();
 		orden.intentarCompletar();
 		return orden;
+	}
+
+	public List<LoteVariedadPrendaDTO> getLotes(Long idOrdenProduccion) {
+		List<LoteVariedadPrenda> lotes= LoteDAO.getInstance().getLotesFromOrden(idOrdenProduccion);
+		 List<LoteVariedadPrendaDTO> lotesDTO = new ArrayList<LoteVariedadPrendaDTO>();
+		for(LoteVariedadPrenda lo : lotes){
+			lotesDTO.add(lo.toDTO());
+		}
+		return lotesDTO;
 	}
 	
 

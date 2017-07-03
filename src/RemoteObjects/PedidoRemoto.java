@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import DTO.EstadoPedidoCliente;
+import DTO.FacturaDTO;
 import DTO.PedidoClienteDTO;
 import RemoteObject.TDAPedido;
 import controllers.PedidoController;
@@ -35,6 +36,11 @@ public class PedidoRemoto extends UnicastRemoteObject implements TDAPedido {
 	@Override
 	public void cambiarEstadoPedido(Long nroPedido, EstadoPedidoCliente estado) throws RemoteException {
 		PedidoController.getInstance().cambiarEstadoPedidoCliente(nroPedido, estado);
+	}
+
+	@Override
+	public FacturaDTO obtenerFactura(Long nroPedido) throws RemoteException {
+		return PedidoController.getInstance().obtenerFactura(nroPedido).toDTO();
 	}
 
 }
