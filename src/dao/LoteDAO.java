@@ -101,7 +101,7 @@ public class LoteDAO extends HibernateDAO {
 
 	public List<LoteVariedadPrenda> getLotesFromOrden(Long idOrdenProduccion) {
 		Session session = this.openSession();
-		Query query = session.createQuery("from LoteVariedadPrendaEntity lvp  where lvp.ordenProduccion.id  :idOrden");
+		Query query = session.createQuery("from LoteVariedadPrendaEntity lvp  where lvp.ordenProduccion.id = :idOrden");
 		query.setParameter("idOrden", idOrdenProduccion);
 		List<LoteVariedadPrendaEntity> lotes = (List<LoteVariedadPrendaEntity>) query.list();			
 		List<LoteVariedadPrenda> lotesBO = new ArrayList<LoteVariedadPrenda>();	
