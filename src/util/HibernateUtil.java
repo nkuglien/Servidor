@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import entities.AreaProduccionEntity;
 import entities.ClienteEntity;
 import entities.CuentaCorrienteEntity;
+import entities.FacturaEntity;
 import entities.InsumoEntity;
 import entities.InsumoProveedorEntity;
 import entities.ItemInsumoEntity;
@@ -56,6 +57,7 @@ public class HibernateUtil {
 			config.addAnnotatedClass(LoteVariedadPrendaEntity.class);
 			config.addAnnotatedClass(PedidoInsumoEntity.class);
 			config.addAnnotatedClass(ReservaVariedadPrendaEntity.class);
+			config.addAnnotatedClass(FacturaEntity.class);
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);

@@ -7,7 +7,9 @@ import java.util.List;
 
 import DTO.EstadoPedidoCliente;
 import DTO.PedidoClienteDTO;
+import dao.FacturaDAO;
 import dao.PedidoClienteDAO;
+import model.Factura;
 import model.PedidoCliente;
 import model.VariedadPrenda;
 
@@ -80,6 +82,9 @@ public class PedidoController {
 			
 		} else if(EstadoPedidoCliente.COMPLETO.equals(estado)) {
 			
+		} else if(EstadoPedidoCliente.DESPACHADO.equals(estado)) {
+			pedido.setFechaDespacho(new Date());
+			this.generarFactura(pedido);
 		}
 		pedido.setEstado(estado);
 		pedido.save();
@@ -111,6 +116,17 @@ public class PedidoController {
 		c.add(Calendar.DATE, 15);
 		probableDespacho = c.getTime();
 		return probableDespacho;
+	}
+	
+	private Factura generarFactura(PedidoCliente pedido) {
+		Factura factura = new Factura();
+		factura.setFechaGeneracion(new Date());
+		factura.setPedidoCliente(pedido);
+		return factura.save();
+	}
+	
+	public Factura obtenerFactura(Long nroPedido) {
+		return FacturaDAO.getInstance().obtenerFactura(nroPedido);
 	}
 
 }
