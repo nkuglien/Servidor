@@ -16,19 +16,19 @@ public class TestInsumo {
 	public static void main(String[] args) {
 		Insumo insumo1 = new Insumo(1000, "Tela", "Tela", 100, 2000,(float)100);
 		insumo1 = insumo1.save();
-		Posicion p1 = PosicionDAO.getInstance().getPosicionInsumoVacia();
-		LoteInsumo lote1 = new LoteInsumo(null, 1500, 1500, p1, insumo1, null, Float.parseFloat("100"), null);
-		lote1 = lote1.save();
-		p1.setLote(lote1);
-		p1.save();
+//		Posicion p1 = PosicionDAO.getInstance().getPosicionInsumoVacia();
+//		LoteInsumo lote1 = new LoteInsumo(null, 1500, 1500, p1, insumo1, null, Float.parseFloat("100"), null);
+//		lote1 = lote1.save();
+//		p1.setLote(lote1);
+//		p1.save();
 		
 		Insumo insumo2 = new Insumo(1001, "Boton", "Boton", 200, 2000,(float)200);
 		insumo2 = insumo2.save();
-		Posicion p2 = PosicionDAO.getInstance().getPosicionInsumoVacia();
-		LoteInsumo lote2 = new LoteInsumo(null, 700, 700, p2, insumo2, null, Float.parseFloat("150"), null);
-		lote2 = lote2.save();
-		p2.setLote(lote2);
-		p2.save();
+//		Posicion p2 = PosicionDAO.getInstance().getPosicionInsumoVacia();
+//		LoteInsumo lote2 = new LoteInsumo(null, 700, 700, p2, insumo2, null, Float.parseFloat("150"), null);
+//		lote2 = lote2.save();
+//		p2.setLote(lote2);
+//		p2.save();
 		
 //		Insumo insumo3 = new Insumo(1002, "Colorante", "Colorante", 300, 300,(float)300);
 //		insumo3 = insumo3.save();

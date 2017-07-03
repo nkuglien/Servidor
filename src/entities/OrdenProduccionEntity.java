@@ -30,7 +30,7 @@ public class OrdenProduccionEntity {
 	private Date fecha;
 	private String estado;
 	private String tipo;
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<PedidoClienteEntity> pedidoCliente;
 	@ManyToMany
 	private List<VariedadPrendaEntity> variedades;

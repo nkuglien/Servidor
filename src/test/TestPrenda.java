@@ -49,11 +49,11 @@ public class TestPrenda {
 		
 		VariedadPrenda rojaXL = crearVariedad(remera, "XL", "Roja", true, 50, 100, 200, insumos1);
 		rojaXL = rojaXL.save();
-		Posicion p = PosicionDAO.getInstance().getPosicionPrendaVacia();
-		LoteVariedadPrenda lote = new LoteVariedadPrenda(null, 5, 5, p, rojaXL, null, new Date(), Float.parseFloat("100"));
-		lote = lote.save();
-		p.setLote(lote);
-		p.save();
+//		Posicion p = PosicionDAO.getInstance().getPosicionPrendaVacia();
+//		LoteVariedadPrenda lote = new LoteVariedadPrenda(null, 5, 5, p, rojaXL, null, new Date(), Float.parseFloat("100"));
+//		lote = lote.save();
+//		p.setLote(lote);
+//		p.save();
 		
 		
 		
@@ -66,11 +66,11 @@ public class TestPrenda {
 		
 		VariedadPrenda rojaL = crearVariedad(remera, "L", "Roja", true, 50, 100, 200, insumos2);
 		rojaL = rojaL.save();
-		Posicion p1 = PosicionDAO.getInstance().getPosicionPrendaVacia();
-		LoteVariedadPrenda lote1 = new LoteVariedadPrenda(null, 7, 7, p, rojaL, null, new Date(), Float.parseFloat("100"));
-		lote1 = lote1.save();
-		p1.setLote(lote1);
-		p1.save();
+//		Posicion p1 = PosicionDAO.getInstance().getPosicionPrendaVacia();
+//		LoteVariedadPrenda lote1 = new LoteVariedadPrenda(null, 7, 7, p1, rojaL, null, new Date(), Float.parseFloat("100"));
+//		lote1 = lote1.save();
+//		p1.setLote(lote1);
+//		p1.save();
 		
 		
 		
@@ -84,13 +84,21 @@ public class TestPrenda {
 		
 		VariedadPrenda azulRemeraL = crearVariedad(remera, "L", "Azul", true, 50, 100, 200, insumos3);
 		azulRemeraL = azulRemeraL.save();
-		Posicion p2 = PosicionDAO.getInstance().getPosicionPrendaVacia();
-		LoteVariedadPrenda lote2 = new LoteVariedadPrenda(null, 10, 10, p, azulRemeraL, null, new Date(), Float.parseFloat("100"));
-		lote2 = lote2.save();
-		p2.setLote(lote2);
-		p2.save();
+//		Posicion p2 = PosicionDAO.getInstance().getPosicionPrendaVacia();
+//		LoteVariedadPrenda lote2 = new LoteVariedadPrenda(null, 10, 10, p2, azulRemeraL, null, new Date(), Float.parseFloat("100"));
+//		lote2 = lote2.save();
+//		p2.setLote(lote2);
+//		p2.save();
 		
 		
+		List<ItemInsumo> insumos4 = new ArrayList<ItemInsumo>();
+		Insumo insumoTela1 = InsumoDAO.getInstance().findByCodigo(1000);
+		insumos4.add(new ItemInsumo(insumoTela1, 1, 5));
+		Insumo insumoBoton1 = InsumoDAO.getInstance().findByCodigo(1001);
+		insumos4.add(new ItemInsumo(insumoBoton1, 2, 3));
+		
+		VariedadPrenda jeanAzulL = crearVariedad(jean, "L", "Azul", true, 50, 100, 200, insumos4);
+		jeanAzulL = jeanAzulL.save();
 		
 		
 		

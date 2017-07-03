@@ -23,12 +23,6 @@ public class TestFinal {
 		TestAreaProduccion.main(args);
 		TestCrearCliente.main(args);
 		TestInsumo.main(args);
-		try {
-			TestPedidoInsumoOrdenProduccion.main(args);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		TestPrenda.main(args);
 		TestProveedor.main(args);
 		TestSucursal.main(args);

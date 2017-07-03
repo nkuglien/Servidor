@@ -40,7 +40,7 @@ public class PedidoInsumoEntity {
 	private InsumoEntity insumo;
 	private int cantidad;
 	private Float precioUnidad;
-	@ManyToMany(cascade= CascadeType.ALL)
+	@ManyToMany
 	private List<OrdenProduccionEntity> ordenesProduccion;
 	
 	@OneToOne(cascade=CascadeType.ALL)
