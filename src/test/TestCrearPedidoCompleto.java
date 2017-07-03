@@ -18,11 +18,17 @@ public class TestCrearPedidoCompleto {
 
 	public static void main(String[] args) throws RemoteException {
 
+
 		//crearPedidoConStockDeVariedades();
 
 		crearPedidoGenerandoOPP();
 
 //		crearPedidoGenerandoOPC();
+
+//		crearPedidoGenerandoOPP();
+//
+//		crearPedidoGenerandoOPC(); 
+
 //
 //		crearPedidoGenerandoOPPyOrdenInsumo();
 //
@@ -70,19 +76,23 @@ public class TestCrearPedidoCompleto {
 	}
 
 	/**
-	 * 3 Jean XL Azul
-	 *
+	 * 20 Remera XL Rojo
+	 * 20 Remera L Rojo
+	 * 20 Remera L Azul
+	 * 
 	 * Generar orden de produccion completa Jean XL Azul
 	 *
 	 * @throws RemoteException
 	 */
 	private static void crearPedidoGenerandoOPC() throws RemoteException {
 
-		long[] idVariedades = { 63 };
-		int[] cantidades = { 3 };
+		long[] idVariedades = { 29, 34, 39 };
+		int[] cantidades = { 20, 20, 20 };
 		PedidoClienteDTO pedido = crearPedido("20362134596", "test 3", idVariedades, cantidades);
 
 		pedido = PedidoController.getInstance().crearPedido(pedido).toDTO();
+		
+		PedidoController.getInstance().cambiarEstadoPedidoCliente(pedido.getNroPedido(), EstadoPedidoCliente.ACEPTADO);
 
 	}
 
