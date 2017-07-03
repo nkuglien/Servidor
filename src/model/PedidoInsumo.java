@@ -76,29 +76,30 @@ public class PedidoInsumo {
 		this.save();
 	}
 	
-	public void TerminarPedidoInsumo(Date FechaRealDespacho) throws RemoteException{
+	public void TerminarPedidoInsumo(Date FechaRealDespacho) throws RemoteException {
 		this.setFechaDespachoReal(FechaRealDespacho);
 		this.setEstado("TERMINADO");
-		if(this.getOrdenesProduccion()!=null){
-			for(OrdenProduccion o : this.getOrdenesProduccion()){
-				o.intentarCompletar();
-			}
-		}
 		this.save();
+
 		this.getInsumo().setPrecio(this.getPrecioUnidad());
 		this.getInsumo().save();
-		try{
-		LoteInsumo lote = new LoteInsumo(this);
-		
-		this.setLote(lote);
-		PedidoInsumo ped =this.save();
-		Posicion pos = PosicionDAO.getInstance().getPosicionInsumoVacia();
-		pos.setLote(ped.getLote());
-		pos.save();
-		
-		}
-		catch(Exception e){
+		try {
+			LoteInsumo lote = new LoteInsumo(this);
+
+			this.setLote(lote);
+			PedidoInsumo ped = this.save();
+			Posicion pos = PosicionDAO.getInstance().getPosicionInsumoVacia();
+			pos.setLote(ped.getLote());
+			pos.save();
+
+		} catch (Exception e) {
 			throw new RemoteException("No se pudo almacenar el lote");
+		}
+
+		if (this.getOrdenesProduccion() != null) {
+			for (OrdenProduccion o : this.getOrdenesProduccion()) {
+				o.intentarCompletar();
+			}
 		}
 	}
 	

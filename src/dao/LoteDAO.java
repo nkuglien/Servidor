@@ -48,7 +48,7 @@ public class LoteDAO extends HibernateDAO {
 
 	public List<LoteInsumo> getLotesConDisponibles(Insumo insumo) {
 		Session session = this.openSession();
-		Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo i where i.id = :idInsumo ");
+		Query query = session.createQuery("select li from LoteInsumoEntity li join li.insumo i where i.id = :idInsumo and li.cantDisponible>0 ");
 		query.setParameter("idInsumo", insumo.getId());
 		List<LoteInsumoEntity> lotes = (List<LoteInsumoEntity>) query.list();			
 		List<LoteInsumo> retorno = new ArrayList<LoteInsumo>();
