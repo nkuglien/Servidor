@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.corba.se.spi.presentation.rmi.PresentationDefaults;
-
 import DTO.EstadoPedidoCliente;
 import DTO.ItemPedidoClienteDTO;
 import DTO.PedidoClienteDTO;
@@ -17,7 +15,6 @@ import controllers.OrdenProduccionController;
 import dao.LoteDAO;
 import dao.PedidoClienteDAO;
 import dao.PrendaDAO;
-import entities.ReservaVariedadPrendaEntity;
 
 public class PedidoCliente {
 	
@@ -151,25 +148,6 @@ public class PedidoCliente {
 
 	public void setNota(String nota) {
 		this.nota = nota;
-	}
-
-	public PedidoClienteDTO toDTO(PedidoCliente pedido) {
-		PedidoClienteDTO dto = new PedidoClienteDTO();
-		dto.setNroPedido(this.nroPedido);
-		dto.setFechaGeneracion(this.fechaGeneracion);
-		dto.setFechaDespacho(this.fechaDespacho);
-		dto.setFechaProbableDespacho(this.fechaProbableDespacho);
-		dto.setCliente(this.cliente.toDTO());
-		dto.setSubtotal(this.subtotal);
-		dto.setImpuestos(this.impuestos);
-		dto.setTotal(this.total);
-		dto.setEstado(this.getEstado());
-		List<ItemPedidoClienteDTO> items = new ArrayList<ItemPedidoClienteDTO>();
-		for(ItemPedidoCliente item : pedido.getItems()) {
-			items.add(item.toDTO());
-		};
-		dto.setItems(items);
-		return dto;
 	}
 
 	public PedidoCliente save() {
