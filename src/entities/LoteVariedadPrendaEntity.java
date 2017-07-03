@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,22 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import controllers.OrdenProduccionController;
 import model.Lote;
-import model.LoteInsumo;
 import model.LoteVariedadPrenda;
 import model.OrdenProduccion;
-import model.PedidoInsumo;
 import model.Posicion;
-import model.ReservaInsumo;
 @Entity
 @Table(name="LoteVariedad")
 public class LoteVariedadPrendaEntity extends LoteEntity {
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private VariedadPrendaEntity variedadPrenda;
 	@ManyToOne
 	private OrdenProduccionEntity ordenProduccion;
@@ -92,6 +86,7 @@ public class LoteVariedadPrendaEntity extends LoteEntity {
 		Posicion p = null;
 		if(getPosicion()!=null) p =getPosicion().toBO(false);
 		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),p,variedadPrenda.toBO(true),op,fechaProduccion,costoProduccion);
+//		LoteVariedadPrenda lote = new LoteVariedadPrenda(getId(),getCantidad() ,getCantDisponible(),p,null,op,fechaProduccion,costoProduccion);
 		return lote;
 	}
 	

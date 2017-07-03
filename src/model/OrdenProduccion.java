@@ -113,7 +113,7 @@ public class OrdenProduccion {
 		// da aviso a los pedidos suscriptos
 		for (VariedadPrenda vp : this.getVariedades()) {
 			vp.recalcularPrecio();
-			vp.save();
+			vp = vp.save();
 			LoteVariedadPrenda lote = new LoteVariedadPrenda(vp, this);	
 			Posicion pos = PosicionDAO.getInstance().getPosicionPrendaVacia();
 			pos.setLote(lote.save());
@@ -123,6 +123,7 @@ public class OrdenProduccion {
 		this.save();
 		for (PedidoCliente pedido : getPedidoCliente()) {
 			pedido.intentarArmar();
+			pedido.save();
 		}
 	}
 
